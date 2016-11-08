@@ -1,0 +1,134 @@
+; STR9_comStick_usb.INF
+; Copyright (c) 2007 Hitex Development Tools 
+;
+; USB serial converter driver installation for Windows 2000 and XP.
+;
+
+;******************************************************************************
+; Version section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+Provider=%S_Provider%
+DriverVer=05/19/2006,2.00.00
+Class=USB
+ClassGUID={36fc9e60-c465-11cf-8056-444553540000}
+CatalogFile=%S_DriverName%.cat
+
+
+;******************************************************************************
+; Manufacturer section
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Mfg%=_Devices
+
+
+;******************************************************************************
+; Device section
+;------------------------------------------------------------------------------
+[_Devices]
+%S_DeviceDesc&PID_002C&MI_00%=_Install0,USB\VID_0640&PID_002C&MI_00
+%S_DeviceDesc&PID_002C&MI_01%=_Install0,USB\VID_0640&PID_002C&MI_01
+
+;%S_DeviceDesc&PID_0022&MI_00%=_Install0,USB\VID_058b&PID_0022&MI_00
+;%S_DeviceDesc&PID_0022&MI_01%=_Install0,USB\VID_058b&PID_0022&MI_01
+;%S_DeviceDesc&PID_0027&MI_00%=_Install0,USB\VID_058b&PID_0027&MI_00
+;%S_DeviceDesc&PID_0027&MI_01%=_Install0,USB\VID_058b&PID_0027&MI_01
+;%S_DeviceDesc&PID_0028&MI_00%=_Install0,USB\VID_058b&PID_0028&MI_00
+;%S_DeviceDesc&PID_0028&MI_01%=_Install0,USB\VID_058b&PID_0028&MI_01
+;%S_DeviceDesc&PID_0029&MI_00%=_Install0,USB\VID_058b&PID_0029&MI_00
+;%S_DeviceDesc&PID_0029&MI_01%=_Install0,USB\VID_058b&PID_0029&MI_01
+;%S_DeviceDesc&PID_002A&MI_00%=_Install0,USB\VID_058b&PID_002A&MI_00
+;%S_DeviceDesc&PID_002A&MI_01%=_Install0,USB\VID_058b&PID_002A&MI_01
+;%S_DeviceDesc&PID_002B&MI_00%=_Install0,USB\VID_058b&PID_002B&MI_00
+;%S_DeviceDesc&PID_002B&MI_01%=_Install0,USB\VID_058b&PID_002B&MI_01
+;%S_DeviceDesc&PID_002C&MI_00%=_Install0,USB\VID_058b&PID_002C&MI_00
+;%S_DeviceDesc&PID_002C&MI_01%=_Install0,USB\VID_058b&PID_002C&MI_01
+
+;******************************************************************************
+; Install section
+;------------------------------------------------------------------------------
+[_Install0.NTx86]
+CopyFiles=_CopyFiles_sys
+
+[_Install0.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService
+
+
+;******************************************************************************
+; NT Service sections
+;------------------------------------------------------------------------------
+[_NT_AddService]
+ServiceType = 1 ; SERVICE_KERNEL_DRIVER
+StartType = 3 ; SERVICE_DEMAND_START
+ErrorControl = 1 ; SERVICE_ERROR_NORMAL
+ServiceBinary = %10%\system32\drivers\%S_DriverName%.sys
+
+
+;******************************************************************************
+; Copy Files section
+;------------------------------------------------------------------------------
+[_CopyFiles_sys]
+; Specify the correct file name of the driver binary.
+STR9_comStick_usb.sys
+
+
+;******************************************************************************
+; Options
+;------------------------------------------------------------------------------
+[ControlFlags]
+ExcludeFromSelect=*
+
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 11    ; SYSTEM directory
+_CopyFiles_sys = 10,System32\Drivers
+
+
+;******************************************************************************
+; Disk Layout
+;------------------------------------------------------------------------------
+[SourceDisksNames]
+1=%S_DiskName%,,,
+
+[SourceDisksFiles]
+dSTR9_comStick_usb.sys = 1
+
+
+;******************************************************************************
+; Text Strings
+;------------------------------------------------------------------------------
+[Strings]
+; provider name
+S_Provider="Hitex Development Tools"
+; manufacturer name
+S_Mfg="Hitex Development Tools"
+
+; device description
+S_DeviceDesc&PID_002C&MI_00="Hitex USB Serial JTAG"
+S_DeviceDesc&PID_002C&MI_01="Hitex USB Serial COM Port"
+;S_DeviceDesc&PID_0022&MI_00="USB Serial JTAG"
+;S_DeviceDesc&PID_0022&MI_01="USB Serial COM Port"
+;S_DeviceDesc&PID_0027&MI_00="Infineon USB Debug"
+;S_DeviceDesc&PID_0027&MI_01="Infineon USB COM Port"
+;S_DeviceDesc&PID_0028&MI_00="Infineon TriCore USB Debug"
+;S_DeviceDesc&PID_0028&MI_01="Infineon TriCore USB COM Port"
+;S_DeviceDesc&PID_0029&MI_00="Infineon XC166 USB Debug"
+;S_DeviceDesc&PID_0029&MI_01="Infineon XC166 USB COM Port"
+;S_DeviceDesc&PID_002A&MI_00="Infineon XC800 USB Debug"
+;S_DeviceDesc&PID_002A&MI_01="Infineon XC800 USB COM Port"
+;S_DeviceDesc&PID_002B&MI_00="Infineon XC166E/XC2000 USB Debug"
+;S_DeviceDesc&PID_002B&MI_01="Infineon XC166E/XC2000 USB COM Port"
+;S_DeviceDesc&PID_002C&MI_00="DAS USB Debug"
+;S_DeviceDesc&PID_002C&MI_01="USB COM Port"
+
+
+; disk name
+S_DiskName="Driver Disk"
+
+; file name of driver executable 
+S_DriverName="STR9_comStick_usb"
+

@@ -1,0 +1,108 @@
+<html>
+<head>
+   <title>QuickStart reference for the GDB Server</title>
+</head>
+<body bgcolor="#FFDE00">
+
+<h1>
+QuickStart reference for the GDB Server</h1>
+<!-- $Id: gdbserv_quickstart.html 47534 2011-10-13 07:33:25Z danielru $ -->
+<h2>
+Getting started with an GDB Server based JTAG solution</h2>
+To use any of the GDB Server-based JTAG solutions available, you must configure the
+ hardware and the software drivers involved.
+ Currently the following GDB Server-based J-TAG solutions are available:<ul>
+<li>
+<a href="#OpenOCD">OpenOCD</a></li>
+
+</ul>
+
+<h3>
+<a NAME="OpenOCD"></a>Using OpenOCD together with STR9-comStick</h3>
+Follow these instructions to install and configure the OpenOCD (Open On-Chip Debugger) server:
+<ol>
+<li>
+Download OpenOCD (eg. version 0.4.0) from 
+<a href="http://developer.berlios.de/projects/openocd">
+     http://developer.berlios.de/projects/openocd</a>. 
+Release information is found at
+<a href="http://openocd.berlios.de/web">
+     http://openocd.berlios.de/web</a>. <br>
+Extract the files to <code>C:\openocd-0.4.0</code>
+</li>
+<p>
+
+<li>
+Download ftd2xx (CDM20802 WHQL Certified.zip) from 
+<a href="http://www.ftdichip.com/Drivers/D2XX.html">
+     http://www.ftdichip.com/Drivers/D2XX.html</a>. <br>
+Extract the files to <code>C:\openocd-0.4.0\ftd2xx</code>
+(This folder name is used by the <code>configure</code> command below)
+</li>
+<p>
+
+<li>
+Insert the STR9-comStick device into a USB port on the PC. Windows will find the new hardware and ask for its driver.
+The USB driver is found in the <code>...\ARM\drivers\STComstickFTDI</code> directory in your Embedded Workbench installation.
+</li>
+<p>
+
+<li>
+Download and install Cygwin from 
+<a href="http://www.cygwin.com">
+     http://www.cygwin.com/</a>. 
+Also select the additional GNU Make and GCC tools to be installed.
+</li>
+<p>
+
+<li>
+Build the OpenOCD server<br>
+Start the Cygwin command line window and do following:<br>
+<code>
+$ cd /cygdrive/c/openocd-0.4.0<br>
+$ ./configure --enable-ft2232_ftd2xx --with-ftd2xx-win32-zipdir=ftd2xx<br>
+$ make<br>
+$ make install<br>
+</code>
+</li>
+<p>
+
+<li>
+Start the OpenOCD server<br>
+Do following in the Cygwin command line window:<br>
+<code>
+$ cd /usr/local/bin<br>
+$ openocd.exe --file ../share/openocd/scripts/board/hitex_str9-comstick.cfg<br>
+</code>
+</li>
+
+<p>
+<img SRC="images/OpenOCD.jpg" >
+<p>
+
+
+<li>
+
+Start Embedded Workbench and open the USB demo example project for STR9-comStick <code>usb.eww</code>.
+
+The TCP/IP address to OpenOCD server is <code>localhost</code> with port 3333.
+ This can be changed in the GDB server category in the project settings.
+
+</li>
+<p>
+
+
+<li>
+
+Start the debug session and click on the button <b>Run</b> when download has finished. 
+This application emulates a USB mouse. By connecting the secondary 
+USB connector to a PC, the mouse pointer on the PC screen will start moving.
+
+</li>
+<p>
+
+<p>
+<p><font size=-1>Copyright &copy; 1999-2011 IAR Systems AB.</font>
+
+</body>
+</html>

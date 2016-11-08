@@ -1,0 +1,235 @@
+<html>
+<head>
+   <title>QuickStart reference for RDI</title>
+</head>
+<body bgcolor="#FFDE00">
+
+<h1>
+QuickStart reference for RDI controlled JTAG debug interfaces</h1>
+<!-- $Id: rdi_quickstart.html 47534 2011-10-13 07:33:25Z danielru $ -->
+<h2>
+Getting started with an RDI-controlled JTAG debug interface</h2>
+To use any of the RDI controlled JTAG debug interfaces available on the market, you must configure the hardware and the software drivers involved.
+<ul>
+<a href="#BDI1000">Abatron BDI1000 / BDI2000</a></li>
+
+<li>
+<a href="#ARM_MultiICE">ARM Multi-ICE</a></li>
+
+<li>
+<a href="#Opella">Ashling Opella</a></li>
+
+<li>
+<a href="#OPENice32">AIJI System OpenICE32</a></li>
+
+<li>
+<a href="#JTAGjet">Signum JTAGjet</a></li>
+</ul>
+
+
+<h3>
+<a NAME="BDI1000"></a>Abatron BDI1000/BDI2000</h3>
+Follow these instructions to configure the Abatron BDI1000/BDI2000
+<ol>
+<li>
+Connect the debugging hardware to your host computer and turn it on. You must use the serial interface to initialize and configure the BDI1000/BDI2000 the first time.</li>
+
+<li>
+Start the application <code>B10ARM.exe</code> and choose <b>Setup>Firmware</b>. In the dialog box that is displayed, select the channel and communication speed you are going to use.</li>
+
+<li>
+Click <b>Connect</b> to refresh the information about the current firmware and logic versions. If necessary, update the firmware and logic software. For more information about how to update firmware and logic, refer to the BDI1000/BDI2000 documentation.</li>
+
+<li>
+To use the IP interface, you must also specify an IP address. Type the address and click <b>Transmit</b>. Then click <b>Ok</b> to close the dialog box.</li>
+
+<p><img SRC="images/BDI1000_dialog_1.jpg">
+<br>&nbsp;
+<li>
+Now choose <b>Setup>Mode</b> to open the <b>BDI Working Mode</b> dialog box.</li>
+
+<li>
+Select the correct <b>CPU Type</b> option and set the <b>Startup</b> behavior to <b>Reset</b>, <b>Stop</b>, or <b>Run</b>, according to the needs of your hardware:</li>
+
+<ol>&nbsp;
+<br><b>Reset</b>
+<br>Reset will be executed after reset or power-up. This will reset all
+registers and SFRs.
+<p><b>Stop</b>
+<br>The target CPU will be set to execute for the number of milliseconds specified in the <b>Run Time</b> option before it will be stopped.
+<p><b>Run</b>
+<br>The target CPU will be put in Run mode after reset or power-up.</ol><p>
+For a board such as the at91eb55 with external memory that will be configured
+from ROM during boot-up, select <b>Stop</b>. This will allow the processor
+and memory to be configured before you start the debug session.</li>
+<p><img SRC="images/BDI1000_dialog_2.jpg" ><br>&nbsp;
+</ol>
+<p>You have now finished the BDI1000/BDI2000 hardware setup. Now you must configure the IAR Embedded Workbench:
+<ol>
+<li>
+Start the IAR Embedded Workbench and open the <code>tutor</code> example project. This project has been preconfigured to use the simulator driver, so to run the BDI1000/BDI2000 you must change the driver.</li>
+
+<ol>
+<li>
+Choose <b>Project>Options</b> and select the <b>C-SPY</b> category.</li>
+
+<li>
+Change the <b>Driver</b> option to <b>RDI</b>.</li>
+
+<li>
+Go to the RDI page of the C-SPY options, select the manufacturer driver (<code>BDIRDI.DLL</code>) and click <b>OK</b>.</li>
+
+<li>
+Make sure that you have a linker command file that matches your hardware. To select a linker command file, choose <b>Project>Options</b> and go to the Include page of the <b>XLINK</b> category.</li>
+</ol>
+Now an extra menu, <b>RDI</b>, has been added to the menu bar.
+<li>
+Choose <b>RDI>Configure</b> to display the RDI-driver-specific setup dialog box. Select the communication settings you want to use and click <b>OK</b>. In this example, the network connection is used.</li>
+
+<br>The settings you make are saved in the file <code>BDIRDI.rdi-cfg</code>, located in the same directory as the manufacturer's driver (<code>BDIRDI.DLL</code>), and will be used the next time you start a debug session.
+<p><img SRC="images/BDI1000_dialog_3.jpg" ><br>&nbsp;
+<li>
+You can now start the debug session. Choose <b>Project>Debug</b> (or click the <b>C-SPY</b> button on the toolbar) to download the code to the target and start debugging.</li>
+</ol>
+
+<h3>
+<a NAME="ARM_MultiICE"></a>ARM Multi-ICE</h3>
+Follow these instructions to configure the ARM Multi-ICE:
+<ol>
+<li>
+Install the Multi-ICE software package from ARM.</li>
+
+<li>
+Connect the debugging hardware to your host computer. Make sure that the Multi-ICE and the target board have been turned on.</li>
+
+<li>
+When the installation is completed, start the Multi-ICE server software.</li>
+
+<br>Choose <b>File>Auto-Configure</b>. Now the server software scans the tool chain to retrieve information. When it has finished, the configuration view will be refreshed.</ol>
+<p><img SRC="images/MultiICE_dialog_1.jpg" >
+<p>
+You have now finished the Multi-ICE hardware setup. Now you must configure the IAR Embedded Workbench:
+
+<ol>
+<li>
+Start the IAR Embedded Workbench and open the <code>tutor</code> example project. This project has been preconfigured to use the simulator driver, so to run the Multi-ICE you must change the driver.</li>
+
+<ol><li>
+Choose <b>Project>Options</b> and select the <b>C-SPY</b> category.</li>
+
+<li>
+Change the <b>Driver</b> option to <b>RDI</b>.</li>
+
+<li>
+Go to the RDI page of the C-SPY options, select the manufacturer driver (<code>Multi-ICE.dll</code>) and click <b>OK</b>.</li>
+
+<li>
+Make sure that you have a linker command file that matches your hardware. To select a linker command file, choose <b>Project>Options</b> and go to the Include page of the <b>XLINK</b> category.</li>
+<br>
+Now an extra menu, <b>RDI</b>, has been added to the menu bar.</ol>
+<li>
+Choose <b>RDI>Configure</b> to open the RDI-driver-specific setup dialog box. The first time you open the dialog box, a welcome screen is displayed. Click <b>OK</b> to proceed to the setup dialog box.</li>
+
+<p><img SRC="images/MultiICE_dialog_2.jpg" ><br>&nbsp;
+<li>
+If there are more than one target CPU present in the tool chain, select the target you want to debug. Close the dialog box.</li>
+
+<li>
+The settings you make are saved in the file <code>Multi-ICE.rdi-cfg</code>, located in the same directory as the manufacturer's driver (<code>Multi-ICE.dll</code>), and will be used the next time you start a debug session.</li>
+
+<p><img SRC="images/MultiICE_dialog_3.jpg" ><br>&nbsp;
+<li>
+You can now start the debug session. Choose <b>Project>Debug</b> (or click the <b>C-SPY</b> button on the toolbar) to download the code to the target and start debugging.</li>
+</ol>
+
+<h3>
+<a NAME="Opella"></a>Ashling Opella</h3>
+
+<ol>Follow these instructions to configure the Ashling Opella:
+<br>&nbsp;
+<li>
+Install the Opella software package from Ashling. The driver should be version 1.0.4g or later.</li>
+
+<li>
+Connect the debugging hardware to your host computer.</li>
+
+<li>
+Start the IAR Embedded Workbench and open the <code>tutor</code> example project. This project has been preconfigured to use the simulator driver, so to run the Opella you must change the driver.</li>
+
+<ol>
+<li>
+Choose <b>Project>Options</b> and select the <b>C-SPY</b> category.</li>
+
+<li>
+Change the <b>Driver</b> option to <b>RDI</b>.</li>
+
+<li>
+Go to the RDI page of the C-SPY options, select the manufacturer driver (<code>Opella.dll</code>) and click <b>OK</b>.</li>
+
+<li>
+Make sure that you have a linker command file that matches your hardware. To select a linker command file, choose <b>Project>Options</b> and go to the Include page of the <b>XLINK</b> category.</li>
+</ol>
+
+Now an extra menu, <b>RDI</b>, has been added to the menu bar.
+
+<li>
+Choose <b>RDI>Configure</b> to open the RDI-driver-specific setup dialog box. Select the <b>Processor</b>, <b>JTAG Clock Frequency</b> and <b>USB</b> or <b>Parallel Port</b> to be used and click <b>OK</b>. Note that the JTAG clock frequency determines the communication speed between Opella and the target CPU.</li>
+
+<li>
+The settings you make are saved in the file <code>Opella.cnf</code>, located in the same directory as the manufacturer's driver (<code>Opella.dll</code>), and will be used the next time you start a debug session.</li>
+
+<p><img SRC="images/Opella_dialog_1.jpg" BORDER=0 height=498 width=643>
+<br>&nbsp;
+<li>
+You can now start the debug session. Choose <b>Project>Debug</b> (or click the <b>C-SPY</b> button on the toolbar) to download the code to the target and start debugging.</li>
+</ol>
+
+
+<h3>
+<a NAME="OPENice32"></a>AIJI System OPENice32</h3>
+
+<ol>Follow these instructions to configure the AIJI System OPENice32:
+<li>
+Install the OPENice32 software package from AIJI System.</li>
+
+<li>
+Connect the debugging hardware to your host computer.</li>
+
+<li>
+Start the IAR Embedded Workbench and open the <code>tutor</code> example project. This project has been preconfigured to use the simulator driver, so to run the OPENice32 you must change the driver.</li>
+
+<ol>
+<li>
+Choose <b>Project>Options</b> and select the <b>C-SPY</b> category.</li>
+
+<li>
+Change the <b>Driver</b> option to <b>RDI</b>.</li>
+
+<li>
+Go to the RDI page of the C-SPY options, select the manufacturer driver (<code>OPENice32_A900.dll</code>) and click <b>OK</b>.</li>
+
+<li>
+Make sure that you have a linker command file that matches your hardware. To select a linker command file, choose <b>Project>Options</b> and go to the Include page of the <b>XLINK</b> category.
+<br>
+Now an extra menu, <b>RDI</b>, has been added to the menu bar.</li></ol>
+
+<li>Choose <b>RDI>Configure</b> to open the RDI-driver-specific setup dialog box. Select the communication port you want to use and click <b>OK</b>. In this example the USB port has been selected.</li>
+
+<p><img SRC="images/OPENice32_dialog_1.jpg" height=456 width=369>
+<p>The settings you make are saved in the file <code>OPENice32_A900.rdi-cfg</code>, located in the same directory as the manufacturer's driver (<code>OPENice32_A900.dll</code>), and will be used the next time you start a debug session.</li>
+
+<li>
+You can now start the debug session. Choose <b>Project>Debug</b> (or click the <b>C-SPY</b> button on the toolbar) to download the code to the target and start debugging.</li>
+</ol>
+
+<h3>
+<a NAME="JTAGjet"></a>Signum JTAGjet</h3>
+
+<a href="../signum_install.pdf">Installation instructions</a>.
+
+
+<p>&nbsp;
+<p><font size=-1>Copyright &copy; 1999-2011 IAR Systems AB.</font>
+
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: csTARGET.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the IAR C-SPY Macraigor driver </title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for the IAR C-SPY Macraigor driver version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a>
+            | Release notes for the IAR C-SPY Macraigor driver
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+<ul>
+  <li>
+    The supported JTAG interfaces from Macraigor are
+    mpDemon (via ethernet), usbDemon, usb2Demon and usb2Sprite.<br>
+  </li><p>
+  <li>
+    Wiggler and Raven interfaces that uses the parallel port are not supported any longer.
+  </li><p>
+  <li>
+    To use usb2Sprite, select usb2Demon as device in the project settings.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+<ul>
+  <li>
+    <p>
+   For the Wiggler and Raven interfaces that uses the parallel port, the error message
+   "Unable to load device driver" is shown when starting the debug sesson.
+   It is not fatal and you can continue debugging by clicking Ok.<br>
+   [EW19352]
+    </p>
+  </li>
+
+  <li>
+    ARM9 cores with an MMU (for example ARM920T) require special handling
+    by the IAR C-SPY Debugger. To access the virtual address space, the
+    implementation as defined by Macraigor requires a small memory buffer as
+    workspace in RAM.<P>
+
+    The C-SPY driver tries to identify usable RAM by using 64 bytes of RAM
+    below the stack pointer, which is only done when the target application
+    has been stopped. This algorithm is not robust and might fail in some
+    cases. When it fails the typical error message will be "Target Error:
+    Register Buffer Error".<br>
+
+    Example:<br><br>
+    <code>--mac_set_temp_reg_buffer=0x400FFC0</code><br><br>
+
+    This will use 64 bytes of memory starting at physical address
+    <code>0x400ffc0</code> as an internal scratch area by the JTAG interface
+    driver.<br>
+
+    If the algorithm to detect RAM fails, the physical address can be
+    provided manually by using the <code>--mac_set_temp_reg_buffer</code>
+    option.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+  <h4>V6.21 2011-07-05</h4>
+  <b>Program corrections</b>
+ 
+<ul>
+    <li>None.</li>
+</ul>
+ 
+ 
+  <b>New features</b>
+ 
+<ul>
+  <li>None.</li>
+</ul>
+ 
+ 
+  <h4>V6.20 2011-04-29</h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V6.10 2010-11-04</h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V5.50 2010-04-21 </h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+    <p>
+      The Macraigor Wiggler debugger now works with Sharp LH79524.<br>
+      [EW19382]
+    </p>
+  </li>
+
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+   None.
+  </li>
+  </ul>
+
+  <h4>V5.41 2009-12-14 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+  <h4>V5.40 2009-07-10 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+  <b>New features</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+<h4>V5.30 2009-01-23 </h4>
+<b>Program corrections</b>
+
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V5.20 2008-06-24 </h4>
+<b>Program corrections</b>
+
+<ul>
+  <li>
+    <p>
+   For Cortex-M, the hardware breakpoint was not removed when it was cleared. This happened when there is only one breakpoint set.<br>
+   [EW20251]
+    </p>
+  </li>
+  <li>
+    <p>
+   The disassembly window made accesses to the VICAddress register etc. (0xFFFFFF00 - 0xFFFFFFFF )
+   when displaying the interrupt vectors at 0x00-0x20. This led to that no IRQs were triggered any more.<br>
+   [EW20160]
+    </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V5.11 2007-11-28</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li>
+    <p>
+    Downloading very small applications could lead to a crash.
+    </p>
+  </li>
+  <li>
+    <p>
+    JTAG scan chain with multiple target option did not work properly.
+    </p>
+  </li>
+  <li>
+    <p>
+    When using the <b>Attach to program</b> option and having the stack plugin
+    enabled, the debugger crashed when ending the debug session.<br>
+    [EW19229]
+    </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+     Added support for ARM11 and Cortex-M3.
+  </li>
+</ul>
+
+<h4>V5.10 2007-07-02</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li>
+    Using the CPU ARM7TDMI-S resulted in an error message "Invalid Register Code" 
+    when starting execution.<br>
+    [EW19160]
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    Data breakpoints. For more information, refer to
+    <i>Part 6. C-SPY hardware debugger systems</i> in the
+    <a href="../EWARM_DebuggingGuide.ENU.pdf">EWARM Debugging Guide</a>.
+  </li>
+</ul>
+
+<h4>V4.41A 2006-12-08</h4>
+<b>Program corrections</b>
+<ul>
+  <li>
+    Using XScale, 8/16/32-bits memory accesses in the Memory window failed.
+  </li>
+</ul>
+
+<h4>V4.40A 2006-05-18</h4>
+<b>New features</b>
+<ul>
+  <li>
+    Support for usb2Demon and usb2Sprite.
+  </li>
+</ul>
+<b>Program corrections</b>
+<ul>
+  <li>
+    When using XScale, a problem in the initialization caused the error message 
+    "JTAG Error: Invalid parameter for this command"<br>
+    [EW17991]
+  </li>
+</ul>
+
+<h4>V4.31A 2006-02-03</h4>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V4.30A 2005-06-23</h4>
+<b>Program corrections</b>
+<ul>
+  <li>
+    ARM7 cores with an MMU (eg. ARM720T) failed with the error message:<br>
+    JTAG Error: Register Buffer Error<br>
+    The register buffer for co-processor access is now set up earlier.<br>
+    [EW16759]
+  </li>
+</ul>
+
+<h4>V4.20A 2005-01-10</h4>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V4.11A 2004-06-10</h4>
+<b>Program corrections</b>
+<ul>
+  <li>
+    Combining the options <b>Suppress download</b> and <b>Verify
+    download</b> did not work.  The combination of the options <b>Suppress
+    download</b> and <b>Verify download</b> should verify the target
+    content without downloading.
+  </li>
+</ul>
+
+<h4>V4.10B 2004-03-09</h4>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V4.10A 2004-02-21</h4>
+<b>Program corrections</b>
+<ul>
+  <li><p>
+    Reading memory blocks > 4K could lead to a JTAG error.
+    This happens for example when using the "verify all" option.<br>
+    [EW14831]
+  </p></li>
+</ul>
+
+<h4>V3.40A 2003-07-03</h4>
+<b>Program corrections</b>
+<ul>
+  <li>
+    The user mode registers R8_usr to R14_usr are now fully working.
+  </li>
+</ul>
+
+<h4>V3.30A 2003-02-18</h4>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V3.21A 2002-09-30</h4>
+<b>Program corrections</b>
+<ul>
+  <li>
+    Breakpoints in big-endian mode did not work.
+  </li>
+</ul>
+
+<h4>V3.20A 2002-06-18</h4>
+
+<ul>
+  <li>
+    User-defined JTAG watchpoints are now supported.
+  </li>
+
+  <li>
+    Code breakpoints can now be set in read-only memory.
+  </li>
+
+  <li>
+    When using Raven, it is now possible to connect the debugger to a
+    running system, stop it for debugging, and start it when ending
+    debugging.
+  </li>
+
+  <li>
+    It is now possible to debug hardware with multiple targets on the JTAG
+    chain.
+  </li>
+
+  <li>
+    The disassembler now also displays version 5 instructions.
+  </li>
+
+  <li>
+    The fiq/svc/abt/und/irq mode-specific registers now work correctly.
+  </li>
+
+  <li>
+    Problems in the breakpoint-setting algorithm have been found and
+    corrected.
+  </li>
+</ul>
+
+<h4>V3.11A 2001-12-05</h4>
+
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V3.10A 2001-10-02</h4>
+
+<ul>
+  <li>
+    First release.
+  </li>
+</ul>
+    </div>
+</body>
+</html>

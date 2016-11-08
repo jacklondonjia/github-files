@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: csTARGET.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the IAR C-SPY GDB server driver </title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for the IAR C-SPY GDB server driver version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a>
+            | Release notes for the IAR C-SPY GDB server driver
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+<ul>
+  <li>
+    This first release of the IAR C-SPY GDB driver for ARM supporting the GDB server
+    is intended for use with the STR9-comStick development kit.<br>
+    All other usages are unsupported.
+  </li>
+  <p>
+  <li>
+    To debug using the GDB Server, both the server itself and the hardware drivers must be installed.<br>
+    See the <a href="gdbserv_quickstart.html">QuickStart reference for
+    the GDB Server</a> that helps you to set up
+    available GDB servers and run the demo application.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+<ul>
+  <li>
+For some newer versions of the OpenOCD server the STR9-comStick configuration file
+<code>...\arm\examples\ST\STR91x\STR9-comStick\str912_comStick.cfg</code> must first be copied into a subdirectory
+in the OpenOCD installation (eg. ...\scripts\str912) before the server can startup and use the configuration file.
+Eg. <code>C:\Program Files\openocd-r717\bin> openocd-ftd2xx.exe --file scripts\str912\str912_comStick.cfg</code>
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+  <h4>V6.21 2011-07-05</h4>
+  <b>Program corrections</b>
+ 
+<ul>
+    <li>None.</li>
+</ul>
+ 
+ 
+  <b>New features</b>
+ 
+<ul>
+  <li>None.</li>
+</ul>
+ 
+ 
+  <h4>V6.20 2011-04-29</h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V6.10 2010-11-04</h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V5.50 2010-04-21 </h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+   None.
+  </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+   None.
+  </li>
+  </ul>
+
+  <h4>V5.41 2009-12-14 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+<h4>V5.40 2009-07-10 </h4>
+
+<b>Program corrections</b>
+
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    New C-SPY macro for sending commands directly to the GDB server:<br>
+    <code>__gdbserver_exec_command("command string")</code>
+  </li>
+</ul>
+
+<h4>V5.30 2009-01-23 </h4>
+
+<b>Program corrections</b>
+
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V5.20 2008-06-24 </h4>
+
+<b>Program corrections</b>
+
+<ul>
+  <li>
+    Improvements to support the GDB server protocol more generically.
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+
+<h4>V5.11 2007-11-28</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li>
+     Improved support for software breakpoints.
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    <p>
+    Data breakpoints. For more information, refer to
+    <i>Part 6. C-SPY hardware debugger systems</i> in the <a href="../EWARM_DebuggingGuide.ENU.pdf">EWARM Debugging Guide</a>.
+    </p>
+  </li>
+</ul>
+
+<h4>V5.10 2007-07-02</h4>
+
+<ul>
+  <li>
+    First release.
+  </li>
+</ul>
+    </div>
+</body>
+</html>

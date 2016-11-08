@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: product_packages.html 123 2011-11-01 13:01:33Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>IAR Embedded Workbench product packages</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            IAR Embedded Workbench for ARM product packages</h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.JPN.html">IAR Information Center for ARM</a> | <a href="release_notes.JPN.html">
+            Release notes</a> | IAR Embedded Workbench product packages
+    </div>
+    <div class="mainblock">
+        <!--======================================================================-->
+        <!-- PRODUCT PACKAGES                                                     -->
+        <!--======================================================================-->
+        <h2>
+            Standard edition
+        </h2>
+        <p>
+            The standard edition comes with all features.
+        </p>
+﻿<h2>Cortex-M版</h2>
+Cortex-M版は、以下の制約を持ったIAR Embedded Workbenchのバージョンです。
+    <ul>
+<li>Cortex-M0、Cortex-M1、Cortex-M3、Cortex-M4への限られたARMコアサポート。</li>
+    </ul>
+        <h2>
+            Limited edition
+        </h2>
+        <p>
+            The limited edition is a version of IAR Embedded Workbench without a debugger. Limitations:
+        </p>
+        <ul>
+            <li>The IAR C-SPY debugger is not available. </li>
+            <li>MISRA C is not available. </li>
+        </ul>
+﻿<h2>BaseLine版</h2>
+BaseLine版は、以下の制約を持ったIAR Embedded Workbenchの低価格バージョンです。
+    <ul>
+<li>コンパイラは、定数データを除き、最大で256KBの生成コードをサポートします。</li>
+<li>MISRA-Cチェック機能はありません。</li>
+<li>Powerデバッグは使用できません。</li>
+<li>リンカは、定数データを除き、C/C++およびアセンブラのソースコードを元にして最大で256KBをリンクします。</li>
+<li>デバッガは、定数データを除き、最大で256KBのコードをロードします。</li>
+    </ul>
+﻿<h2>コードサイズ制限版</h2>
+コードサイズ制限版は、IAR Embedded Workbenchの特別なスターターキット/評価バージョンです。コードサイズおよび提供されるサービスとサポートに制限があります。パッケージ内容は次のとおりです。
+    <ul>
+<li>コンパイラのコード制限は通常、定数データを除いて32KB(Cortex-M0とCortex-M1では8KB)に設定されています。これは、Cortex-M3を含めて、サポートされているすべてのARMコアに共通です。</li>
+<li>MISRA-Cチェック機能はありません。</li>
+<li>Powerデバッグは使用できません。</li>
+<li>ランタイムライブラリのソースコードは含まれていません。</li>
+<li>リンカは、定数データを除いて、C/C++およびアセンブラコードを元とするプリセットのコードサイズ制限までのバイト数をリンクします。</li>
+<li>定数データを除いて、デバッガはプリセットのコードサイズ上限までロードします。</li>
+<li>コンパイラによって生成されたオブジェクトファイルは、暗号化された形式になっており、IAR ILINKリンカでのみ読取り可能です。リンカはまた、以前のコードおよびサードパーティのコードをリンクするために、AEABIに準拠するELF/DWARFコードを読み取ります。</li>
+
+<li>コンパイラアセンブリリストの出力は無効になっています。</li>
+    </ul>
+リリース4.41Aより前のコードサイズ制限版のライセンスを持っている場合、Cortex-M3のコード制限は8KBになります。ライセンスマネージャでコードサイズ制限版のライセンスを削除し、<tt>www.iar.com</tt>で新しいライセンスをリクエストして32KBにアップグレードしてください。
+    <p></p>
+    <br>
+    
+﻿<h2>評価版</h2>
+評価版は、30日間使用できる期間限定の評価用バージョンです。パッケージ内容は次のとおりです。
+    <ul>
+<li>評価キー生成後30日で有効期間が終わります。</li>
+<li>MISRA-Cチェック機能はありません。</li>
+<li>ランタイムライブラリのソースコードは含まれていません。</li>
+<li>コンパイラによって生成されたオブジェクトファイルは、暗号化された形式になっており、IAR ILINKリンカでのみ読取り可能です。リンカはまた、以前のコードおよびサードパーティのコードをリンクするために、AEABIに準拠するELF/DWARFコードを読み取ります。</li>
+<li>コンパイラアセンブリリストの出力は無効になっています。</li>
+    </ul>
+    </div>
+</body>
+</html>

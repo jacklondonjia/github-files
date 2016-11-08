@@ -1,0 +1,4103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: release_history.html 112 2011-10-10 11:35:36Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>IAR Embedded Workbench Release History</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>Release History</h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a> | <a href="iccarm.ENU.html">Release notes for the IAR C/C++ Compiler for ARM</a> | Release History
+    </div>
+    <div class="mainblock">
+    <h2>
+        Release History
+    </h2>
+    <!-- $Id: release_history.ENU.html 48040 2011-10-19 12:40:30Z danielru $ -->
+    <ul>
+      <li>
+        <A HREF="#his621">V6.21</A> 2011-07-05 
+      </li>   
+      <li>
+        <A HREF="#his620">V6.20</A> 2011-04-29 
+      </li>   
+      <li>
+        <A HREF="#his610">V6.10</A> 2010-11-04 
+      </li>   
+      <li>
+        <A HREF="#his550">V5.50</A> 2010-04-21   
+      </li>   
+      <li>
+        <A HREF="#his541">V5.41</A> 2009-12-14   
+      </li>   
+      <li>
+        <A HREF="#his540">V5.40</A> 2009-07-10   
+      </li>   
+      <li>
+        <A HREF="#his530">V5.30</A> 2009-01-23   
+      </li>   
+      <li>
+        <A HREF="#his520">V5.20</A> 2008-06-24   
+      </li>   
+      <li>
+        <A HREF="#his511">V5.11</A> 2007-12-11   
+      </li>   
+      <li>
+        <A HREF="#his510">V5.10</A> 2007-06-12   
+      </li>   
+      <li>
+        <a HREF="#his441A">V4.41A</a> 2006-12-08
+      </li>
+      <li>
+        <a HREF="#his440A">V4.40A</a> 2006-06-03
+      </li>  
+      <li>
+        <a HREF="#his431A">V4.31A</a> 2006-02-03
+      </li>
+      <li>
+        <a HREF="#his430A">V4.30A</a> 2005-06-23
+      </li>
+      <li>
+        <a HREF="#his420A">V4.20A</a> 2005-01-10
+      </li>
+      <li>
+        <a HREF="#his411A">V4.11A</a> 2004-06-10
+      </li>
+      <li>
+        <a HREF="#his410B">V4.10B</a> 2004-03-09
+      </li>
+      <li>
+        <a HREF="#his410A">V4.10A</a> 2004-02-21
+      </li>
+      <li>
+        <a HREF="#his340C">V3.40C</a> 2003-12-12
+      </li>
+      <li>
+        <a HREF="#his340B">V3.40B-P1</a> 2004-10-06
+      </li>
+      <li>
+        <a HREF="#his340A">V3.40A</a> 2003-07-03
+      </li>
+      <li>
+        <a HREF="#his330B">V3.30B</a> 2003-03-18
+      </li>
+      <li>
+        <a HREF="#his330A">V3.30A</a> 2003-02-18
+      </li>
+      <li>
+        <a HREF="#his321A">V3.21A</a> 2002-09-27
+      </li>
+      <li>
+        <a HREF="#his320A">V3.20A</a> 2002-06-18
+      </li>
+      <li>
+        <a HREF="#his311A">V3.11A</a> 2001-12-04
+      </li>
+      <li>
+        <a HREF="#his310A">V3.10A</a> 2001-10-02
+      </li>
+      <li>
+        <a HREF="#his210D">V2.10D</a> 2001-06-27
+      </li>
+      <li>
+        <a HREF="#his210A">V2.10A</a> 2001-02-21
+      </li>
+      <li>
+        <a HREF="#his130C">V1.30C</a> 2000-10-14
+      </li>
+      <li>
+        <a HREF="#his130A">V1.30A/B</a> 2000-09-28
+      </li>
+      <li>
+        <a HREF="#his120A">V1.20A</a> 2000-05-28
+      </li>
+      <li>
+        <a HREF="#his110A">V1.10A</a> 2000-01-14
+      </li>
+    </ul>
+    <p></p>
+
+    <!-- ============================================== -->
+
+  <h4><A NAME="his621">V6.21 2011-07-05</A></h4>
+  <b>New features</b>
+<ul>
+  <li>None.</li>
+</ul>
+
+  <b>Program corrections</b>	
+<ul>
+<li>
+  <p>
+    Location information (from <code>#pragma location</code> or the <code>@</code> operator) now carries
+    over properly from a function declaration to the function definition.<br>
+    Example:<br>
+      <code>int foo(void) @ "XXX";<br>
+      int foo(void) { return 1; }<br></code>
+    The function <code>foo()</code> should be placed in the section <code>XXX</code>, but it was not.<br>
+    [EW22448]
+  </p>
+</li>
+
+<li>
+  <p>
+    Redeclaring <code>main</code> with non-matching location strings and suppressing the resulting error
+    caused an internal error in the compiler. Now the error cannot be suppressed in this situation.<br>
+    [EW22450]
+  </p>
+</li>
+
+<li>
+  <p>
+    Commutative operations with multiple constants are no longer optimized incorrectly even if one or more of the
+    operations is of a smaller type.<br>
+    [EW22470, EW22484]
+  </p>
+</li>
+
+<li>
+  <p>
+    For a nested interrupt handler, <code>LR</code> is now adjusted.<br>
+    [EW22472]
+  </p>
+</li>
+
+<li>
+  <p>
+    String literals in inline and template functions were turned into non-const variables.
+    Now the variables are <code>const</code> instead, and end up in ROM, the way they should.<br>
+    [EW22475]
+  </p>
+</li>
+
+<li>
+  <p>
+    Corrected an internal error.<br>
+    [EW22479]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    For certain small switch statements the compiler generated different code for different
+    invocations. This has been fixed.<br>
+    [EW22520]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    In some rare cases a store to a struct member in an auto object was optimized incorrectly
+    if the object member was read once before the address of the object was passed to a function.<br>
+    [EW22537]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    The compiler now avoids widening partial definitions.<br>
+    [EW22539]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    When the Thumb-1 instruction <code>ADD.N Rdn,Rdn,SP</code> is widened the equivalent Thumb-2
+    instruction <code>ADD.W Rdn,SP,Rdn</code> is used, since <code>ADD.W Rdn,Rdn,SP</code> is unpredictable.<br>
+    [EW22555]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    The compiler no longer places too many constants or string literals between a branch
+    and its target, which for a Thumb-1 function where <code>LR</code> is not pushed could result in
+    "Internal error: Jump distance to far for B".<br>
+    [EW22611]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    The compiler no longer crashes when compiling a reference to <code>ASR</code>, <code>LSR</code>,
+    <code>LSL</code>, <code>ROR</code>, or <code>RRX</code>.<br>
+    [EW22614]
+  </p>
+</li>
+</ul>
+
+  <h4><A NAME="his620">V6.20 2011-04-29</A></h4>
+  <b>New features</b>
+  <ul>
+       <li><p>
+       <code>time.h</code> has an optional 64-bit interface that supports years from -9999 up to 9999.
+       For more information see the <A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>.
+       </p></li>
+
+  </ul>
+  <b>Program corrections</b>	
+  <ul>
+ 
+<li>
+  <p>
+    When compiling a C file with the <code>--use_c++_inline</code> option, the C99 rule that a public inline
+    function definition cannot reference functions or variables with internal linkage is no longer
+    checked.<br>
+    [EW22161]
+  </p>
+</li>
+
+<li>
+  <p>
+    Loops where the final statement in the loop body is a switch will no longer trigger an
+    internal error on High optimization.<br>
+    [EW22183]
+  </p>
+</li>
+
+<li>
+  <p>
+    The C++ C system headers (<code>errno.h</code>, etc) can now be included
+    inside an <code>extern "C"</code> block.<br>
+    [EW22188]
+  </p>
+</li>
+
+<li>
+  <p>
+    A <code>while</code> loop with multiple returns in the loop body will no longer trigger an internal error.<br>
+    [EW22195]
+  </p>
+</li>
+
+<li>
+  <p>
+    Now the compiler can handle macro parameters that contains multibytes.<br>
+    [EW22214]
+  </p>
+</li>
+
+<li>
+  <p>
+    Compilation of modules with a very large number of constant data symbols is now considerably faster.<br>
+    [EW22243]
+  </p>
+</li>
+
+<li>
+  <p>
+    When the <code>offsetof</code> macro is used in a macro argument for a user-defined macro,
+    the compiler no longer produces unwanted warnings about the contents of the <code>offsetof</code> macro.<br>
+    [EW22250]
+  </p>
+</li>
+
+<li>
+  <p>
+    The symbol <code>__vector_table</code> is now included when linking with the file
+    <code>arm\src\lib\thumb\cstartup_M.c</code> delivered with the product.<br>
+    [EW22252]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler now correctly handles multibyte characters in a comment and the source line splice mechanism.<br>
+    [EW22276]
+  </p>
+</li>
+
+<li>
+  <p>
+    The unrolling of a one-trip loop with multiple tests and empty loop body now works also when the
+    second test is used to determine that only one iteration of the loop shall be executed.<br>
+    [EW22295]
+  </p>
+</li>
+
+<li>
+  <p>
+    Complex expressions involving left-shifts and subtractions will always be optimized correctly.<br>
+    [EW22306]
+  </p>
+</li>
+
+<li>
+  <p>
+    In some cases the compiler could generate a Thumb-2 <code>ADD</code> instruction with negative 8-bit 
+    immediate, which the assembler would convert to a narrowThumb-1 <code>SUB</code> instruction.
+    This has been corrected.<br>
+    [EW22308]
+  </p>
+</li>
+
+<li>
+  <p>
+    MISRA C rules were erroneously applied to the constant expression for the address in a 
+    <code>#pragma location</code> or after the <code>@</code> operator, resulting in spurious
+    diagnostics when MISRA C checking was enabled. This has been corrected.<br>
+    [EW22321]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler no longer produces an internal error when generating code for Thumb-2 and trying to split
+    a 64-bit store into two 32-bit stores (for example due to alignment) when the address operand is of
+    the form <code>[&lt;Rn&gt;,&lt;Rm&gt;,#&lt;imm&gt;]</code>.<br>
+    [EW22324]
+  </p>
+</li>
+
+<li>
+  <p>
+    Now the compiler can produce an error for a nonstandard implicit cast of a function to a pointer-to-member.<br>
+    [EW22337]
+  </p>
+</li>
+
+<li>
+  <p>
+    Trampoline functions <code>__iar_via_rw_&lt;Rn&gt;</code> are now generated as a writable section fragment, so
+    that <code>__ramcode</code> functions can be used also in cases were such a function is needed.<br>
+    [EW22346]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    The compiler no longer exits with internal error when optimizing conditional jumps.<br>
+    [EW22404]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    For cores with media extensions, the compiler no longer generates <code>ADD</code> instead of
+    <code>{S,U}XTA{B,H}</code>.<br>
+    [EW22407]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    The compiler no longer reports internal error when generating code for Thumb-2 and trying to split
+    a 64-bit load into two 32-bit loads (for example due to alignment) when the address operand is of
+    the form <code>[&lt;Rn&gt;,&lt;Rm&gt;,#&lt;imm&gt;]</code>.<br>
+    [EW22415]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    In static initialization of a structure or an array of structures, fields following an unnamed
+    bit-field no longer get incorrect values.<br>
+    [EW22416]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    The compiler erroneously issued warning Pe021 (type qualifiers are meaningless in this declaration)
+    when using the keyword <code>__packed</code> on a struct or class definition.<br>
+    [EW22417]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    Loops with <code>goto</code> statements no longer trigger an internal error for any case.<br>
+    [EW22420]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    The compiler no longer abort with an internal error for aggregate initializers consisting entirely of
+    constant integers in some cases involving non-integer, non-aggregate types nested more than two levels
+    down in the unspecified parts of the initializer.<br>
+    [EW22424]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.3:<br>
+    When generating Thumb-2 code, access to 32-bit floating point values on a large stack frame no longer causes internal error.<br>
+    [EW22439]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.3:<br>
+    Pointer constants involving a cast from an integer could get an incorrect type, leading to spurious errors or internal errors.
+    This has been corrected.<br>
+    [EW22441]
+  </p>
+</li>
+  </ul>
+
+
+  <h4><A NAME="his610">V6.10 2010-11-04</A></h4>
+  <b>New features</b>
+  <ul>
+          <li><p> The product now uses the current C standard defined in 1999, 
+               known as C99, as the default C language. The previous major 
+               version of the product used the former C standard defined in 
+               1989, known as C89. C89 can still be used in the compiler by 
+               using the <code>--c89</code> option. The product will not be totally 
+               backwards-compatible though, because the support for some C99 
+               features has been withdrawn. Variable length arrays, VLAs, in 
+               C99, are not supported in the default C language. They can be 
+               enabled with the option <code>--vla</code>. The C library  
+               supports all C99 functionality, and more, but only if used with 
+               the C99 language or with any C++ language. If used with the C89 
+               language, C99-added functionality will not be allowed.</p></li>
+          <li><p> The implementation of EC++ and EEC++ has not changed in any
+               major way.</p></li>
+          <li><p> Support for the C++ language 
+               has been added. By default, it fully supports the 2003 C++ 
+               standard, but can be used with exceptions and/or runtime type 
+               information disabled by using <code>--no_exceptions</code> and 
+               <code>--no_rtti</code> respectively.</p></li>
+          <li><p>Thread-safe libraries<br />
+               The DLIB library now supports 
+               being used in a threaded environment. Some library systems, like
+               the heap and the file structure, will be guarded by locks. Other
+               library systems, like <code>locale</code> and <code>errno</code>, will have their
+               static data allocated in thread-local storage. The DLIB thread
+               support can either be supported by your chosen RTOS or can be
+               manually implemented. 
+               For more information see the <A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>.
+          </p></li>
+          <li><p> The compiler and assembler now automatically know where the 
+               library's system headers reside. You can control the compiler
+               using the options: 
+               <ul>
+                 <li><code>--dlib_config</code>, to choose a configuration in the 
+                     DLIB library.</li>
+                 <li><code>--system_include_dir</code>, to override the directory
+                     to use as system header base.</li>
+                 <li><code>--no_system_include</code>, to turn the automation off.
+                     </li>
+               </ul></p></li>
+          <li><p> The compiler can now optimize some floating-point expressions more agressively
+               by using the option <code>--relaxed_fp</code>. If enabled, the
+               compiler tries to reduce the floating-point type used in 
+               floating-point expressions. This can cause a small loss of accuracy.
+          </p></li>
+  </ul>
+  <b>Program corrections</b>
+  <ul>
+<li>
+  <p>
+    The library function <code>fpclassify()</code> handles normal and subnormal numbers correctly.<br>
+    [EW21098]
+  </p>
+</li>
+
+<li>
+  <p>
+    Small <code>memcpy</code> calls are no longer transformed to assignments unless both the source and
+    destination addresses have correct alignment.<br>
+    [EW21193]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler now checks that different kinds of variables are no placed in the same section.<br>
+    [EW21351]
+  </p>
+</li>
+
+<li>
+  <p>
+    An internal error should no longer occur if <code>__segment_begin()</code> or
+    <code>__segment_end()</code> is used in conditional code.<br>
+    [EW21770, EW21838, EW21905]
+  </p>
+</li>
+
+<li>
+  <p>
+    Loops that decremented an unsigned loop counter past zero could in some cases be
+    incorrectly optimized.<br>
+    [EW21795]
+  </p>
+</li>
+
+<li>
+  <p>
+    Now all system headers do not generate MISRA errors.<br>
+    [EW21799]
+  </p>
+</li>
+
+<li>
+  <p>
+    When optimizing, the the compiler now handles an initializer containing a function pointer with an offset.<br>
+    [EW21870]
+  </p>
+</li>
+
+<li>
+  <p>
+    The endian attribute is not supported for pointers or arrays. Now an endian attribute can
+    no longer be specified for pointers or arrays.<br>
+    [EW21887]
+  </p>
+</li>
+
+<li>
+  <p>
+    Reversal of byte order is now correctly performed also for combinations of endian
+    attributes and unaligned accesses. Previously, this was in some cases not handled.<br>
+    [EW21888]
+  </p>
+</li>
+
+<li>
+  <p>
+    At optimization level High, speed-optimizing small loops similar to
+    <pre><code>
+      int test(int n)
+      {
+        while (n-- > 0)
+          if (!foo(n))
+            break;
+        return n;
+      }
+      </code></pre>
+    could in some cases be incorrectly unrolled and cause an internal error.<br>
+    [EW21949]
+  </p>
+</li>
+
+<li>
+  <p>
+    A class with a member that is a nameless struct, or an array of nameless structs,
+    where at least one of the members is not a PoD, could cause
+    an internal error while compiling.<br>
+    [EW21958]
+  </p>
+</li>
+
+<li>
+  <p>
+    A while loop with a preincrement or predecrement in the loop test could be incorrectly optimized
+    if the final part of the loop body was a do loop.<br>
+    [EW21999]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler will no longer merge instruction sequences (through cross call or
+    cross jump optimizations) that are not equal, due to the register operand of a
+    Thumb-2 compare-and-branch instruction (<code>CBZ</code> or <code>CBNZ</code>).<br>
+    [EW22000]
+  </p>
+</li>
+
+<li>
+  <p>
+    When an <code>enum</code> is specified as a parameter or return type before it has been defined,
+    the compiler will no longer record the wrong num size (attribute <code>Tag_ABI_enum_size</code>)
+    in the ELF file.<br>
+    [EW22013]
+  </p>
+</li>
+
+<li>
+  <p>
+    In Thumb-2, the compiler no longer issues an internal error in an attempt to widen
+    <code>MULS.N</code> to <code>MULS.W</code> (which is not a Thumb-2 instruction)
+    to achieve a 4-byte alignment of a following instruction or label.<br>
+    [EW22018]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler can now handle a function symbol as an argument to compiler optimized functions
+    like <code>memcpy</code>.<br>
+    [EW22052]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    Nested <code>for</code> loops where the inner loop's initial or final value was the outer
+    loop's variable, multiplied with a constant scaling factor or with a constant offset, no
+    longer causes an internal error on high optimization.<br>
+    [EW22078]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    Some <code>while</code> loops with multiple exits no longer causes an internal error on
+    high optimization.<br>
+    [EW22080]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    Constant data is now placed in the <code>.rodata</code> section if the compiler has not
+    generated a direct <code>ADR</code> reference. If there is an <code>ADR</code> reference,
+    the constant data is placed in the <code>.text</code> section.<br>
+    [EW22081]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    Standard C++ is now enabled also for the kickstart products.<br>
+    [EW22089]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    Now the MISRA-C:2004 rule 20.2 checker can handle a long preprocessor symbol define.<br>
+    [EW22117]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    For Cortex-M3, the compiler no longer attempts to generate a sub-routine for identical
+    instruction sequences (cross-call) that end with a call to a software interrupt function
+    (<code>SWI</code>), which would result in an internal error.<br>
+    [EW22118]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    The compiler no longer removes code that uses the result of an <code>STREX</code>
+    instruction (the instruction can be generated by using the <code>__STREX</code> intrinsic
+    function).<br>
+    [EW22119]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    The compiler no longer uses a signed 16-bit value as the immediate operand for the
+    <code>MOVT</code> instruction. A 16-bit unsigned value is used instead, because
+    <code>MOVT</code> expects an immediate value between 0 and 65535.<br>
+    [EW22121]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    Evaluating a function address without using the result no longer causes an internal error.<br>
+    [EW22146]
+  </p>
+</li>
+  </ul>
+
+  <h4><A NAME="his550">V5.50 2010-04-21</A></h4>
+  <b>New features</b>  
+  <ul>
+      <li>
+        <p>
+        The following C library floating-point functions, for devices without VFP, have been optimized for speed and size:<br>
+        <code>sqrt</code>, <code>sqrtf</code>, <code>modf</code>, <code>modff</code>, <code>fabs</code>,
+        <code>fabsf</code>, <code>fmod</code>, <code>fmodf</code>, <code>floor</code>, <code>floorf</code>,
+        <code>ceil</code>, <code>ceilf</code>, <code>ldexp</code>, <code>ldexpf</code>, <code>frexp</code>,
+        <code>frexpf</code>.
+        </p>
+      </li>
+      <li>
+        <p>
+        The following C library floating-point functions, for devices with VFP, have been optimized for speed and size:<br>
+        <code>sqrt</code>, <code>sqrtf</code>,
+        <code>modf</code>, <code>modff</code>, <code>fabs</code>,
+        <code>fabsf</code>, <code>fmod</code>, <code>fmodf</code>, <code>floor</code>, <code>floorf</code>,
+        <code>ceil</code>, <code>ceilf</code>, <code>ldexp</code>, <code>ldexpf</code>, <code>frexp</code>,
+        <code>frexpf</code>, <code>asin</code>, <code>asinf</code>,
+        <code>acos</code>, <code>acosf</code>, <code>atan</code>, <code>atanf</code>, <code>atan2</code>, <code>atan2f</code>.
+        </p>
+      </li>
+  </ul>
+  <b>Program corrections</b>
+  <ul>
+        <li>
+          <p>
+            While optimizing a function that contained code that prevented the end of the function to be reached,
+            the compiler would erroneously leave a label after the last reachable instruction. This label was later
+            interpreted as a leak of flow-of-control out of the function and an internal error was generated.<br>
+            [EW21541]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            A call to the map index operator now default-constructs the value if the key is not found even for base types.<br>
+            [EW21592]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Using designated initializers (a C99 feature available in EC++ when IAR extensions are enabled) with a
+            static storage duration object that needed C++ dynamic initialization could cause incorrect initialization.<br>
+            [EW21649]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The use of intrinsics for <code>LDC</code> and <code>STC</code> could in some cases crash the compiler (access violation).<br>
+            [EW21657]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            A function, <code>f</code>, updating a global variable, could be incorrectly optimized, if<br>
+            <ul>
+            <li><code>f</code> had multiple return statements,</li>
+            <li>at least one of the return statements was inside a loop, and</li>
+            <li><code>f</code> was inlined in another function.</li>
+            </ul>
+            [EW21666]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            For a function call where the compiler inserts a call to <code>memcpy</code> to construct a stack parameter,
+            the register <code>R1</code> is no longer assumed to survive the call to <code>memcpy</code>.<br>
+            [EW21668]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The compiler no longer generates unaligned memory accesses for Cortex-M0.<br>
+            [EW21687]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The compiler no longer generates branch instructions without size specifiers (<code>.W</code> or <code>.N</code>)
+            for Thumb-2 capable cores (in Thumb mode), because doing so sometimes could result in an
+            internal error.<br>
+            [EW21699]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            Using an enumerator constant directly as a floating-point value no longer
+            produces a corrupt value.<br>
+            [EW21704]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            Array pointer decay of a block local static array with template parameter
+            dependent size no longer results in an internal error.<br>
+            Example:<br>
+            <pre>
+              template<typename C> struct Q
+              {
+                C * get()
+                {
+                  static long x[sizeof(C)];
+                  return (C *)x;
+                }
+              };</pre>
+            [EW21728]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            The instruction scheduling for ARM11 no longer issues an internal error
+            when scheduling a <code>PKHBT</code> instruction with a shifted operand.<br>
+            [EW21745]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            The <code>USAT</code> instruction (for unsigned saturation) is now generated with
+            correct bitwidth also in Thumb-2 mode (was off by one).<br>
+            [EW21768]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            Cast from <code>double</code> to <code>long long</code> no longer generates faulty values for very
+            large inputs with a non-zero fractional part. Values in the range
+            [2^32, 2^52] were affected.<br>
+            [EW21786]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            An internal error no longer occurs for conditions where the test is a
+            <code>? :</code> expression on the form:<br>
+            <code>if ((condition1 && condition2) ? 1 : 0)</code><br>
+            [EW21807]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            Range checks for the address of a function parameter is now translated
+            correctly: it could earlier in some cases result in internal error.<br>
+            [EW21826]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.5:<br>
+            The compiler is now able to inline a function that in its body calls a
+            function with the <code>__noreturn</code> attribute.<br>
+            [EW21841]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.7:<br>
+            An internal error is no longer issued when multiple constant-table
+            references are placed in the same IT-block for a function that is so large that
+            an <code>LDR (immediate)</code> instruction cannot reach outside the function.<br>
+            [EW21968]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.7:<br>
+            Loops that contain conditional accesses through an invariant pointer variable
+            are no longer incorrectly optimized.<br>
+            [EW21992]
+          </p>
+        </li>
+
+        <li>
+          <p>
+            In EWARM 5.50.7:<br>
+            A signed division of an expression with a negative divider no longer gets optimized
+            into using an unsigned division.<br>
+            [EW22043]
+          </p>
+        </li>
+  </ul>
+
+  <h4><A NAME="his541">V5.41 2009-12-14</A></h4>
+  <b>New features</b>    
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+  <b>Program corrections</b>
+  <ul>
+<li>
+  <p>
+    <code>cstartup_M.c</code> now includes default interrupt handlers.<br>
+    [EW21314]
+  </p>
+</li>
+
+<li>
+  <p>
+    Expressions on the form<br>
+    <code>if (expr < 0) v = -expr;</code><br>
+    are no longer optimized incorrectly.<br>
+    [EW21340]
+  </p>
+</li>
+
+<li>
+  <p>
+    A test inside a loop is no longer optimized incorrectly if<br>
+    a) the loop had constant values for the initial and the final iteration,<br>
+    b) the test compared an expression to a constant, and<br>
+    c) the calculation of the expression would overflow or underflow for either the initial or final iteration.<br>
+    [EW21363]
+  </p>
+</li>
+
+<li>
+  <p>
+    Complex |-expressions no longer cause infinite loops during optimization.<br>
+    [EW21380]
+  </p>
+</li>
+
+<li>
+  <p>
+    Registers might be spilled to the stack frame when there are more live variables than registers.
+    A spilled large register parameter (more than 8 bytes) no longer results in an internal error.<br>
+    [EW21386]
+  </p>
+</li>
+
+<li>
+  <p>
+    The linker is now more relaxed concerning attribute checking when linking with explicitly specified libraries.<br>
+    [EW21387]
+  </p>
+</li>
+
+<li>
+  <p>
+    Absolute addressed variable accesses no longer loose the <code>volatile</code> attribute during optimization.<br>
+    [EW21400]
+  </p>
+</li>
+
+<li>
+  <p>
+    Debug information for classes inheriting from a base class whose primary base was inherited virtually
+    is no longer generated incorrectly. The old problem could result in incorrect display of base classes in C-SPY.<br>
+    [EW21411]
+  </p>
+</li>
+
+<li>
+  <p>
+    An error from the assembler in inline assembler code is no longer reported as a compiler internal error.<br>
+    [EW21436]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler now encodes the character value 255 in a string literal using an escape sequence, to work
+    around the fact that the assembler interprets such a value as end of file.<br>
+    [EW21443]
+  </p>
+</li>
+
+<li>
+  <p>
+    Registers are no longer renamed in situations where unused registers become used after
+    renaming, to avoid situations where such registers would not be saved on the stack.<br>
+    [EW21449]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler now generates correct code instead of reporting an internal error in situations where an entry in a constant
+    table is duplicated so that it can be reached by all its references.<br>
+    [EW21471]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 5.41.2:<br>
+    Integral expressions in loops are no longer optimized incorrectly when the expression adds or subtracts
+    a constant to/from a variable <code>(x + ... + C)</code>, and the variable is assigned the same constant
+    subtracted/added from/to the loop index variable  <code>(x = i - C)</code>.<br>
+    [EW21493]
+  </p>
+</li>
+
+
+<li>
+  <p>
+    In EWARM 5.41.2:<br>
+    Two tests on the form<br>
+    <code>expr1 > c1 && expr2 < c2</code><br>
+    or<br>
+    <code>expr1 < c1 || expr2 > c2</code><br>
+    are no longer incorrectly optimized as a range test when <code>expr1</code> is not
+    identical to <code>expr2</code>.<br>
+    [EW21498]
+  </p>
+</li>
+
+
+<li>
+  <p>
+    In EWARM 5.41.2:<br>
+    A bitwise and operation between a constant and a value loaded from memory will sometimes be transformed
+    into a truncated load, which loads only a part of the variable from memory. For a 64-bit variable
+    (in other words, <code>long long</code>) the truncated load will no longer result in an internal error.<br>
+    [EW21517]
+  </p>
+</li>
+
+
+<li>
+  <p>
+    In EWARM 5.41.2:<br>
+    Complex array index expressions in loops no longer result in an internal error.<br>
+    [EW21545]
+  </p>
+</li>
+
+
+<li>
+  <p>
+    In EWARM 5.41.2:<br>
+    Types smaller that 32 bits must sometimes be sign- or zero-extended before being compared
+    (using for example <code>CMP</code>, <code>TST</code>, or <code>TEQ</code>). Sign- and zero-extends
+    are now generated when needed also for cases when the result of bitwise and/xor operations
+    are compared with zero (in other words, cases for which a <code>TST</code> or <code>TEQ</code> instruction
+    is generated).<br>
+    [EW21550]
+  </p>
+</li>
+
+
+<li>
+  <p>
+    In EWARM 5.41.2:<br>
+    Correct values are now produced when the intrinsics <code>__CLZ</code>, <code>__REV</code>, or
+    <code>__REVSH</code> are used with a constant argument.<br>
+    [EW21561]
+  </p>
+</li>
+  </ul>
+
+    <h4><A NAME="his540">V5.40 2009-07-10</A></h4>
+  <b>New features</b>  	
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+  <b>Program corrections</b>  
+  <ul>
+
+<li>
+  <p>
+    An if-then-else statement could be optimized into a question mark expression even at low optimization levels, which would make the debugger confused as to which is the current statement. The optimization has now been disabled at optimization levels 'low' and 'none'.<br>
+    [EW20828]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler no longer generates a message for the usage of <code>long long</code> in system headers even
+    though the options <code>--strict_ansi</code> and <code>--warnings_are_errors</code> are used.<br>
+    [EW20844]
+  </p>
+</li>
+
+<li>
+  <p>
+    The final value of variables in loops transformed into a <code>memcpy</code> or <code>memset</code> call could,
+    in some cases, be off by one.<br>
+    [EW20886]
+  </p>
+</li>
+
+<li>
+  <p>
+    Fixed an internal error in the compiler when trying to match an out-of-line template member function definition to the correct declaration. The problem occurred when two or more template member functions differed in the this qualifiers of a pointer to member function type parameter.<br>
+    Example:<br><code><pre>
+      struct X
+      {
+        template<typename Y, typename Z> int fun(Y (Z::*fp)());
+        template<typename Y, typename Z> int fun(Y (Z::*fp)() const);
+      };
+
+      template<typename Y, typename Z>
+      int X::fun(Y (Z::*fp)())
+      {
+        return 1;
+      }</pre></code>
+    [EW20920]
+  </p>
+</li>
+
+<li>
+  <p>
+    The MISRA C error <code>Pm020</code> was incorrectly reported as a warning and the corresponding rule number was omitted from the error message.<br>
+    [EW20925]
+  </p>
+</li>
+
+<li>
+  <p>
+    When compiling multiple input files (<code>--mfc</code>) in Embedded C++ mode, the compiler could get an
+    internal error <code>[assertion failed at: ".\src\parser\edg\lower_il.c", line 2484]</code> in some circumstances.<br>
+    [EW20927]
+  </p>
+</li>
+
+<li>
+  <p>
+    Loops where a global variable (<code>g</code>) just held a result (<code>g</code> passed no value
+    between loop iterations) could in some cases be incorrectly optimized.
+    <pre>
+    for (...) {
+       g = ...
+       if (...) break;
+       g = ...
+    }</pre>
+    [EW20952]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler and assembler produced object files where group section header table entries did not appear before the entries of all their members, as required by the ELF format.<br>
+    [EW20988]
+  </p>
+</li>
+
+<li>
+  <p>
+    After a <code>memcpy</code> call, where a buffer (<code>b</code>) was assigned <code>n</code> characters from a string
+    literal of length <code>n</code> (all characters except the zero termination), a <code>b[n] = 0</code> assignment
+    could erroneously be removed.<br>
+    [EW20991]
+  </p>
+</li>
+
+<li>
+  <p>
+    Associative expressions containing both a division and a modulo operation could in some rare cases be
+    incorrectly optimized.<br>
+    [EW21010]
+  </p>
+</li>
+
+<li>
+  <p>
+    When compiling EEC++ for Thumb, a class that inherits from three or more classes where a virtual method has three or more arguments, one of the generated thunks was faulty (when compiling with multiple inheritance there is sometimes a need for a piece of code that adjusts the 'this' pointer. This piece of code is known as a 'thunk').<br>
+    [EW21014]
+  </p>
+</li>
+
+<li>
+  <p>
+    For a struct <code>x</code> of 8 bytes or more, allocated as a register variable with two fields <code>a</code>
+    and <code>b</code>, a simple if statement that can be reduced to a question mark expression (such as
+    <code>x.a < x.b ? x.a : x.b</code>) could result in an internal error.<br>
+    [EW21017, 21108]
+  </p>
+</li>
+
+<li>
+  <p>
+    Member accesses to auto structs assigned with <code>memcpy</code> could in some cases be incorrectly optimized.<br>
+    [EW21020]
+  </p>
+</li>
+
+<li>
+  <p>
+    When compiling for VFP, a function call with a variable argument list where an argument passed on the
+    stack is converted from <code>double</code> to <code>int</code> could result in an incorrect stack pointer value.<br>
+    [EW21023]
+  </p>
+</li>
+
+<li>
+  <p>
+    When compiling with <code>--legacy RVCT3.0</code> for Thumb mode, and a constant is shared between functions of the same compilation unit, the compiler could in some cases generate one of the functions in a segment part with two bytes alignment. Four bytes alignment is required in such cases to correctly resolve the <code>R_ARM_THM_PC8</code> relocation.<br>
+    [EW21031]
+  </p>
+</li>
+
+<li>
+  <p>
+    The code generator could fail to detect that an object had been placed with stricter alignment than required by the type. This would, in turn, cause the compiler to crash when the code generator at a later stage expected the higher alignment.<br>
+    [EW21059]
+  </p>
+</li>
+
+<li>
+  <p>
+    When a switch statement inside a loop is generated as a table with negative offsets, the same register could be reused for two different purposes at table lookup.<br>
+    [EW21100]
+  </p>
+</li>
+
+<li>
+  <p>
+    The compiler could terminate with an internal error in some cases involving enum types defined in a template class.<br>
+    [EW21101, 21112]
+  </p>
+</li>
+
+<li>
+  <p>
+    When optimizing loops where the loop limit is the result of an expression involving possibly negative values in a bitwise AND operation, the compiler could in some cases erroneously conclude that the loop body would execute at least once and eliminate the test of the initial iterator value against the limit. The result of this is incorrect loop code for the case when the loop body should not be executed at all.<br>
+    [EW21118,21120]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    The runtime library no longer assumes that unaligned access is supported in Cortex-M0 or Cortex-M1.<br>
+    [EW21262]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    Scalar stack parameters smaller than 32-bit are now properly sign- or zero extended before the
+    function is called.<br>
+    [EW21271]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    Compilation of a file using either of the intrinsics <code>__get_interrupt_state</code> or
+    <code>__set_interrupt_state</code> no longer results in an internal error.<br>
+    [EW21272]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    MISRA C is now available in EWARM-CM.<br>
+    [EW21324]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    The compiler now generates correct debug information for calls to C++ member functions defined
+    in another module. The <b>step into</b> debugger command for such a call now works properly.<br>
+    [EW21327]
+  </p>
+</li>
+  </ul>
+
+    <h4><A NAME="his530">V5.30 2009-01-23</A></h4>
+    <b>New features</b>  	
+    <ul>
+      <li><b>__task extended keyword</b><br>
+      By default, functions save the contents of used preserved registers on the stack upon
+      entry, and restore them at exit. Functions that are declared<code> __task </code>do not save all
+      registers, and therefore require less stack space. This is typically used by realtime operating systems.
+      </li>
+	</ul>
+    <b>Program corrections</b>
+	<ul>
+
+      <li>
+        <p>
+          Creating a variable with a class/struct/union type with type errors in one
+          or more of its fields could earlier result in an internal error. This has been corrected.<br>
+          [EW20367]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          In some unusual cases the compiler could terminate ungracefully. Ungraceful
+          terminations are now prevented.<br>
+          [EW20380]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Stack usage reported in the listfile is now again a safe approximation.<br>
+          [EW20410]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          In some cases two pre/post increment/decrements in two consecutive
+          expressions could cause an internal error. This problem has been corrected.<br>
+          [EW20419]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Irregular loops could in some rare cases be optimized incorrectly. This problem has been corrected.<br>
+          [EW20428]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Specifying a designated initializer on a field inside more than one level
+          of anonymous unions/structs could earlier cause an internal error in the compiler.
+          This problem has been corrected.<br>
+          [EW20439]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          An inline-assembler operation can now correctly generate an error for absolute addressing in ELF.<br>
+          [EW20489]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The compiler could fail when generating code for certain loop constructs. This has been corrected.<br>
+          [EW20503]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          In some cases an address expression inside two nested loops could use a
+          variable before it had been assigned a value. This has been corrected.<br>
+          [EW20531]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          At medium optimization level (or higher) for Cortex-M3, compilation of certain combinations of the constant 256
+          and the question mark operator (<code>a?b:c</code>) could earlier result in an internal error with the message
+          "illegal state". This has been corrected.<br>
+          [EW20537]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Variables of small type (for example <code>char</code>) could earlier be incorrectly hoisted
+          as a loop counter even though it might wrap. This has been corrected.<br>
+          [EW20563]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          A<code> do </code>loop copying consecutive shorts, integers, or long longs have now a
+          correct byte count when translated into a memcpy call.<br>
+          [EW20570]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Return value temporaries created for functions that use a return value
+          pointer did not get marked as having had their address taken. This has been corrected.<br>
+          [EW20572]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          In some cases the code could be optimized incorrectly if pointers of different types were
+          used to access the same memory address. This has been corrected.<br>
+          [EW20581]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Certain operations (typically bit-wise) involving template static data members of integer type
+          could cause an internal error when compiling template code. This has been corrected.<br>
+          [EW20608]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          A loop could in some cases be incorrectly optimized if it updated a global
+          variable preceded by an indirect store of the same type as the global
+          variable.<br>
+          [EW20627]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The compiler no longer tries to put <code>CPSIE/CPSID</code> in an IT-block.<br>
+          [EW20652]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The min and max templates should now be optimized correctly after function inlining.<br>
+          [EW20654]
+        </p>
+
+      <li>
+        <p>
+          The compiler no longer crashes after issuing the error Pe020.<br>
+          [EW20684]
+        </p>
+
+      <li>
+        <p>
+          The intrinsic function __set_CPSR() generated the wrong assembler instruction.
+          This has been corrected.<br>
+          [EWARM-268]
+        </p>
+
+      </li>
+
+    </ul>
+
+    <h4><A NAME="his520">V5.20 2008-06-24</A></h4>
+    <b>New features</b>  
+    <ul>
+      <li>
+        <p>
+	  Support for vector floating point (VFP) coprocessors.
+	</p>
+      </li>
+	  </ul>
+      <b>Program corrections</b>
+	  <ul>
+      <li>
+        <p>
+          The compiler no longer removes reads from uninitialized volatile auto variables
+          from the code.<br>
+          [EW19167]
+        </p>
+      </li>
+      <li>
+        <p>
+          A thunk with fall through is now padded properly whenever it is needed.<br>
+          [EW19481]
+        </p>
+      </li>
+      <li>
+        <p>
+          Source lines after a<code> #line </code>directive are now included in compiler list files.<br>
+          [EW19654]
+        </p>
+      </li>
+      <li>
+        <p>
+          The compiler can now handle segment/section names that are the same as assembler
+          instruction names, register names, etc.<br>
+          [EW19674]
+        </p>
+      </li>
+      <li>
+        <p>
+          Out-of-line definitions of member functions of a template class are now made properly
+          tentative.<br>
+          [EW19678]
+        </p>
+      </li>
+      <li>
+        <p>
+          Declaring a class-specific two-operand operator<code> delete </code>in a class template no longer causes
+          the compiler to crash.<br>
+          [EW19707]
+        </p>
+      </li>
+      <li>
+        <p>
+          The compiler no longer crashes after emitting an error indicating an extraneous
+          <code> typename </code>keyword in a template.<br>
+          [EW19796]
+        </p>
+      </li>
+      <li>
+        <p>
+          MISRA C rule 23 no longer gives an error for non code symbols.<br>
+          [EW19802]
+        </p>
+      </li>
+      <li>
+        <p>
+          Realloc no longer leaves the heap in a broken state after a call that tries to allocate
+          more memory than there is in the heap.<br>
+          [EW19803]
+        </p>
+      </li>
+      <li>
+        <p>
+          The compiler no longer crashes when generating DWARF debug information for a class-external
+          <code> typedef </code>of a class-scoped<code> enum </code>type with more than 9 constants.<br>
+          [EW19820]
+        </p>
+      </li>
+      <li>
+        <p>
+          When performing<code> memcpy </code>in Cortex-M3 and the source and destination pointers have different
+          alignments, the last 16 bytes are now copied also in cases where the size is:<br>
+          <code>
+          size = 32 + ((4 -(DstPtr & 3)) & 3) + (y * 16);       // y = 0, 1, 2 e.t.c.<br>
+          </code>
+          [EW19837]
+        </p>
+      </li>
+      <li>
+        <p>
+          Instruction scheduling will no longer lift pop of LR over a function/library call.<br>
+          [EW19872]
+        </p>
+      </li>
+      <li>
+        <p>
+          A call to<code> memmove </code>with aligned parameters is no longer incorrectly transformed into
+          <code> __aeabi_memcpy4 </code>instead of<code> __aeabi_memmove4</code>.<br>
+          [EW19878]
+        </p>
+      </li>
+      <li>
+        <p>
+          Masking a<code> long long </code>value now works.<br>
+          [EW19908]
+        </p>
+      </li>
+      <li>
+        <p>
+          A function call, where one parameter is a pointer to a signed integral type that is
+          cast to a pointer to the unsigned type of the same size (or vice versa), no longer causes an
+          internal error if the function call is inlined.<br>
+          [EW19933]
+        </p>
+      </li>
+      <li>
+        <p>
+          Loops with an unsigned loop variable, going from 0 to 1, will no longer be optimized
+          incorrectly.<br>
+          [EW19973]
+        </p>
+      </li>
+      <li>
+        <p>
+          Constant tables layout generation for Thumb2 code has been adjusted.<br>
+          [EW19984]
+        </p>
+      </li>
+      <li>
+        <p>
+          In some rare cases structure assignments, where the source was a indirection of a pre- or
+          post-incremented pointer, could be optimized incorrectly. This has been corrected.<br>
+          [EW20071]
+        </p>
+      </li>
+      <li>
+        <p>
+          Debug information for variables in high registers (<code>r8-r14</code>) in Thumb2 code has
+          been improved.<br>
+          [EW20098]<br>
+          [EW20100]
+        </p>
+      </li>
+      <li>
+        <p>
+          Clustering now handles segment/section-located initialized variables.<br>
+          [EW20149]
+        </p>
+      </li>
+      <li>
+        <p>
+          In some rare cases an optimization that temporarily hoisted a memory cell (i.e. a global
+          variable or a structure member) to a register did not transform the code correctly and
+          one or more uses could still refer to the memory cell. This has been corrected.<br>
+          [EW20150]
+        </p>
+      </li>
+      <li>
+        <p>
+          Fall through from an arm function to a thumb function is no longer generated.<br>
+          [EW20164]
+        </p>
+      </li>
+      <li>
+        <p>
+          Invalid instructions no longer generate internal errors.<br>
+          [EW20199]
+        </p>
+      </li>
+      <li>
+        <p>
+          <code>Tag_ABI_enum_size </code>now reflects the real size of<code> enum </code>used.<br>
+          [EW20203]
+        </p>
+      </li>
+    </ul>
+
+    <h4><A NAME="his511">V5.11 2007-12-11</A></h4>
+    <b>New features</b>  
+    <ul>
+      <li>
+	  Support for Cortex-M1 and Cortex-M3.
+      </li>
+     </ul>
+     <b>Program corrections</b>
+	 <ul>
+      <li>
+        <p>
+          If the code generator failed to place a small object of aggregate type in registers, 
+          it could fail also when it tried to place the object on the stack instead. This happened if the 
+          alignment of the object did not match the size of the aggregate members, resulting in 
+          the wrong offsets being used for all members except those placed on alignment boundaries.<br>
+          [EW19478]
+        </p>
+      </li>
+      <li>
+        <p>
+          A 32-bit mask operation with all except the highest bit together with a test on 
+          the highest bit of the same variable could generate incorrect code in Thumb mode.<br>
+          [EW19480]
+        </p>
+      </li>
+      <li>
+        <p>
+          The section ".textrw" can now be renamed.<br>
+          [EW19672]
+        </p>
+      </li>
+      <li>
+        <p>
+          The compiler can now handle segments/sections with names that are identical
+          to names of assembler instructions, registers, etc.<br>
+          [EW19674]
+        </p>
+      </li>
+      <li>
+        <p>
+          Out-of-line definitions of member functions of a template class were not made properly tentative, resulting in erroneous
+          'duplicate definition' errors when linking. This has been corrected.<br>
+          [EW19678]
+        </p>
+      </li>
+      <li>
+        <p>
+          Declaring a class-specific two-operand operator delete in a class
+          template no longer causes the compiler to crash.<br>
+          [EW19707]
+        </p>
+      </li>
+      <li>
+        <p>
+          Bad syntax in function declarations no longer generate internal errors.<br>
+          [EW19718]
+        </p>
+      </li>
+      <li>
+        <p>
+          Doubles are now rounded correctly.<br>
+          [EW20026]
+        </p>
+      </li>
+    </ul>
+
+    <h4><A NAME="his510">V5.10 2007-06-12</A></h4>
+    <b>New features</b>  
+    <ul>
+      <li>
+        Object files are now produced in the ELF/DWARF format.
+      <li>
+	      Support for AEABI, which means interperability with other ARM EABI compliant tools.
+      </li>
+	 </ul>
+     <b>Program corrections</b>
+	 <ul>
+      <li>
+    	  The compiler now produces an error when an initializer for a static variable 
+	      contains the address of a bitfield member.<br>  
+	      [EW17962]
+      <li>
+    	  A function-like macro, named as a predefined IAR attribute name, no longer 
+	      makes the compiler end erroneously.<br>
+	      [EW18386]
+      <li>
+    	  In rare cases, only the high part of a 64-bit variable was loaded.<br>
+	      [EW18735] 
+      <li>
+    	  NOP instructions, inserted with the intrinsic function <code>__no_operation()</code> was 
+        scheduled causing them not to appear at the desired places in the code.<br>
+	      [EW18767] 
+      <li>
+        The header file <code>MtxWrapper.h</code> now works from C++.<br>
+        [EW18769]
+      <li>
+    	  Loops containing array accesses with index expressions of<code> char </code>type could earlier in some 
+	      cases be optimized incorrectly.<br>
+	      [EW18815,EW18963]
+      <li>
+    	  Inconsistencies between several declarations or between declaration and definition 
+	      of the same function now give proper diagnostics.<br>
+	      [EW18818]
+      <li>
+    	  The header file <code>Dlib_Product.h</code> is now compilable with MISRA C.<br>
+	      [EW18843]
+      <li>
+    	  Interweaved stores with zero and reads from the same structure could earlier be done in 
+        incorrect order.<br>
+	      [EW18845]
+      <li>
+	      Wrong code was generated when passing an unaligned struct as parameter in big endian mode.<br>
+	      [EW18900]
+      <li>
+	      <code>swprintf</code> and <code>vswprintf</code> now correctly handle the ending <code>\0</code>.<br>
+	      [EW18948]
+      <li>
+	      In some rare cases, common subexpressions involving a struct pointer (<code>p-&gt;x</code>) 
+        was incorrectly optimized if the expression was preceded by an equality test between 
+        an other member in the same structure and a constant (<code>p-&gt;y == 0</code>).<br>
+	      [EW19015]
+      <li>
+        Functions with <code>__irq</code> and <code>__fiq</code> now save the vfp status register when compiling for 
+        vfp.<br>
+        [EW19047]
+      <li>
+        The compiler no longer generates an erroneous constant for a compound literal that is
+        used in a file-scoped initialization.<br>
+        [EW19076]
+      <li>
+        <code>swprintf</code> now handles large strings correctly.<br>
+        [EW19105]
+      <li>
+        Large functions could give the following internal error:
+        <code>Internal Error: [CoreUtil/General]: Jump distance to far for B</code>.<br>
+        [EW19179]
+      <li>
+        Clustering could cause zero initialized data to occupy ROM space,
+        instead of using zero initialization.<br>
+        [EW19232]
+      <li>
+        The<code> ! </code>operator on a byte in a <code>char</code> buffer (example:<code> return !buf[0];</code>) could earlier cause the internal error:<br>
+        <code>Const_Folding - Internal error Unequal types for operator != <br>
+        Internal Error: [CoreUtil/General]: Const_Folding - Internal error</code><br>
+        [EW19337]
+    </ul>
+
+    <h4><A NAME="his441A">V4.41A 2006-12-08</A></h4>
+    <b>Program corrections</b>	
+      <ul>
+        <li>
+            The compiler generated misleading errors for unevaluated parts of constant
+            expressions in some circumstances, for example:<br>
+            <code>const unsigned int z1d = ( (0) ? ( ( 1 >= (1ul << -6) ) ? 1 : 2 ): 1 );</code><br>
+            This expression contains a negative shift count, which would normally result
+            in a diagnostic, but the problem is in the non-evaluated part of the containing
+            conditional expression, so this diagnostic is suppressed.
+            The negative shift count makes the comparison undeterminate, which resulted
+            in a "constant value is not known" diagnostic. This subsequent diagnostics
+            was not suppressed, which it also should have been.<br>
+            [EW18140]
+        <li>
+            In Thumb-mode a tail-call could incorrectly be optimized to jump even when the jump
+            distance was just out of reach.<br>
+            [EW18151]
+        <li>
+            A stack-backtrace information problem with <code>__irq</code> and <code>__fiq</code> functions has
+            been corrected.<br>
+            [EW18152]
+        <li>
+            Inverting a <code>long long</code> variable could earlier generate an internal error.<br>
+            [EW18157]
+         <li>         
+            Instruction scheduling could earlier incorrectly lose some debug information for inlined functions.<br>
+            [EW18180]
+         <li>
+            A function containing a structure assignment inlined in a loop body could in some 
+            rare cases cause an internal error.<br>
+            [EW18182]
+         <li> 
+            The optimizer could incorrectly remove <code>CMP</code> instructions if the 
+            preceding arguments looked like constants.<br>
+            [EW18231]
+         <li>
+            When a constant table was placed immediately after a switch table, 
+            a dangling (duplicate) label might be left which caused the backtrace 
+            analysis to abort the compilation with the following error message
+<pre>   Internal error: [CoreUtil/General]: BtThreadAnalyzer:
+   No direct arc from node to successor 
+</pre>
+            [EW18259]
+          <li>
+            If the compiler found several stores with zero to consecutive memory locations 
+            the last store could be done with wrong size.<br>
+            [EW18273]
+          <li>
+            The compiler did not handle large functions properly in thumb mode.<br>
+            [EW18276]
+          <li>
+            The <code>&ltvector&gt</code> header no longer relies on the undefined symbol TRUE<br>
+            [EW18284]
+          <li>
+            Branch chaining optimization could incorrectly chain a <code>BNE</code> 
+            instruction via a <code>BHI</code> instruction.</br>
+	    [EW18312]
+          <li>
+             Variables declared both <code>static</code> and <code>volatile</code> were incorrectly not treated as such at all times.<br>
+            [EW18316]
+          <li>
+              For a <b><code>struct</code></b> with <b><code>short</code></b> members, the members
+	            could incorrectly be written as a 32-bit entity when the <b><code>short</code></b> member was
+	            kept in register. This could also lead to adjacent members being overwritten.<br>
+	            [EW18320]
+          <li>
+             In some rare cases the intrinsic <code>__no_operation()</code> function could give an internal error message.<br>
+             [EW18396]
+          <li>
+             Bitfield assignments should now work correctly, even when the function call on the right-hand
+             side of the assignment modifies other bitfields in the word.<br>
+            [EW18460]
+          <li>
+              In some rare cases, a series of assignments could be optimized incorrectly, for example assignments like:
+<PRE>x = ...;
+y = x;
+x = !z;
+...
+use(y);
+</PRE>
+              [EW18540]
+          <li>
+            Using <b><code>#pragma optimize</code></b> to lower optimization level for a function no longer 
+            affect optimization of static accesses in other functions.<br>
+            [EW18582]
+          <li>
+            An optimization can lift a global variable to a register in a code region.
+            In some rare cases the register was not written back to the variable on all paths from the region.<br>
+            [EW18814]
+      </ul>
+
+    <h4><A NAME="his440A">V4.40A 2006-06-03</A></h4>
+    <b>Program corrections</b>	
+      <ul>
+        <li>
+            In some rare cases, the optimizer incorrectly transformed a <code>for</code> or a <code>
+              while</code> loop to a <code>do</code> loop if: the loop test compared the loop 
+            counter to a variable (<code>V</code>) that was invariant in the loop, and the loop 
+            was preceded by an if-else-if-statement where the else-if-test tested <code>V</code>
+            against a constant value.<br>
+            [EW17723]
+        <li>
+            High optimization could, in some rare cases, incorrectly hoist a common 
+            subexpression (1) across the initialization of another common subexpression (2) 
+            where (2) was the value of a global pointer variable and (2) appeared as a 
+            subexpression in (1).<br>
+            [EW17754]
+        <li>
+            Saturate idiom was recognized even at low or no optimization making the code 
+            harder to debug.<br>
+            [EW17802]
+        <li>
+            An ARM-mode peephole optimization could optimize a MUL + ADD to MLA even thou 
+            the ADD had a shifted operand.<br>
+            [EW17833]
+        <li>
+            Functions with inline assembler with labels could incorrectly be inlined.<br>
+            [EW17862]
+        <li>
+            Incorrect code could in some cases be generated in thumb mode for saturate 
+            idiom.<br>
+            [EW17868]
+        <li>
+            Inlining of functions where a pointer parameter was declared volatile could in 
+            some case result in incorrect code.<br>
+            [EW17902]
+        <li>
+            The result of the instruction scheduling could in some cases differ between 
+            compilations with same input.<br>
+            [EW17919]
+        <li>
+            Functions that dereferenced a pointer after testing if it was NULL could be optimized 
+            incorrectly.<BR>
+            [EW18038]
+        <li>
+            Loops that added invariant expression to an indirection of an invariant pointer and the loop 
+            index variable (p[i] += 4711) could in some cases be optimized incorrectly.<br>
+            [EW18089]
+        <li>
+            Unaligned store of zero could give internal error if neighbored with another zero store.
+            <pre>
+            char charr[100];
+
+            *(int*)(&charr[1]) = 0;
+            charr[5] = 0;
+</pre>
+            Note that this kind of code probably will not execute correctly, since most ARM architectures
+            do not support unaligned accesses.<br>
+            [EW18124]
+      </ul>
+      <b>New features</b>  	  
+	  <ul>
+        <li>
+          Support for the Cortex-M series has been added.
+        <li>
+          Output from the compiler is now in unified assembler syntax.
+        </li>                
+      </ul>
+
+
+    <h4><A NAME="his431A">V4.31A 2006-02-03</A></h4>
+    <b>Program corrections</b>	
+    <ul>
+      <li>
+        Invariant assignments could in some cases incorrectly be hoisted out of <code>for</code>
+        or <code>while</code> loops, if the loop test contained an <code>||</code> operator.<br>
+      [EW16986]
+      <li>
+        High optimization could in some cases generate incorrect code for nested loops 
+        if the inner loop was not executed for every iteration of the outer loop.<br>
+      [EW17010, EW17064]
+      <li>
+        The compiler could in some rare cases loop if the outcome of the condition in a 
+        conditional (<code>? :</code>) expression could be determined by assignments in the 
+        preceding basic blocks.<br>
+      [EW17026]
+      <li>
+        Nested irq functions did not return properly.<br>
+      [EW17032, EW17033, EW17038]
+      <li>
+        A <code>char</code> or <code>short </code>loop counter initialized with a function call 
+        could in some cases result in an internal error.<br>
+      [EW17039, 17179]
+      <li>
+        Assignments to an auto array could incorrectly be removed as dead code if the 
+        only use of the array, besides assignments to it, was to assign the array 
+        address to a global pointer.<br>
+      [EW17041]
+      <li>
+        Incorrect interpretation of the <code>Z</code> flag when analyzing a <code>CMN</code> instruction 
+        could lead to incorrect optimizations.<br>
+      [EW17065]
+      <li>
+        Accessing a data member of a base class of a class object returned by value 
+        from a function call no longer results in an internal error.<br>
+        Example: <code>fun().x</code>, where <code>x</code> is a data member of a base class of 
+        the type returned by <code>fun()</code>.<br>
+      [EW17085]
+      <li>
+        Optimization of a function tail call into a branch instruction in a thumb 
+        function that takes stack parameters generated wrong stack offset to the stack 
+        parameters.<br>
+      [EW17117]
+      <li>
+        Delayed stack-cleaning in combination with stack access and a conditional (<code>? 
+          :</code>) expression could generate wrong stack offset.<br>
+      [EW17127]
+      <li>
+        Loops where the loop counter was a <code>short int</code> or <code>char</code> could 
+        earlier result in incorrect code if the loop increment was negative and high 
+        speed optimization was used (<code>-s9</code>).<br>
+      [EW17129, 17164]
+      <li>
+        When constructing a vector of POD data (data with no constructors) with an 
+        initial non-zero size, the elements are now correctly zero-initialized. For 
+        example:<br>
+        <pre>
+      vector&lt;int&gt; v(3);
+</pre>
+        <code>v</code> should in this example contain 3 integers, each initialized to zero. 
+        Previously the integers were incorrectly left uninitialized.<BR>
+      [EW17160]
+      <li>
+        Code with both shifting and division by a constant value could in some rare 
+        cases generate internal error.<br>
+      [EW17162]
+      <li>
+        Loops where the trip count was constant and the final statement was a <code>switch</code>
+        expression could in some cases cause an internal error when high optimization 
+        was used.<br>
+      [EW17181]
+      <li>
+        Incorrect code could be generated for small loops with descending access 
+        patterns. For example:<br>
+        <pre>      for (i = 0 ; i &lt; n; ++i)
+        a[100 - i] = ...;
+</pre>
+        or
+        <pre>      for (i = 0 ; i &lt; n; ++i)
+        *(p-- + 17)= ...;
+</pre>
+      [EW17184]
+      <li>
+        The MISRA C rule 113 states that members of a structure or union shall only be 
+        accessed via their name. The compiler now diagnoses a violation of this rule 
+        correctly when a pointer to an element of a member array is created. For 
+        example:<br>
+        <pre>
+      struct {
+        int a;
+        int b[2];
+      } x;
+
+      x.a;    /* Was diagnosed     */
+      x.b[0]; /* Was not diagnosed */
+</pre>
+      [EW17186]
+      <li>
+        An <code>__swi</code> declared function pointer now correctly gives an error 
+        message.<br>
+      [EW17329]
+      <li>
+        A register transfer instruction were in some cases optimized away due to 
+        incorrect optimizer analysis of sign extend operations.<br>
+      [EW17330]
+      <li>
+        Incorrect code was generated for assignments of instances of <code>vector&lt;&gt;</code>
+        in two cases:<br>
+        1. The assignment of a vector where the elements could use bitwise copy and 
+        where the destination vector was smaller than the source vector but had a 
+        capacity that was large enough.<br>
+        2. The assignment of a vector where the elements needed copying or construction 
+        using member functions but did not need destruction, where the destination 
+        vector was larger than the source vector.<br>
+        These assignments now work correctly.<br>
+      [EW17413]
+      <li>
+        <code>R8_fiq</code> - <code>R12_fiq</code> was unnecessarily saved when entering an fiq 
+        exception.<br>
+      [EW17453]
+      <li>
+        The internal error: <code>[Ect]: Optimize</code> has been corrected.<br>
+      [EW17461]
+      <li>
+        An error message is now given if the <code>--segment</code> option is used more 
+        than once with the same segment specifier.<br>
+      [EW17463]
+      <li>
+        On high optimization, array initializations and assignments to array members 
+        could be incorrectly removed as dead code if the only explicit use of the array 
+        was to assign its address to a member in a packed <code>struct</code>.<br>
+      [EW17466]
+      <li>
+        A problem in the instruction scheduling optimizer has been corrected. A <code>pop</code>
+        instruction to restore callee saved registers could be hoisted over an 
+        instruction that defined one of theses registers.<br>
+      [EW17495]
+      <li>
+        When compiling for interwork, a redundant mode change entry will be inserted in 
+        front of a generated function. This function may save information about code 
+        size if the function is called from code with different mode (arm/thumb). In 
+        some cases the compiler missed to generate this mode change entry. The 
+        generated code is still correct but can give different code size between 
+        compilations.<br>
+        [EW17603]
+	   </ul>
+	     <b>New features</b>  
+		<ul>
+      <li>
+        The command-line option <code>--no_path_in_file_macros</code> has been added. It 
+        removes the path leaving only the filename for the symbols <code>__FILE__</code> and
+        <code>__BASE_FILE__</code>.</li>
+    </ul>
+    <h4><A NAME="his430A">V4.30A 2005-06-23</A></h4>
+    <b>Program corrections</b>		
+    <ul>
+      <li>
+          The compilation time is now reasonable when the source code
+          contains hundreds of global variables and is compiled
+          with high optimization level.<br>
+          [EW14199]
+      </li>
+      <li>
+        Warning Pa084 ("pointless integer comparison with out of range value") will no 
+        longer be issued erroneously in cases where a relational operator is used with 
+        a template non-type parameter of integer type.<br>
+      [EW16367]
+      <li>
+        Some float NaN patterns were not correctly converted to double.<br>
+      [EW16373]
+      <li>
+        Using compound literals, a C99 feature, could result in an internal error in 
+        the compiler.<br>
+      [EW16412]
+      <li>
+        Inline assembler code with illegal instructions like <code>MOV R0,@R1</code> could 
+        generate an internal error<br>
+      [EW16414]
+      <li>
+        An inline-assembler statement containing nothing but a newline character could 
+        cause an internal error in the compiler. Example: asm("\n");<br>
+      [EW16415]
+      <li>
+        A label placed on the first line of a multi-line inline-assembler statement 
+        could cause errors.<BR>
+        Example:<pre>   asm("loop:\n"
+       " bra loop"); </pre>
+      [EW16417]
+      <li>
+        Loops with multiple assignments to an auto variable could result in incorrect 
+        code, when the loop also contained partial accesses (with a non-zero offset) to 
+        the auto variable.
+        <pre>void ByteSwap128(short *addr)
+{
+&nbsp;&nbsp;int i;
+&nbsp;&nbsp;short tmp;
+&nbsp;&nbsp;char *dst, *src = (char *)&amp;tmp;
+&nbsp;&nbsp;for (i = 0; i &lt; 64; ++i)&nbsp;&nbsp;
+  {&nbsp;&nbsp;&nbsp;&nbsp;
+    tmp = *addr;
+&nbsp;&nbsp;&nbsp;&nbsp;dst = (char *)addr++;
+&nbsp;&nbsp;&nbsp;&nbsp;dst[0] = src[1]; /* points to (char *)&amp;tmp + 1*/
+&nbsp;&nbsp;&nbsp;&nbsp;dst[1] = src[0];
+
+&nbsp;&nbsp;&nbsp;&nbsp;tmp = *addr;
+&nbsp;&nbsp;&nbsp;&nbsp;dst = (char *)addr++;
+&nbsp;&nbsp;&nbsp;&nbsp;dst[0] = src[1];
+&nbsp;&nbsp;&nbsp;&nbsp;dst[1] = src[0];
+&nbsp;&nbsp;}
+}</pre>
+      [EW16419]
+      <li>
+        The compiler now generates the same alignment for the following two 
+        definitions:<br>
+        unsigned char a [6] = {0,0,0,0,0,0};<br>
+        unsigned char b [] = {0,0,0,0,0,0};<br>
+      [EW16430]
+      <li>
+        Loops with a non-constant trip count (number of iterations in the loop) could 
+        be uncorrectly unrolled.<br>
+      [EW16439]
+      <li>
+        Common subexpression elimination no longer hoists expressions that incorrectly 
+        can cause an exception, unless the expression is guaranteed to be executed in 
+        all successors.<br>
+      [EW16443]
+      <li>
+        Fixed a problem were iswprint erroneously returned true for the characters 
+        carriage return and newline.<br>
+      [EW16465]
+      <li>
+        Branch-chaining optimization, which is performed at the highest size 
+        optimization level, could incorrectly chain a <code>BCS</code> instruction via a <code>BHI</code>
+        instruction. This could cause a branch to go the wrong way at runtime depending 
+        on the status of the Z-flag.<br>
+      [EW16481]
+      <li>
+        An expression containing the new operator could generate a reference to the 
+        wrong constructor when an optimization level of 6 or higher was used, at least 
+        one of the parameters to the constructor was an object passed by copy 
+        construction, and the constructor definition was not visible in the same 
+        compilation unit as the expression containing the new operator.<BR>
+        Example:
+        <pre>struct X
+{
+  X(X const &amp;);
+  ...&nbsp;&nbsp;&nbsp;
+};
+&nbsp;&nbsp;&nbsp;
+struct Y
+{&nbsp;&nbsp;
+  Y(X);
+  ...
+};
+
+Y * mkY(int a) { return new Y(a); }</pre>
+        If the function mkY was not in the same file as the definition of Y::Y(X), a 
+        reference was created to Y::new Y(X *) instead of to Y::new Y(X).<br>
+      [EW16482]
+      <li>
+        Calculating remainder by a constant could give the wrong result at the highest 
+        speed optimization level.<br>
+      [EW16487]
+      <li>
+        Overlapping stores with zero could caused an exception in the compiler at high 
+        optimizations. The compiler analyzes stores with zero to memory and optimizes 
+        them. If there were instructions that wrote to overlapping memory locations, 
+        the compiler could terminate with the following internal error:<br>
+        <pre>
+      Internal error: [Ect]: Any exception
+      Fatal error detected, aborting.
+      Internal error: [PostOptimize]: Any exception
+      Fatal error detected, aborting.</pre>
+      [EW16489,EW16491]
+      <li>
+        Optimizer inlining failed to recognize the #pragma location directive, leading 
+        to located code being placed in the wrong segment.<br>
+      [EW16529]
+      <li>
+        The compiler could generate incorrect code if:
+        <ol>
+      <li>
+      A function (f) assigned a variable (p) to point to an object (o) and returned 
+      the variable p,
+      <li>
+      the function result was assigned to a variable (q) of the same type as p,
+      <li>
+      the object o was modified before an access to o through q
+      <li>
+        and the function call to f was inlined by the optimizer.</li>
+      </ol> [EW16537]
+      <li>
+        An optimization that tries to hold a global variable in a register during 
+        several modifications of the global variable could in some cases cause 
+        incorrect code.<br>
+      [EW16547]
+      <li>
+        In some cases, a loop with an upper bound that was a signed non-trivial 
+        expression divided by a power of two could result in incorrect code.<br>
+      [EW16550]
+      <li>
+        Complex <code>?:</code> sequences could cause an internal error at the high 
+        optimization level.<br>
+      [EW16552]
+      <li>
+        When compiling EC++, constant variables initialized with simple floating point 
+        expressions were put in RAM memory instead of ROM memory.<br>
+      [EW16587]
+      <li>
+        Corrected an internal error that could occur when an assignment to an auto 
+        structure contained a reference to a member in itself or another auto 
+        structure.
+        <pre>struct X x, y, *array;
+x = array[x.m];</pre>
+      [EW16606,EW16608,EW16627,EW17177]
+      <li>
+        A Thumb <code>MOV</code> immediate to low register could be hoisted in between a <code>CMP</code>-<code>BCC</code>/<code>BCS</code>
+        sequence, which destroyed the effect of the <code>CMP</code> instruction.<br>
+      [EW16611]
+      <li>
+        In some rare cases, values were not written to memory before a function call.<br>
+      [EW16620]
+      <li>
+        Code that implements a saturate operation (keep a value inside a range such as 
+        -128 to 127) could produce incorrect code in both Thumb and Arm mode.<br>
+      [EW16626,EW16670]
+      <li>
+        At the high optimization level incorrect code could be generated if a loop had 
+        an unsigned loop counter, the loop counter was decremented, and the loop 
+        contained a test (besides the loop exit test) where the loop counter was 
+        compared to zero.<br>
+      [EW16646]
+      <li>
+        An internal error in constant table generation for functions that end with a 
+        fall through to the common exit sequence has been corrected.<br>
+      [EW16657]
+      <li>
+        Incorrect code could be produced when a "<code>Rn &lt;shift&gt; Rm</code>" operand 
+        is spilled to other registers and there is an overlap between one of the 
+        original registers and the new destination. The error occurred because the 
+        operand was not properly reconstructed to reflect the new registers that the 
+        values were moved to.<br>
+      [EW16671]
+      <li>
+        Optimizer inlining failed to recognize <code>__ramfunc</code>, leading to that code 
+        meant to be placed in RAM could end up in ROM.<br>
+      [EW16698]
+      <li>
+        If both statements in an if else statement are identical (after removal of dead 
+        code) an optimization that merges the two statements could in some cases also 
+        remove side effects (for example calls or volatile accesses) in the redundant 
+        condition.<br>
+      [EW16735]
+      <li>
+        Incorrect code could be generated when the initial value for a signed loop 
+        counter was computed with an &amp; expression where both operands where 
+        non-constant expressions.<br>
+      [EW16757]
+      <li>
+        Two <code>STRB</code> with zero to offset 256 and 257 could be compiled into a 
+        single <code>STRH</code> which then had its offset truncated to 0.<br>
+      [EW16885]
+      <li>
+        Coprocessor instructions MCR and MRC are no longer moved around by the 
+        instruction scheduler. They previously were allowed to be move past a volatile 
+        side effect.<br>
+      [EW16886]
+      <li>
+        If a loop with a variable upper limit was preceded by a modification of the 
+        upper limit and a test of the upper limit being larger than the lower limit of 
+        the loop, the optimizer could incorrectly assume the loop body should always be 
+        entered.
+        <br>
+        <pre>    if (u &gt; 0)
+      {
+        --u;
+       for (i = 0; i &lt; u; ++i)
+        {
+          ...
+        }
+     }</pre>
+      [EW16887]
+      <li>
+        Including an I/O definition header and referencing more than one SFR from C++ 
+        code will no longer result in incorrect "more than one definition for 
+        struct/union type" warnings when linking.<br>
+      [EW16957]
+      <li>
+        Unrolling of loop with non-constant trip count could cause internal error in 
+        the optimizer.<br>
+        [EW17006]
+	  </ul>
+      <b>New features</b>  	  
+	  <ul>
+      <li>
+      Support for ARM11 and V6 has been added.
+      <li>
+      The execution speed of the floating point library has been significantly 
+      improved.
+      <li>
+      Code size and speed performance have been improved for both ARM and Thumb.
+      <li>
+      It is now possible to declare variables in the initialization clause of a for 
+      statement, but only in extended language mode. This behavior is according to 
+      the C99 and the C++ standards.
+      <li>
+        You can now compile several source files in one compilation by specifying the 
+        command line option --mfc. The advantage of multi-file compilation is that it 
+        gives the interprocedural optimizations a larger set of functions to work on. 
+        If you also specify the command line option --discard_unused_publics, the 
+        optimization will be further improved because the compiler will assume that 
+        there are no references to any symbol from the outside in the compilation, i.e. 
+        the compilation unit is the whole application apart from the library.<br>
+      Use the --mfc option with caution, because it is experimental in this version 
+      of the compiler.
+      <li>
+        Some more C99 functionality has been added to the IAR DLIB Library:<br>
+        <ul>
+          <li>
+          Ctype.h defines isblank as an added function.
+          <li>
+          Inttypes.h has been added. Note that only the conversions are included, not the 
+          functions.
+          <li>
+            Math.h defines the following additions:<br>
+            Macros - HUGE_VALF, HUGE_VALL, INFINITY, NAN, FP_INFINITE, FP_NAN, FP_NORMAL, 
+            FP_SUBNORMAL, FP_ZERO, MATH_ERRNO, MATH_ERREXCEPT, math_errhandling.<br>
+            Typedefs - float_t, double_t.<br>
+            Macro functions - fpclassify, signbit, isfinite, isinf, isnan, isnormal, 
+            isgreater, isless, islessequal, islessgreater, isunordered.<br>
+          <li>
+          Stdlib.h defines llabs, lldiv, strtoll, strtoull, atoll, strtof, and strtold as 
+          added functions.
+          <li>
+          Wchar.h defines vfwscanf, vswscanf, vwscanf, wcstof, and wcstolb as added 
+          functions.
+          <li>
+            Wctype.h defines iswblank as an added function.</li>
+        </ul>
+      </li>
+    </ul>
+    <h4><A NAME="his420A">V4.20A 2005-01-10</A></h4>
+    <ul>
+      <b><u>Program corrections</u></b><p>
+        <li>
+          Using <code>#pragma vector</code> on an interrupt function did not update the 
+          exception vector table.<br>
+        [EW14086]
+        <li>
+          A function definition at a line number greater than 65535 could cause an 
+          internal error, due to an unused line number field in an object file record 
+          that overflowed.<br>
+        [EW15542]
+        <li>
+          Call to an <code>__irq</code> or <code>__fiq</code> function could generate an internal 
+          error.<br>
+        [EW15561]
+        <li>
+          <code>__ramfunc</code> functions shared relay functions with non <code>__ramfunc</code> 
+          functions in the same module. If they were placed far from each other that 
+          could generate a link error.<br>
+        [EW15562]
+        <li>
+          The scheduler failed to recognize overlapping load and store operations if they 
+          were of different size.<br>
+        [EW15579, EW15656]
+        <li>
+          A volatile load directly following a store to the exact same location could 
+          reuse the stored value instead of loading it again.<br>
+        [EW15582, EW15657, EW15663]
+        <li>
+          A declaration of a block local variable with no initialization, immediately 
+          followed by a label, resulted in incorrect code in some cases.<br>
+        [EW15594]
+        <li>
+          In some cases auto-variables of union type were optimized incorrectly. 
+          Assignments to a member (m) were incorrectly removed if the union definition 
+          contained a declaration of another member, of equal or larger size, below the 
+          declaration of m.<br>
+        [EW15595]
+        <li>
+          The scheduler could generate an internal error for a large basic block without 
+          any statement info.<br>
+        [EW15596]
+        <li>
+          If a function had multiple return statements and all returns were preceded by 
+          an assignment to the same global variable (or an indirect assignment using the 
+          same pointer), the return value could be overwritten by a temporary value.<br>
+        [EW15600]
+        <li>
+          Some caller-saved registers were not saved when calling library routines for 
+          floating point subtraction and division.<br>
+        [EW15601]
+        <li>
+          Fall through to a large 'common exit sequence' with several constant references 
+          could generate constant entries out of bounds.<br>
+        [EW15613]
+        <li>
+          <code>AND</code> with a constant that was converted to <code>BIC</code> on a variable 
+          smaller than 32 bits could leave garbage in the higher bits of the register.<br>
+        [EW15621]
+        <li>
+          In some cases auto-variables of structure type caused an internal error if the 
+          structure had a member of union type.<br>
+        [EW15622]
+        <li>
+          A register parameter could in rare circumstances be allocated in the same 
+          register (or overlapping register) as another local variable.<br>
+        [EW15623]
+        <li>
+          Hoisting of loop-invariant code could in some rare cases generate incorrect 
+          code.<br>
+        [EW15624]
+        <li>
+          Code optimized to a conditional tail jump could generate an internal error.<br>
+        [EW15625]
+        <li>
+          A basic block could in some cases be flattened even if it had multiple 
+          predecessors with different flags set.<br>
+        [EW15627, EW15768]
+        <li>
+          <code>FLDS</code>, <code>FLDD</code>, <code>FSTS</code> and <code>FSTD</code> can now have 
+          relocatable offset. This is needed when accessing constants from vfp code.<br>
+        [EW15641]
+        <li>
+          Constant entries could in some cases, especially large <code>long long</code> switches, 
+          be placed among the switch data. This could lead to random jumps anywhere in 
+          memory.<br>
+        [EW15643,EW15660,EW15661,EW15665]
+        <li>
+          Invariant definitions were in some cases hoisted even if it defined alive 
+          non-invariant resources or used a non-invariant resource.<br>
+        [EW15646]
+        <li>
+          Offset check for constants placed in another segment part was too pessimistic. 
+          This could lead to internal error.<br>
+        [EW15653,EW15654]
+        <li>
+          In some rare cases the compiler performed incorrect optimizations (for example 
+          constant propagation or common subexpression elimination) of accesses through 
+          pointers. The effects were noticeable when the same data object was accessed 
+          through different pointers. The problem was unlikely to occur in non-trivial 
+          functions.<br>
+        [EW15655]
+        <li>
+          <code>long long</code> switch in thumb mode could generate unaligned accesses.<br>
+        [EW15659]
+        <li>
+          In some cases the compiler tried to flatten a basic block ending with a table 
+          switch. This generated broken code.<br>
+        [EW15664]
+        <li>
+          In some cases union accesses were optimized incorrectly. The union accesses 
+          could only have two sizes and one of the sizes must be the whole union. 
+          Accesses of the two differing sizes must be interleaved so the contents of the 
+          union was read with a different size than the value stored in the union.<br>
+        [EW15681]
+        <li>
+          The intrinsic <code>__no_operation()</code> could be optimized away in Arm mode.<br>
+        [EW15690]
+        <li>
+          When a volatile-declared variable was used in the index expression of a 
+          volatile-declared array expression, the compiler issued an incorrect warning 
+          about undefined order of volatile accesses.<br>
+        [EW15710]
+        <li>
+          The #pragma vector was broken in several ways.<br>
+          1. The segment part was generated as noroot causing the linker to remove it.<br>
+          2. Multiple vector numbers was not recognized.<br>
+          3. The vector number was scaled wrongly.<br>
+        [EW15781]
+        <li>
+          When typedefs were involved in an integer comparison, the compiler sometimes 
+          incorrectly issued the warning Pa084 (pointless integer comparison with out of 
+          range value) for cases where such a warning was inappropriate.<br>
+        [EW15793]
+        <li>
+          Swi vector for declared only functions was sometimes treated as 0.<br>
+        [EW15862]
+        <li>
+          A thumb peephole pattern which propagates an <code>ADD</code> instruction beyond a <code>
+            LDR</code>/<code>STR</code> instruction by modifying the addressing mode of the <code>LDR</code>/<code>STR</code>
+          instruction did not take care of all situations properly with respect to flags 
+          being alive after the instruction.<br>
+        [EW15898, EW16191]
+        <li>
+          The compiler could generate wrong debug information for local variables causing 
+          them to be shown as unavailable in the debugger watch window.<br>
+        [EW15948]
+        <li>
+          Complex expressions containing a signed division with a constant denominator 
+          could in some cases cause an internal error.<br>
+        [EW16000]
+        <li>
+          Evaluation of expressions with the <code>%=</code> operator now follows the rules 
+          for integral promotion.<br>
+        [EW16001]
+        <li>
+          The internal header file <code>xlocale.h</code> did not work properly when the 
+          current locale was the C locale (which it typically is) and the symbol C was 
+          defined as a preprocessor macro.<br>
+        [EW15602]
+        <li>
+          The use of a variable (x) could incorrectly be eliminated from an expression, 
+          if 1. the expression contained both a use and a defining use of x and 2. the 
+          expression contained a use of another variable (b) that was the single use of 
+          it 3. no defining use of x occured before b's defining use
+          <pre>
+      void use(int);
+      int broken(void)
+      {
+        int x; /* x uninitialized */
+        int a = 1;
+        int b = 2; /* b's definition */
+
+        x = a; /* this defining use of x is overlooked */
+        use(x);
+        x = b + x; /* use and def of x, use of b */
+        use(x);
+
+        return x;
+      }
+</pre>
+        [EW16002]
+        <li>
+          The compiler now attempts to warn about undefined behavior in some situations 
+          involving sequencing or multiple modifications with no intervening sequence 
+          point. If this warning involved data accessed through the implicit <code>this</code>
+          pointer of a C++ member function, an internal error resulted.<br>
+        [EW16021]
+        <li>
+          The scheduler could rearrange code including a constant load to VFP register 
+          even when conflicts would appear.<br>
+        [EW16051]
+        <li>
+          An initialized <code>auto</code> array inside a loop no longer causes an internal 
+          error.<br>
+        [EW16052]
+        <li>
+          Relay function to <code>div</code>/<code>mod</code> trashed R2 in thumb mode. Such 
+          relay functions is needed when the distance between the caller and the callee 
+          is more than 4 Mbytes.<br>
+        [EW16061]
+        <li>
+          A problem where using the preprocessing operator <code>define</code> could cause an 
+          internal error has been corrected.<br>
+        [EW16076]
+        <li>
+          Register allocation of VFP registers could differ between compilations of a 
+          specific source code depending on Windows memory allocation. The code produced 
+          was correct, but not necessarily identical.<br>
+        [EW16083]
+        <li>
+          Long functions can make use of spring board jumping which utilize existing 
+          jumps to avoid generating a long branch, by forming branch chains. In one rare 
+          case a conditional branch immediately preceeding the destination label could 
+          incorrectly be incorporated in such sequence (its destination points elsewhere, 
+          but it has fall-through flow to the target label).<br>
+        [EW16097]
+        <li>
+          Defining a C preprocessor macro with the same name as any directory component 
+          of the library configuration file path would change that component giving the 
+          wrong path.<br>
+        [EW16220]
+        <li>
+          <code>long long</code> operations such as <code>add</code>, <code>subtract</code>, <code>negate</code>
+          could be incorrectly made if the low part of the result overlapped with the 
+          upper part of one of the operands. This happened in some rare situations when 
+          the register pressure was high.<br>
+        [EW16331]
+        <li>
+          8-bytes stack alignment was not always preserved.<br>
+        [EW16332]
+        <LI>
+          Complex pointer to data member access could generate internal error with bad 
+          data alignment.<BR>
+        [EW16370]
+        <li>
+          The compiler could terminate with<br>
+          Internal Error: [CoreUtil/General]: Const_Folding<br>
+          when doing a cast on pointer arithmetics.<br>
+        [EW16898]
+        <li>
+          The common subexpression elimination optimization could could give different (but correct)
+          output depending on compilation environment, producing slightly different (but correct)
+          code between compilations.<br>
+        [EW17918]
+      <p></p>
+	  </ul>
+        <b>New features</b>  
+	  <ul>
+      <li>
+        A new object attribute, <code>__noreturn</code> has been added. The attribute can 
+        be used on functions to inform the compiler that the function will not return. 
+        The compiler can then generate more efficient code. Examples of functions that 
+        do not return are <code>abort()</code> and <code>exit()</code>.
+      <li>
+        To determine the configuration file for DLIB from the command line, use the 
+        compiler option <code>--dlib_config config_file</code>. The old variant, using <code>-D_DLIB_CONFIG_FILE=config_file</code>, 
+      will still work but can interfere with other preprocessor defines.
+      <li>
+      Support for compound literals has been added to the C language.
+      <li>
+        New compiler command line option <code>--preinclude include_file</code>.
+      <li>
+        The inline assembler operator <code>asm()</code> now supports multiple instructions 
+        and local labels. Example<br>
+        <pre>
+      asm("Loop:  MOV R0,#10     \n"
+          "       ADD R3,R3,R2   \n"
+          "       SUB R0,r0,#1   \n"
+          "       BNE Loop");
+</pre>
+        Note that the instruction separator is <code>'\n'</code> and that the definition 
+        and the reference of a local label do not necessarily need to be in one <code>asm()</code>.</li>
+    </ul>
+    <h4><A NAME="his411A">V4.11A 2004-06-10</A></h4>
+    <ul>
+      <li>
+        The following C99 features can now be used in the C language if language 
+        extensions (-e) are enabled:
+        <ul>
+          <li>
+            The <code>inline</code> keyword. It works as the C++ inline keyword (and the <code>#pragma 
+              inline</code>
+          declaration).
+          <li>
+          Mixing declarations and statements within the same scope.
+          <li>
+            Having a declaration in the initialization expression of a for-loop.</li>
+        </ul>
+      <li>
+        The standard library <code>fopen()</code> function incorrectly worked and returned 
+        a valid file pointer, even when not linking the application with the debug 
+        information without I/O emulation modules, available by choosing <b>Project 
+          Options</b> and selecting the <b>Linker category</b>.<br>
+      [EW13922]
+      <li>
+        In rare cases at high optimization levels, the optimizer data flow analysis 
+        could fail with an internal error.<br>
+      [EW15026]
+      <li>
+        The namespace scope of extern "C" functions was incorrectly included in their 
+        linker visible names, which sometimes could lead to incorrect Undefined 
+        External errors when linking.<br>
+      [EW15088]
+      <li>
+        Instruction scheduling could in some cases change the order of two volatile 
+        read accesses.<br>
+      [EW15119]
+      <li>
+        In some cases an array element reference could be optimized incorrectly if the 
+        address was computed in two separate expressions and both contained the loop 
+        counter. For example.
+        <pre>  int a[100][100];
+  int foo()
+  {
+    int i;
+    for (i = 0; i &lt; 10; ++i)
+    {
+      int *p = &amp;a[i][0];&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/* first use of i */
+      p[i * 2] = 4711;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; /* second use of i */
+    }
+  }</pre>
+      [EW15123]
+      <li>
+        If all paths to a switch statement with a single variable as a switch 
+        expression contained assignments to the variable, it could in some rare cases 
+        cause the compiler to loop when all the jumps to the switch were redirected to 
+        their destination into the switch body.<br>
+      [EW15131]
+      <li>
+        Functions declared <code>__swi</code> and with calls to other functions could 
+        generate an internal error.<br>
+      [EW15327]
+      <li>
+        The <code>va_start1()</code> intrinsic function incorrectly gave a warning when the 
+        option <code>require_prototypes</code> was used.<br>
+      [EW15328]
+      <li>
+        Switch on character expression with all case values between 0x80 and 0xFF could 
+        generate incorrect code.<br>
+      [EW15349]
+      <li>
+        Too agressive optimization could incorrectly casuse a needed <code>AND</code> instruction 
+        to be removed.<br>
+      [EW15396]
+      <li>
+        The treatment of the <code>#pragma segment</code> directive has been changed to 
+        allow multiple equivalent declarations of the same segment.<br>
+      [EW15413]
+      <li>
+        A switch statement with case values in a range greater than 255 could generate 
+        an internal error.<br>
+      [EW15462]
+      <li>
+        The compiler printed diagnostic text contained the obsolete segment types <code>HUGEDATA</code>
+        and <code>HUGECONST</code> instead of <code>DATA</code> and <code>CONST</code>.<br>
+      [EW15464]
+      <li>
+        Library call from located functions could incorrectly cause reference to 
+        undefined symbol.<br>
+      [EW15465]
+      <li>
+        A function with a parameter of type pointer to class could sometimes get an 
+        incorrect name in the object file, resulting in an 'undefined external' error 
+        when linking. For this to happen, the class must have a user-defined or 
+        non-bitwise compiler generated copy constructor, and there must be a definition 
+        of another function in the same module returning the class by value. That 
+        function must, apart from the pointer to class parameter, be declared with the 
+        same parameter types as the first function.<br>
+      [EW15466]
+      <li>
+        An ARM function compiled for VFP with an integer parameter located in register 
+        and later stored on the stack could generate an internal error.<br>
+      [EW15469]
+      <li>
+        No relay function was generated for calls to <code>__ramfunc</code> functions 
+        declared in the same module even though the distance was too far for the <code>BL</code>
+        instruction.<br>
+      [EW15485]
+      <li>
+        The shift count was not properly zero extended for <code>long long</code> shifts.<br>
+      [EW15500]
+      <li>
+        If a register was used in a loop only by a single instruction, that register 
+        could incorrectly be considered as dead after the refering instruction.<br>
+        [EW15612]
+      </li>
+    </ul>
+    <h4><A NAME="his410B">V4.10B 2004-03-09</A></h4>
+    <ul>
+      <li>
+        Two new intrinsic functions are now available in the compiler, <code>__MCR()</code> 
+        and <code>__MRC()</code>. They make it possible to access coprocessor registers 
+        from C and C++, and not just from assembler language. <code>__MCR()</code> inserts 
+        a coprocessor write instruction, <code>MCR</code>, and <code>__MRC()</code> inserts a 
+        coprocessor read instruction, <code>MRC</code>. For syntax details, please see the <em>
+          inarm.h</em>
+      header file.
+      <li>
+        A new compiler command line option, <code>--separate_cluster_for_initialized_variables</code>, 
+        has been added to separate initialized and uninitialized variables, when using 
+        variable clustering. The use of this option can make the <code>*_ID</code> segments 
+        smaller at the expense of code size. Variable clustering is disabled altogether 
+        by the <code>--no_clustering</code>
+      command line option.
+      <li>
+        A new compiler keyword, <code>__nested</code> is available to allow nested 
+        interrupts. The keyword modifies the enter and exit code of an interrupt 
+        function to allow interrupts to be enabled and to be served inside the 
+        interrupt function without overwriting the <code>SPSR</code> and return address in <code>
+          R14</code>. Nested interrupts are only supported for <code>__irq</code> functions. 
+        For example:
+        <pre>
+  __irq __nested __arm void interrupt_handler(void);
+</pre>
+      <li>
+        Some <b>ISO C99 features</b> have been added. They are available when language 
+        extensions are enabled.
+        <ul>
+          <li>
+            Support for the bool data type, if the header file <code>stdbool.h</code>
+          has been included.
+          <li>
+          _Pragma support. This operator works as the pragma directive and can be used in 
+          macro definitions.
+          <li>
+            Variadic macro support. You can now write printf-style macros.<br>
+          <li>
+            Hexadecimal floating point constants support. This means the ability to exactly 
+            specify a floating point constant. The functions strtod(), printf(), and 
+            scanf()&nbsp; recognize the syntax.<br>
+          <li>
+            The macro definition <code>__func__</code>. If used in a function, it is defined 
+          to the name of the function.
+          <li>
+          Designated initializers. Using these, you can initialize a specific element in 
+          a structure or a specific element in an array.
+          <li>
+            Inline functions. The pragma directive <code>inline[=forced]</code>
+          has been added as well.
+          <li>
+            <code>long long</code> support in the library. For example the functions strtoll(), 
+            strtoull() have been added as well as support for them in printf() and scanf().<p></p>
+          </li>
+        </ul>
+      <li>
+        The <code>localtime</code> C++ runtime library function generates negative values 
+        for the <code>tm_mday</code> element.<br>
+      [EW12510]
+      <li>
+        The compiler could generate an internal error when performing live-dead 
+        analysis on a data pointer that was casted from a function pointer. The problem 
+        was present on optimization levels medium (-z6/-s6) and high (-z9/-s9).<br>
+      [EW14949]
+      <li>
+        No relay is generated in the following code (The compiler does not know how far 
+        apart these two functions actually are...)
+        <pre>
+  #pragma location="CALLEE"
+  __thumb void callee()
+  {
+	  volatile int a = 0;
+  }
+
+  #pragma location="CALLER"
+  __thumb void main()
+  {
+	  volatile int a;
+	  callee();
+	  a=1;
+  }</pre>
+      [EW14973]
+      <li>
+        In the following code the relay for the call from caller() to callee() will be 
+        'knocked out' by the relay entry to callee.
+        <pre>
+  #pragma location="CALLEE"
+  __thumb __interwork void callee()
+  {
+	  volatile int a = 0;
+  }</pre>
+      [EW14975]
+      <li>
+        In a member function of a template class or one of its nested classes, a delete 
+        expression involving a pointer to one of these classes could cause an internal 
+        error when compiling.<br>
+      [EW14979]
+      <li>
+        When compiling C++ code, the compiler could fail with an internal error when 
+        the result of a struct/class/union assignment was used (for instance in a 
+        chained assignment expression), the struct/class/union had no user-written 
+        assignment operator, and the assignment could be performed as a bitwise 
+        assignment.<br>
+      [EW14981]
+      <li>
+        The body of the following loop was incorrectly treated as invariant.
+        <pre>  struct
+  {
+    int x;
+    int array[10];
+  } s;
+
+  void f(void);
+  void g(void);
+
+  void test()
+  {
+    int i;
+
+    for(i = 0; i &lt; 8; ++i)
+    {
+      if (s.array[i])
+      {
+        f();
+        return;
+      }
+    }
+    g();
+  }</pre>
+      [EW14985]
+      <li>
+        When an inline member function was called from an __arm function, instead of 
+        calling the member function the object's destructor was called.<br>
+      [EW15102]
+      <li>
+        When an inline member function is called from an __arm function, instead of 
+        calling the member function the object's destructor was called.<br>
+        [EW15103]</li>
+    </ul>
+    <h4><A NAME="his410A">V4.10A 2004-02-21</A></h4>
+    <ul>
+      <li>
+        Valid stack backtrace information is now available in the IAR C-SPY Debugger 
+        inside the <code>__irq</code> and <code>__fiq</code> interrupt functions.<br>
+      [EW12251]
+      <li>
+        Variables initialized to zero, either by explicitly setting them to zero in the 
+        code or as default behavior when no value is given, were cleared to zero by <em>cstartup</em>. 
+        A very small table entry was used to describe an entire block of memory to be 
+        cleared. If such zero-initialized variables are clustered together with 
+        variables that have explicit non-zero initializers, they would get explicit 
+        zero bytes to be copied by <em>cstartup</em>. If the zero-initialized variable 
+        was large (an array, for example), this could result in a waste of read-only 
+        memory. There is a new option that can be used to correct the described 
+        behavior:<br>
+        <code>--separate_cluster_for_initialized_variables</code><br>
+        Separate initialized and uninitialized variables, when using variable 
+        clustering.<br>
+      [EW12980]
+      <li>
+        The <code>stdout</code> stream is now buffered. Unbuffered stdio could cause slow 
+        terminal I/O performance in the debugger.<br>
+      [EW13609]
+      <li>
+        Assignments of derived class objects to base class variables (also known as 
+        "slicing" assignments) where the assignment could be performed by bitwise 
+        copying caused an internal error when compiling.<br>
+      [EW14094]
+      <li>
+        Some syntax errors could cause a subsequent internal error when the <code>--require_prototypes</code>
+        option was used.<br>
+      [EW14107]
+      <li>
+        When generating a constructor or destructor for an unnamed structure or class 
+        (for example, because one of its members had a constructor or destructor) an 
+        internal error occurred.<br>
+      [EW14149]
+      <li>
+        An internal error was generated for a switch case value which was out of range 
+        for the switch type.<br>
+      [EW14304]
+      <li>
+        The compiler sometimes generated incorrect code when dividing with, and 
+        comparing with -1 in a single statement.<br>
+      [EW14344]
+      <li>
+        In some cases loops with <code>long long</code> loop counters could be optimized 
+        incorrectly.<br>
+      [EW14345]
+      <li>
+        Incorrect code is no longer generated for <code>long long</code> decrements.<br>
+      [EW14347]
+      <li>
+        Fix of several problems regarding bitfields in <code>long long</code> base types.<br>
+      [EW14357, EW14361, EW14362, EW14366, EW14378]
+      <li>
+        An internal error with the message "Jump distance too far for B" could occur in 
+        some rare situations.<br>
+      [EW14358]
+      <li>
+        Casting between <code>float</code> and the <code>long long</code> <code>signed</code> and <code>
+          unsigned</code> types failed in Thumb mode when using the software 
+        floating-point runtime library. The library functions handling the casts used a 
+        return sequence that was not compatible with the v4 instruction set. Therefore, 
+        the Thumb state was not preserved by these casting operations.<br>
+      [EW14365]
+      <li>
+        Side effects of function calls was not correctly handled for global bit fields.<br>
+      [EW14367]
+      <li>
+        The intrinsic function <code>__QFlag()</code>, which is declared in <em>inarm.h</em>, 
+        is now correctly acknowledged as an intrinsic function by the compiler.<br>
+      [EW14405]
+      <li>
+        All functions (including, but not limited to, all relay functions) are now 
+        KEEP_WITH_NEXT instead of REORDER. This prevents them from being reordered at 
+        link time, if packed placement (-P) is used. This is only an issue for 
+        applications larger than 4 Mbyte.<br>
+      [EW14454]
+      <li>
+        Float comparison could result in an internal error at the highest optimization 
+        level when using the vector floating-point (VFP) unit.<br>
+      [EW14669]
+      <li>
+        Compares with 0.0 when generating code for VFP was sometimes done as if the 
+        hardware supportes subnurmal-numbers.<BR>
+      [EW14670]
+      <li>
+        Template functions and member functions of class templates that were not inline 
+        (implicitly or explicitly) could cause an internal error in the compiler.<br>
+      [EW14680]
+      <li>
+        The intrinsic function <code>__CLZ()</code> gave an internal error when compiled at 
+        optimization levels above 3.<br>
+      [EW14723]
+      <li>
+        The extra 'new constructor'/'delete destructor' routines generated by the 
+        compiler when optimizing for space should be marked as tentative if the class 
+        involved is a template class, even if the corresponding constructor/destructor 
+        is not tentative. The compiler failed to do this, which could result in 
+        multiply defined symbol errors when linking.<br>
+      [EW14746]
+      <li>
+        In some cases an assignment to a member in a structure variable could be 
+        erroneously eliminated, if the member was assigned a variable and that variable 
+        was assigned in all basic blocks preceding the basic block containing the 
+        structure variable declaration.<br>
+      [EW14760]
+      <li>
+        Optimization no longer treats <code>~(x - y)</code> as <code>-(x - y)</code>.<br>
+      [EW14788]
+      <li>
+        <code>Printf</code> format string characters above 0x7F were not handled correctly.<br>
+      [EW14897]
+      <li>
+        When trying to avoid unnecessary setting of the <code>vtable</code> pointer in the 
+        constructor for abstract classes, if the class has a member variable that is an 
+        array of objects requiring construction, the compiler could hit an assertion in 
+        the internal file <em>lower_init.c</em>.<br>
+      [EW14909]
+      <li>
+        When generating a constructor or destructor for an unnamed structure or class 
+        (for example, because one of its members had a constructor or destructor) an 
+        internal error occurred.<br>
+      [EW14911]
+      <li>
+        Converting numbers using <code>wcstoul()</code> with more than 9 decimal digits 
+        gave the wrong result.<br>
+      [EW14921]
+      <li>
+        The extra 'new constructor'/'delete destructor' routines generated by the 
+        compiler when optimizing for space should be marked as tentative if the class 
+        involved is a template class, even if the corresponding constructor/destructor 
+        is not tentative. The compiler failed to do this, which could result in 
+        multiply defined symbol errors when linking.<br>
+      [EW14931]
+      <li>
+        A structure that only containes small integral types plus another structure of 
+        small integral types generated 32-bit LDR/STR instructions when operating on 
+        non-aligned data objects.<br>
+      [EW15593]
+      <li>
+        In some situations the access to a variable could be hoisted above an 
+        assignment to that variable.<br>
+        [EW16828]
+      </li>
+    </ul>
+    <h4><A NAME="his340C">V3.40C 2003-12-12</A></h4>
+    <ul>
+      <li>
+        ELF/DWARF debug information for variables located in VFP double registers could 
+        not be handled by the linker. A linker internal error was generated.<br>
+      [EW14206]
+      <li>
+        In some cases expressions containing a negation could cause an internal error 
+        if the expression below the negation was an associative and commutative 
+        expression with several constants.<br>
+        For example certain expressions with succeeding minus signs, as in <code>-(108000000-(temp-108000000))</code>.<br>
+      [EW14293, EW14532]
+      <li>
+        Missing intrinsic function declarations of <code>__get_CPSR()</code> and <code>__set_CPSR()</code>
+        have been added to the <em>inarm.h</em> header file.<br>
+      [EW14300]
+      <li>
+        In some cases loops with <code>long long</code> loop counters were optimized 
+        incorrectly.<br>
+      [EW14345]
+      <li>
+        If a function that was compiled as <code>__monitor __thumb __interwork</code> did 
+        not destroy any registers that had to be restored, for example if the function 
+        body was empty, an internal error was generated.<br>
+      [EW14445]
+      <li>
+        Some standard I/O library functions was linked into the application even if not 
+        used.<br>
+      [EW14465]
+      <li>
+        When common sub-expression elimination (CSE) was enabled in the compiler 
+        optimizer, some constructs were previously optimized incorrectly. An example of 
+        such a statement is:<br>
+        <code>k = i + j + k;</code><br>
+        [EW14497]</li>
+    </ul>
+    <h4><A NAME="his340B">V3.40B-P1 2003-10-06</A></h4>
+    <ul>
+      <li>
+        Compiling with VFP enabled in ARM mode, and declaring a function with <code>__thumb</code>
+        in the same translation unit, could cause an internal error at optimization 
+        levels above 3.<br>
+      [EW14210, EW14211]
+      <li>
+        The runtime library routine <code>??div8_a</code> has been corrected so that it now 
+        makes a full 32-bit sign-extension of the divisor and dividend, as opposed to a 
+        16-bit one, prior to performing the actual division operation. The previous 
+        behavior was not a bug according to the C standard, but it could unnecessarily 
+        lead to an "undesired" result.<br>
+      [EW14239]
+      <li>
+        The result from signed 8- and 16-bit divide and modulo operations is now 
+        (correctly) sign extended.<br>
+      [EW14298]
+      <li>
+        Optimizations based on register content tracking did not function correctly for 
+        multidimensional arrays. This could result in incorrect optimization of an 
+        access to an element in a multidimensional array, if two or more paths through 
+        the function could reach the access and at least one of the paths contained an 
+        assignment to the same element. Single dimensional arrays could also be 
+        affected if they were clustered. This problem only occured on optimization 
+        levels above 3.<br>
+      [EW14342, EW14354]
+      <li>
+        Structures small enough to fit within a register could in some cases be read 
+        with incorrect alignment, that is with a single large read instruction instead 
+        of several small ones. This resulted in an undefined behavior.<br>
+      [EW14353]
+      <li>
+        The expression <code>X-(Y*Z)</code> was incorrectly coded as <code>FMSC[S|D]</code> instead 
+        of <code>FNMAC[S|D]</code> when using VFP. Since this type of expressions are 
+        present in the sourcecode for <code>sin()</code>, <code>cos()</code>, and <code>cosh()</code>, 
+        applications using these library functions were affected.<br>
+      [EW14359, EW14373, EW14389]
+      <li>
+        VFP function pointers were previously not recognized as the default function 
+        type.<br>
+      [EW14360]
+      <li>
+        Using VFP and casting a <code>float</code> to an <code>unsigned int</code> or <code>long</code>
+        could give the wrong rounding mode depending on the rounding mode set in <code>FPSCR</code>. 
+        Previously, the <code>FTOUIS</code> instruction was used, but the rounding mode of <code>
+          FTOUIS</code> depends on <code>FPSCR</code> and gives the wrong result unless round 
+        towards zero is set in <code>FPSCR</code>. Now, the <code>FTOUIZS</code> instruction is 
+        correctly used instead.<br>
+      [EW14363]
+      <li>
+        Using VFP and casting a <code>double</code> to a <code>signed int</code> or <code>long</code>
+        could give the wrong rounding mode depending on the rounding mode set in <code>FPSCR</code>. 
+        Previously, the <code>FTOSID</code> instruction was used, but the rounding mode of <code>
+          FTOSID</code> depends on <code>FPSCR</code> and gives the wrong result unless round 
+        towards zero is set in <code>FPSCR</code>. Now, the <code>FTOSIZD</code> instruction is 
+        correctly used instead.<br>
+        [EW14364]
+      </li>
+    </ul>
+    <h4><A NAME="his340A">V3.40A 2003-07-03</A></h4>
+    <ul>
+      <li>
+        Compiler assembly output in interwork mode could fail to assemble.<br>
+      [EW13604]
+      <li>
+        A loop containing a condition, where a loop counter was multiplied with a value 
+        greater than 1 and compared to a constant, could, if certain additional 
+        conditions were met, be optimized incorrectly due to rounding errors when 
+        loop-peeling optimizations were performed. For example:
+        <pre>
+  int i, res;
+  for (i = 0; i &lt; 3; i++)
+  {
+    if((i * 2) &lt; 1)
+      res = 0;
+    else
+      res = 1;
+    printf("i=[%d]:res=[%d]\n", i, res);
+  }
+</pre>
+        Loop-peeling optimizations are only attempted when there is a maximum of three 
+        basic blocks within the loop and the highest optimization level (<code>-z9/-s9</code>) 
+        is used.<br>
+      [EW13695]
+      <li>
+        When using Thumb mode and a <code>long long</code>, or a value whose temporary 
+        internal representation was <code>long long</code>, was part of a struct and 
+        located at an offset of 124 (bytes) within the struct, the compiler sometimes 
+        tried to generate syntactically illegal code. As a result, an internal error 
+        was generated.<br>
+      [EW13702]
+      <li>
+        The global optimizer could in very special cases lose track of a temporary 
+        result.<br>
+      [EW13925]
+      <li>
+        In some rare cases, the global optimizer could make incorrect assumptions of 
+        the contents of a clustered variable, <code>b</code>, inside a loop. Incorrect code 
+        was generated in these cases. For this to occur, the loop must reside within an 
+        if-else statement, it cannot change <code>b</code> but must change another variable 
+        in the same cluster, and <code>b</code> must be assigned in the other clause of the 
+        if-else statement. For example:
+        <pre>
+  int a;
+  int b;
+
+  void f(void)
+  {
+    if(a &lt; b + 2)
+    {
+      while(a + b &lt;= 0)
+      a++;
+    }
+    else
+    {
+      b = b + 2;
+    }
+  }
+</pre>
+      [EW13936]
+      <li>
+        In some cases, inner loops could be optimized incorrectly if the trip count 
+        depended on the loop counter in a surrounding loop, the surrounding loop had a 
+        trip count of 2, and the loop counter in the surrounding loop counted down.<br>
+      [EW13937]
+      <li>
+        In some cases, nested loops could be optimized incorrectly if the exit test in 
+        the inner loop jumped directly to the test in the outer loop. For example:
+        <pre>
+  x = ...;
+  while (--x &gt; 0)
+  {
+    y = ...;
+    while (--y &gt; 0)
+    {
+      ...
+    }
+    /* no code from outer loop here */
+  }
+</pre>
+      [EW13942]
+      <li>
+        When <code>SFB</code> or <code>SFE</code> directives were used on segments containing 
+        tentative segment parts (<code>PUBWEAK</code> symbols), one such tentative segment 
+        part was used in the calculation of <code>SFB</code>/<code>SFE</code>, and the chosen 
+        definition of the segment part was located in a different segment than the 
+        tentative one, XLINK could generate the wrong value for the <code>SFB</code>/<code>SFE</code>.<br>
+      [EW13972]
+      <li>
+        The compiler could produce different object code depending on the execution 
+        environment, such as the host operating system used. However, the generated 
+        code was correct in all cases.<br>
+      [EW14003]
+      <li>
+        Signed compare on <code>long long</code> was previously performed incorrectly. The 
+        generated code performed an all-signed compare, when it should have done a 
+        signed compare on the high 32-bit word and an unsigned compare on the lower 
+        part.<br>
+      [EW14020]
+      <li>
+        The sign-on message for the <code>--segment</code> command line option has been 
+        corrected. The sign-on message is displayed when invoking the compiler from the 
+        command line by typing "iccarm" only.<br>
+      [EW14044]
+      <li>
+        Const objects which are located at an absolute address, and either implicitly 
+        initialized to zero or explicitly initialized to any value, were previously 
+        incorrectly placed together with located no_init (const and non-const) objects 
+        in the HUGE_AN segment. Now, they are correctly placed in the HUGE_AC segment.<br>
+      [EW14050]
+      <li>
+        In some cases volatile global variables could lose the volatile attribute if 
+        they were clustered. Clustering was performed on <code>high</code> optimization 
+        level (<code>-z9/-s9</code>) only. For example:
+        <pre>
+  int y;
+  int z;
+  int volatile x;
+
+  void f(void)
+  {
+    x = y;
+    x = z;
+  }
+</pre>
+      [EW14051]
+      <li>
+        All printf formatters, such as <code>%d</code> and <code>%s</code>, gave an incorrect 
+        output when the <code>_Printf_small</code> formatter was used.<br>
+      [EW14068]
+      <li>
+        The following example previously generated Thumb <code>ADD</code> and <code>SUB</code> instructions 
+        in ARM mode, which resulted in an internal error.
+        <pre>
+  char x[8];
+  void foo(void)
+  {
+    *(int*)&amp;x[1] = 1;
+  }
+</pre>
+      [EW14070]
+      <li>
+        An internal error could be generated when compiling Thumb code containing 
+        certain forms of 32-bit integer multiplications.<br>
+      [EW14093]
+      <li>
+        A loop containing a condition, where a scaled loop counter was compared to a 
+        constant, could be optimized incorrectly if the test was for (non-)equality and 
+        the value was reached during the final iteration through the loop.<br>
+      [EW14096]
+      <li>
+        Signed long long division with negative numbers gave wrong sign on quotient and 
+        remainder.<br>
+      [EW14117]
+      <li>
+        Long long arithmetic right shift failed if high word was all ones.<br>
+      [EW14118]
+      <li>
+        Alignment of complex objects like character arrays is now set to 4. The 
+        previous alignment of one was not a bug according to ANSI, but could cause code 
+        written for other ARM compilers to fail at runtime due to unaligned accesses. 
+        As an example, this could happen when casting a character pointer to an int 
+        pointer.<br>
+      [EW14123]
+      <li>
+        Passing a pointer to long long as argument to a function could cause an 
+        internal error.<br>
+      [EW14126]
+      <li>
+        Standard input in C-SPY with library buffered I/O enabled did not work. In 
+        addition, redirecting stdin from a file in C-SPY caused an application error.<br>
+        If library buffered I/O was disabled, the standard input worked correctly.<br>
+        [EW14174]
+      </li>
+    </ul>
+    <h4><A NAME="his330B">V3.30B 2003-03-18</A></h4>
+    <ul>
+      <li>
+        When the compiler generated relay functions to Thumb assembler library 
+        routines, for example <code>??divu32</code>, <code>??div32</code>, <code>??divu16</code>, <code>
+          ??div16</code>, <code>??divu8</code>, and <code>??div8</code>, it accidentally 
+        destroyed the contents of non-scratch register R11. R11 is seldom used by Thumb 
+        code generation, but in ARM functions which call Thumb library code, this 
+        problem could surface if relay functions were needed. Now relay functions 
+        correctly use scratch register R12 instead.<br>
+      [EW10737, EW13614]
+      <li>
+        When performing crossjump or hoisting optimizations, which is done on 
+        optimization levels <code>-z9/-s9</code>, the compiler incorrectly assumed that all 
+        inline assembler routines were identical. This could lead to an overly 
+        aggressive use of these optimization techniques, which resulted in incorrect 
+        code sequences to be generated.<br>
+      [EW13638]
+      <li>
+        The compiler produced incorrect type information when compiling a file which 
+        contained a struct, one of whose fields was a pointer to another struct, and 
+        where the first struct was used in a context where its size or any offsets into 
+        it were not needed. The type information for the second struct was incorrect, 
+        which could lead to numerous incorrect type conflict warnings when linking.<br>
+        [EW13651]
+      </li>
+    </ul>
+    <h4><A NAME="his330A">V3.30A 2003-02-18</A></h4>
+    <ul>
+      <li>
+        <code>va_arg()</code> now works for structs that are not word-aligned.<br>
+      [EW10145]
+      <li>
+        Formatted I/O functions, like <code>printf</code>, can now handle <code>long long</code>.<br>
+      [EW10898]
+      <li>
+        The combined number of variables/functions per file is no longer limited to 
+        64k.<br>
+      [EW12299]
+      <li>
+        Using the same segment name multiple times as an argument to the <code>__sfb()</code>
+        or <code>__sfe()</code> intrinsic functions resulted in an internal error:<br>
+        <code>Internal Error: [Front end]: compare_constants: bad address constant kind</code><br>
+      [EW12783]
+      <li>
+        In some cases, assignments to elements in arrays with an unspecified size could 
+        be removed if the same element was used exactly once later in the same basic 
+        block.<br>
+      [EW12790]
+      <li>
+        A remark that had been converted to a warning could not be suppressed using the <code>
+          --diag_suppress</code> command line option.<br>
+      [EW12847]
+      <li>
+        An internal buffer overflow could occur if a very long file name was used in 
+        combination with a very long function name. When this happened, the result 
+        could either be no diagnostic message, or one of the following two internal 
+        errors:<br>
+        <code>Internal error: [write_ABS_UBROF A01]: Illegal tag (P0: 0, P1: 0)</code><br>
+        or<br>
+        <code>Internal error: [any]: Unexpected exception</code><br>
+      [EW12851]
+      <li>
+        A casted pointer expression could result in an internal error similar to:<br>
+        <code>Internal Error: [AsmLine - OgAsm]: Error[43]: Illegal effective address</code><br>
+        <code>ADD R1,#+0x2</code><br>
+      [EW12883, EW12884]
+      <li>
+        Peephole optimization of additions, where the first operand was known to be 
+        smaller than the type of the addition and the other operand was a negative 
+        constant, did not take the effects of propagated carry bits into account. If 
+        only a part of the sum was used (for example by shifting or masking the sum) 
+        and those bits came from the bits known to be cleared in the first operand, the 
+        result was optimized incorrectly.<br>
+      [EW12973]
+      <li>
+        Incorrect code was generated for a pure 32-bit division when the divisor was a 
+        constant with a value of 2^n, and optimization was turned on. The problem was 
+        an incorrect mask constant.<br>
+      [EW12975]
+      <li>
+        If a multiplication of two <code>long long</code> numbers was made in Thumb mode 
+        inside a leaf function (a function that does not call any other functions), the 
+        link register was not properly preserved for function return, which resulted in 
+        an eternal loop.<br>
+      [EW12979]
+      <li>
+        If a switch statement contained only case constants that were impossible to 
+        reach due to the size of the switch expression type, an internal error occurred 
+        when no optimization was used.<br>
+      [EW12983]
+      <li>
+        Accessing an element of an array in a packed structure type could cause a 
+        spurious warning:<br>
+        <code>Pa039: use of address of unaligned structure member</code><br>
+      [EW12997]
+      <li>
+        In some cases where several structure members were assigned loop invariant 
+        values, the optimizer could mistakenly use the value from another member.<br>
+      [EW13030]
+      <li>
+        The compiler could get into an infinite loop for certain loop constructs at 
+        optimization level <code>-z6</code> and above.<br>
+      [EW13031, EW13048]
+      <li>
+        An assignment from an array element to another in the same array could be 
+        optimized away at optimization level 4 and above, if the only use of the array 
+        after the assignment was to pass the array pointer itself to another function.<br>
+      [EW13068]
+      <li>
+        Negating variables of type <code>long long int</code> previously generated 
+        incorrect code.<br>
+      [EW13077]
+      <li>
+        At optimization level <code>-z4</code> or higher, the compiler could give an 
+        internal error with the message: <code>illegal state</code><br>
+      [EW13160]
+      <li>
+        Incorrect code could be produced when the common subexpression and code motion 
+        optimizations were turned on (optimization level 7 and above).<br>
+      [EW13169]
+      <li>
+        Multiplying a variable with itself could result in an unpredictable instruction 
+        (operand combination) being generated in Thumb mode.<br>
+      [EW13171, EW13362]
+      <li>
+        In some cases, the sum of two expressions, where both expressions could be 
+        expressed as k*x + m (k and m are constants and x is a loop variable), could be 
+        calculated incorrectly.<br>
+      [EW13184]
+      <li>
+        The compiler could hang on certain code constructs.<br>
+      [EW13185]
+      <li>
+        There was a problem in auto-variable allocation that could cause two array or 
+        struct variables to be allocated to the same space on the stack, even when they 
+        were both alive at the same time.<br>
+      [EW13186]
+      <li>
+        The code generated for a constant shifted by a 2^n scaled value inside a loop 
+        was incorrect, when compiled with <em>High</em> speed optimization.<br>
+      [EW13222]
+      <li>
+        Common subexpression elimination depended on memory allocation order and could 
+        eliminate different expressions if the executing environment changed, for 
+        example if different operating systems were used.<br>
+      [EW13251]
+      <li>
+        In some cases, optimization of repeated assignments could remove an assignment 
+        to an auto variable, even though it was still used.<br>
+        <code>p = q; p-&gt;next = p; p-&gt;prev = p;</code><br>
+        could be transformed to<br>
+        <code>p-&gt;prev = p-&gt;next = q;</code><br>
+      [EW13299]
+      <li>
+        When creating a temporary value from a common subexpression, the creation could 
+        be lifted above assignments to clustered variables that were part of that 
+        common subexpression. This caused the wrong clustered variable to be accessed.<br>
+      [EW13332]
+      <li>
+        Thumb functions declared <code>__irq</code> no longer generate an internal error. 
+        But note that <code>__irq</code> functions cannot be compiled as <code>__thumb</code>.<br>
+      [EW13337]
+      <li>
+        XLINK could erroneously report a type conflict for cases where some type 
+        attributes (like <code>const</code> or <code>volatile</code>) were part of a <code>typedef</code>
+        type.<br>
+      [EW13345]
+      <li>
+        If a loop contains multiple occurrences of variables that are only incremented 
+        in the loop, the increments of those variables can be hoisted out of the loop. 
+        The order of the hoisted increments no longer depend on memory allocation 
+        order.<br>
+      [EW13352]
+      <li>
+        When compiling a <code>new/delete</code> expression in C++ code at optimizations of <em>
+          Medium</em> or <em>High</em>, and the code for the constructor/destructor was 
+        not visible, the compiler sometimes referred to the special 'new 
+        constructor'/'delete destructor' by an incorrect name, resulting in undefined 
+        external errors when linking.<br>
+      [EW13359]
+      <li>
+        A comma expression containing an assignment where a constant address was 
+        assigned another constant, <code>*(unsigned char *)0x1234 = 17</code>, caused an 
+        internal error.<br>
+      [EW13375]
+      <li>
+        The assembler output generated from a string literal beginning with a tab 
+        character could not be assembled.<br>
+      [EW13552]
+      <li>
+        If there were several calls with a different number of parameters via a relay 
+        function to a vararg or K&amp;R function, one of the parameters could be 
+        destroyed.<br>
+      [EW13564]
+      <li>
+        Inline assembler with several functions in different modes (<code>__arm/__thumb</code>) 
+        in the same source file could cause an internal error.<br>
+      [EW13581]
+      <li>
+        In some cases, a common subexpression containing a clustered variable could be 
+        hoisted across a definition of that variable, if it occured in the same basic 
+        block as the common subexpression.<br>
+      [EW13593]
+      <li>
+        Incorrect code was sometimes generated when combining shift and zero extension 
+        operations.<br>
+      [EW13915]
+      <li>
+        When doing char (8-bit) arithmetics causing overflow, the generated code could 
+        make use of the overflowed value, that is, a larger value than 8 bits.<br>
+      [EW14191]
+      <li>
+        When compiling code containing a combination of left and right shifts, the 
+        compiler performed an incorrect optimisation using a constant mask. This mask 
+        was calculated for an unsigned int even when the actual type used was signed 
+        int.<br>
+      [EW14688]
+      <li>
+        Compiling code which used a combination of shift left and shift right, the 
+        compiler did an erroneous optimisation using a constant mask. This mask was 
+        calculated for an unsigned int even when the actual type used was signed int.<br>
+        [EW14688]
+      </li>
+    </ul>
+    <h4><A NAME="his321A">V3.21A 2002-09-27</A></h4>
+    <ul>
+      <li>
+        #pragma segment = &lt;name&gt;<br>
+        Declares a segment name that can be used in the segment operators 
+        __segment_begin and __segment_end. Example:<br>
+        <code>#pragma segment = "MYSEG" __huge</code>
+      <li>
+        __segment_begin(&lt;name&gt;)<br>
+        __segment_end(&lt;name&gt;)<br>
+        The __segment_begin operator denotes the start address of the segment with the 
+        name &lt;name&gt;, which must be a string literal and must have been declared 
+        in a segment pragma at an earlier point in the compilation unit. The 
+        __segment_end operator denotes the address immediately after the last byte in 
+        the segment. The type of these operators is pointer to void. If a memory 
+        attribute is entered in the segment pragma declaring the segment, the type is 
+        pointer to &lt;memory&gt; void, otherwise the type is a default pointer to 
+        void. The operator given in the example has the type "void __huge *".<br>
+        Example:<br>
+        <code>__segment_begin("MYSEG")</code>
+      <li>
+        #pragma required<br>
+        The #pragma required will introduce a requirement from a symbol to another 
+        symbol, i.e. if the first symbol is in the produced output when linking the 
+        other symbol should also be in that output. This is useful if, for instance, a 
+        function that handles certain data should only be used if there is any data to 
+        handle.<br>
+        Syntax: #pragma required=symbol where symbol is any statically linked function 
+        or variable. The #pragma must be placed in front of a symbol definition.<br>
+        An example:
+        <pre>
+  void func(void)
+  {
+  // handle segment S or longVariable here
+  }
+  #pragma required = func  // longVariable requires f
+  long longVariable @ "S"; // longVariable resides in segment S</pre>
+      <li>
+      The option --diagnostics_tables file|directory produces all possible 
+      diagnostics to a file. The default extension is txt. Default filename, if only 
+      a directory is specified, is diagnostics_tables.txt. It should only be used as 
+      a separate option to the compiler. This option is usefull if you have used 
+      #pragma diag... but forgot to document why, etc.
+      <li>
+      Libraries for big endian are now included.
+      <li>
+        Loop-invariant optimizations depended on OS memory allocation order.<br>
+      [EW13215]
+      <li>
+        Inlined code could in rare cases give the following error:<br>
+        Internal Error: [GoSyncStuff::FindPrecedingSync]: cannot find unique sync node.<br>
+      [12852]
+      <li>
+        The compiler now generates the Thumb mnemonics LDRSB and LDRSH instead of the 
+        older LDSB and LDSH.<br>
+      [EW12310]
+      <li>
+        Loop optimizations could generate incorrect array index.<br>
+      [EW12325, EW12326, EW12409]
+      <li>
+        Code that handles small unaligned structures could generate an internal error.<br>
+      [EW12403]
+      <li>
+        Code for casting to signed and unsigned long long could sometimes result in 
+        incorrect values.<br>
+      [EW12404]
+      <li>
+        Code generated to access to nonaligned structures could be incorrect.<br>
+      [EW12405, EW12406]
+      <li>
+        A constanttable inserted after a function that had been cross-jumped could 
+        result in an internal error.<br>
+      [EW12407]
+      <li>
+        An optimization bug could cause incorrect code to be generated.<br>
+      [EW12408]
+      <li>
+        Short elements in a union stored in a register could be incorrectly aligned.<br>
+      [EW12410]
+      <li>
+        A cast operation could sometimes incorrectly be optimized away.<br>
+      [EW12512]
+      <li>
+        The code generated by the compiler could change depending on the compiler 
+        execution environment. The generated code was correct but the size could 
+        differ. The sensitivity to change in execution environment could be moving to a 
+        different Windows OS, changing the environment settings, length of file paths 
+        and other changes that could change the memory allocation order within the 
+        compiler process.<br>
+        [EW11219, EW12580]
+      </li>
+    </ul>
+    <h4><A NAME="his320A">V3.20A 2002-06-18</A></h4>
+    <ul>
+      <li>
+      The runtime model has changed from version 3.11A. The current __rt_version is 
+      4.
+      <li>
+        ARM instruction set version 5TE is now supported.<br>
+      To use it add command line option --cpu {target core or architecture name}.
+      <li>
+      It is now possible to mix code compiled with small and large code models.
+      <li>
+      The interworking code model is now supported through the new command line 
+      option --interwork.
+      <li>
+      The calling convention is now ATPCS as default. Interwork must still be added 
+      if needed to a function with function-type attribute __interwork or globally 
+      with the command line option --interwork.
+      <li>
+      Access to floating point flags has been re-engineered. Refer to the file 
+      MathFloatFlags.h for more information.
+      <li>
+      Two functions from the ANSI C99 standard have been included: snprintf() and 
+      vsnprintf().
+      <li>
+        Evaluation of else-if could be performed incorrectly at high speed optimization 
+        in Thumb mode.<br>
+      [EW12287]
+      <li>
+        The char pointer member of a structure object used as parameter was not passed 
+        correctly to the called function. This occurred at high optimization levels.<br>
+      [EW12248]
+      <li>
+        The combination of Thumb mode and high speed optimization could lead to 
+        incorrect code when testing bitfield values.<br>
+      [EW12227]
+      <li>
+        Structure return values from __pcs functions that are less than 32-bit and not 
+        aligned to an even 4-byte address would be returned indirectly using an 
+        implicit extra parameter.<br>
+      [EW10358]
+      <li>
+        Register mismatch in debug information between compiler and linker when output 
+        was ELF/DWARF.<br>
+      [EW10703]
+      <li>
+        Library functions assert, strchr and strrchr could not be used with string 
+        literals in C++.<br>
+      [EW10899]
+      <li>
+        The compiler could previously generate multiplication instruction with 
+        undefined behavior: MUL R0,R0,R4.<br>
+      [EW11114]
+      <li>
+        The intrinsic functions __sfb/sfe could only be used once per segment, multiple 
+        uses would result in link failure.<br>
+      [EW11122]
+      <li>
+        A small part of the runtime library was broken. It used the wrong register in a 
+        BX instruction.<br>
+      [EW12060]
+      <li>
+        Certain __swi function definitions could result in an incorrect warning.<br>
+      [EW11247]
+      <li>
+        The compiler generated incorrect code for switch statements where the body code 
+        and at least one case except the last did not end with a break or a goto.
+        <br>
+      [EW11336, EW11337, EW11360]
+      <li>
+        The compiler could generate incorrect code for a bitfield value test at 
+        high-speed optimization.<br>
+      [EW11371]
+      <li>
+        Nested loops using the same loop variable could be optimized incorrectly if the 
+        increment or decrement of the loop variable preceded the inner loop.<br>
+      [EW11372,EW11423]
+      <li>
+        Read access to smaller union fields in register allocated unions could destroy 
+        other union fields of different size.<br>
+      [EW11373, EW11381]
+      <li>
+        Some code optimization and analysis problems were corected. They either 
+        resulted in "Internal error" or the compiler never terminated.<br>
+      [EW11374, EW11375, EW11376]
+      <li>
+        Corrected a problem where partial object assignments were interpreted as an 
+        assignment of the whole object. This could cause incorrect elimination of 
+        assignments.<br>
+      [EW11377, EW11418, EW11424, EW11427]
+      <li>
+        The compiler is now a little more restrictive when optimizing address 
+        expressions. This avoids incorrect assumptions while compiling code that does 
+        not conform to ANSI C.<br>
+      [EW11378, EW11422]
+      <li>
+        Variable initialization could in some cases be optimized away.<br>
+      [EW11380]
+      <li>
+        Sometimes loops that were unrolled to straight line code could be optimized 
+        incorrectly.<br>
+      [EW11416, EW11425]
+      <li>
+        When for or while loops were fully unrolled, side effects in the test would not 
+        be executed for the final iteration.<br>
+      [EW11417, EW11426]
+      <li>
+        Expressions like a &gt; b + 1 were rewritten as a &gt; = b, but that changed 
+        the behavior when the expression b + 1 would have overflowed.<br>
+        The ANSI C standard allows the transformation, since the behavior at overflow 
+        is unspecified. But the expressions are no longer transformed since it changed 
+        the expected behavior.<br>
+      [EW11490, EW10978]
+      <li>
+        Using integer division or modulo in __ramfunc could result in an internal 
+        error.
+        <br>
+      [EW11999]
+      <li>
+        Relay from located functions could result in:<br>
+        Internal error [OgModuleLabels::Def::Define]: Label already defined.<br>
+      [EW12011]
+      <li>
+        A number of code-generation and optimization bugs have been corrected.<br>
+        [EW11419, EW11420, EW11421,EW11862]<br>
+      <li>
+        The file checkDefs.i included by cstartup.s79 was missing from the 
+        distribution.<br>
+      [EW11223]
+      <li>
+        The code generated for __disable_interrupt() has been rewritten in a more 
+        secure way.<br>
+      [EW11143]
+      <li>
+        Crossjump between two or more small functions could destroy LR is the distance 
+        between them is too far.<br>
+        [EW12808]
+      </li>
+    </ul>
+    <h4><A NAME="his311A">V3.11A 2001-12-04</A></h4>
+    <ul>
+      <li>
+      The floating point library now has exception flags. Refer to the file 
+      MathFloatFlags.h for more information.
+      <li>
+      Long long is now supported, except in the formatted I/O functions.
+      <li>
+      A new command line option, --omit_types, omits function/variable type info in 
+      object output.
+      <li>
+        An assignment between two elements from packed structures could generate a 
+        misaligned access.<br>
+      [EW10299]
+      <li>
+        Structure parameters to __pcs functions larger then 64 bit or not aligned to an 
+        even 4-byte address were always placed on the stack.<br>
+      [EW10357]
+      <li>
+        __pcs functions could in some cases get incorrect backtrace information.<br>
+      [EW10359]
+      <li>
+        Several corrections in long long support.<br>
+      [EW10364]
+      <li>
+        Loop optimization could hoist an expression before its definition.<br>
+      [EW10421]
+      <li>
+        String literals now have the type "array of const char" in C++.<br>
+      [EW10542]
+      <li>
+        Values casted to and compared in a type smaller than 32-bit could be destroyed.<br>
+      [EW10569]
+      <li>
+        When compiling a while loop following immediately after a case label in a 
+        switch, the compiler could crash if high optimization was used (-s9 or -z9).<br>
+      [EW10725]
+      <li>
+        The intrinsic functions __sfb, __sfe and __sfs yield an error when the referred 
+        segment is not otherwise used in the module.<br>
+      [EW10757]
+      <li>
+        Cross call optimization could generate a fatal error in some cases where 
+        several similar functions had multiple exits.<br>
+      [EW10807]
+      <li>
+        Register allocation could in some rare cases with extreme register pressure 
+        generate a "coloring failed" error.<br>
+        [EW10868]
+      </li>
+    </ul>
+    <h4><A NAME="his310A">V3.10A 2001-10-02</A></h4>
+    <ul>
+      <li>
+      The runtime model has changed from version 2.10. The current __rt_version is 2.
+      <li>
+      New floating point library with smaller code size and greatly improved speed.
+      <li>
+      Debug information is improved, with better variable information and backtrace.
+      <li>
+        A switch statement of the form switch(a-b&lt;=0) at higher optimization levels 
+        than 3 caused the wrong case to be selected.<br>
+      [ARMC0021]
+      <li>
+        Inline expansion of memcpy() could produce the wrong result.<br>
+      [ARMC0022]
+      <li>
+        Assignment loop using loop index caused incorrect code at -z9.<br>
+      [ARMC0027]
+      <li>
+        Bitfields could not be larger than 255 bits.<br>
+      [LB397]
+      <li>
+        Global optimizer problems which resulted in internal error has been corrected<br>
+      [EW10178 (LB399)]
+      <li>
+        Global optimizer problems which resulted in incorrect code has been corrected.<br>
+      [EW10082, EW10102, EW10180 (LB401), EW10181 (LB402), EW10182 (LB403)]
+      <li>
+        Call via function pointer now sets the correct mode bit in return address.<br>
+      [EW10313]
+      <li>
+        A problem in the register allocation algorithm could cause "Internal error: 
+        [CgDriver]: Coloring failed".<br>
+      [EW10087]
+      <li>
+        Too aggressive optimizations when shifting bitfields.<br>
+      [EW10080]
+      <li>
+        Call to a variadic __pcs function with K&amp;R declaration with different 
+        number of arguments could cause an internal error.<br>
+      [EW10083]
+      <li>
+        A faulty optimization rule could cause Thumb instructions to use illegal high 
+        registers.<br>
+      [EW10292]
+      <li>
+        Header files for C++ not installed.<br>
+      [EW10294]
+      <li>
+        The gmtime() could cause corrupt tm structure values for arbitrary time values, 
+        the tm_mday for example could turn negative. There was also a problem that the 
+        mktime() function could corrupt tm structure values.<br>
+        [EW10363]
+      </li>
+    </ul>
+    <h4><A NAME="his210D">V2.10D 2001-06-27</A></h4>
+    <ul>
+      <li>
+        Loop optimizations have been reorganized and several problems have been 
+        corrected.<br>
+      [Lb 355,375,376,379,382,390,396]
+      <li>
+        Corrected a problem in the ARM mode peephole optimizations. Could cause an 
+        unintialized register to be used.<br>
+      [ARMC0018]
+      <li>
+        Corrected a problem that caused compiler to loop if ARM mode was used and the 
+        code had a large modulo expression.<br>
+      [ARMC0017]
+      <li>
+        Part of the exit sequence could be optimized away (restoring high registers in 
+        Thumb mode).<br>
+      [ARMC0016]
+      <li>
+        Fixed problem where a constant casted to a pointer caused incorrect code 
+        randomly.<br>
+      [ARMC0015]
+      <li>
+        CStartup used to have a reference to SVC_STACK that was neither used in the 
+        code nor declared in the standard linker command file lnkarm.xcl.<br>
+      [ARMC0011]
+      <li>
+        #pragma swi_number can now be fitted to either the function declaration or the 
+        function definition.<br>
+      [ARMC0009]
+      <li>
+        Fixed code for passing structures as parameters. The code was either incorrect 
+        or the stack was not aligned correctly.<br>
+        [ARMC0007]
+      </li>
+    </ul>
+    <h4><A NAME="his210A">V2.10A 2001-02-21</A></h4>
+    <ul>
+      <li>
+      The compiler now supports Embedded C++.
+      <li>
+      It is now possible to choose between big and little endian byte order.
+      <li>
+      Support for the ARM9TDMI core has been added.
+      <li>
+        The following command line options have been added or changed:
+        <ul>
+          <li>
+            <code>--ec++</code>
+          add support for ec++ syntax
+          <li>
+            <code>--cpu [arm7tdmi | arm9tdmi]</code>
+          select processor
+          <li>
+            <code>--endian [big | little]</code>
+          select memory format
+          <li>
+            <code>--no_scheduling</code> disables instruction scheduling</li>
+        </ul>
+      <li>
+        A program with struct accesses in different scopes but casted from the same 
+        variable could be transformed incorrectly.<br>
+      [Lb 388]
+      <li>
+      Too aggressive optimizations with partial updates of variables.
+      <li>
+      A change of sign was sometimes introduced in unsigned character switches.
+      <li>
+        Incorrect code was generated in loops at high speed optimizations.<br>
+      [Lb 381]
+      <li>
+        An internal error was received when the &gt; operator was used with unequal 
+        types in loops at high optimizations.<br>
+      [Lb 380]
+      <li>
+        The recognition code for packed structures was incorrect.<br>
+      [Lb 378]
+      <li>
+        A problem occuring when accessing fields in packed structures has been 
+        corrected.<br>
+      [Lb 374]
+      <li>
+        Accessing array members of struct return values could give an internal error.<br>
+      [Lb 365]
+      <li>
+        Correcting a problem occuring in Thumb mode on high optimization level when 
+        adding a constant offest to an address (label).<br>
+      [ARMC0004]
+      <li>
+        The following code used to give an internal error:<br>
+        <code>int fn_dbl(double);</code><br>
+        <code>int fn_dbl(f) float f; { do_nothing(&amp;f); return 97; }</code><br>
+        [Lb 364]</li>
+    </ul>
+    <h4><A NAME="his130C">V1.30C 2000-10-14</A></h4>
+    <ul>
+      <li>
+        A problem in cstartup has been corrected, constants where put after each 
+        segment even when fall-through was used.<br>
+      [ARMC0003]
+      <li>
+        A problem sometimes resulting in an internal error "coloring failed" in Thumb 
+        mode has been corrected.<br>
+        [ARMC0002]
+      </li>
+    </ul>
+    <h4><A NAME="his130A">V1.30A/B 2000-09-28</A></h4>
+    <ul>
+      <li>
+        Support for handling interrupt functions has been added.<br>
+        The following function type attribute keywords have been added:
+        <ul>
+          <li>
+          __irq - declares an interrupt function.
+          <li>
+          __fiq - declares a fast interrupt function.
+          <li>
+            __swi - declares a software interrupt function.</li>
+        </ul>
+      <li>
+        The following #pragma directive has been added:<br>
+        <code>#pragma swi_number=&lt;number&gt;</code><br>
+      For more information about interrupt functions, see Manual corrections in this 
+      document, tutor\interrupt_example.c, inc\arm_interrupt.h, and 
+      src\lib\swi_handler.s79.
+      <li>
+        The following intrinsic functions have been added:
+        <ul>
+          <li>
+            <code>__intrinsic int __sfb(void *)</code>
+          - returns address to beginning of segment
+          <li>
+            <code>__intrinsic int __sfe(void *)</code>
+          - returns address to end of segment
+          <li>
+            <code>__intrinsic int __sfs(void *)</code> - returns size of segment</li>
+        </ul>
+      <li>
+        Code for spilling and unspilling high registers in Thumb mode has been 
+        corrected.<br>
+      [ARMC0001]
+      <li>
+      A problem that under some circumstances could result in a never-ending compiler 
+      internal loop is corrected.
+      <li>
+        Volatile objects referred by a pointer, are now handled correctly.
+      </li>
+    </ul>
+    <h4><A NAME="his120A">V1.20A 2000-05-28</A></h4>
+    <ul>
+      <li>
+        The following C library functions will under certain circumstances be handled 
+        as intrinsic functions and will generate inline code instead of an ordinary 
+        library call: <code>memcpy, memset, strcpy, strlen, strncpy, strcat, strcmp, 
+          strncmp</code>
+      </li>
+    </ul>
+    <h4><A NAME="his11B">V1.10B 2000-01-14</A></h4>
+    <ul>
+      <li>
+      Minor corrections.
+      <li>
+        Switch statements in ARM mode are now implemented more efficiently, using jump 
+        tables.</li>
+    </ul>
+    <h4><A NAME="his110A">V1.10A 1999-12-30</A></h4>
+    <ul>
+      <li>
+        First release.
+      </li>
+    </ul>
+    </div>
+</body>
+</html>

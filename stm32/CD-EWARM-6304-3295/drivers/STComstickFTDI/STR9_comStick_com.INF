@@ -1,0 +1,152 @@
+; STR9_comStick_com.INF
+; Copyright (c) 2007 Hitex Development Tools 
+;
+; USB serial port driver installation for Windows 2000 and XP.
+;
+
+;******************************************************************************
+; Version section
+;------------------------------------------------------------------------------
+[Version]
+Signature="$Windows NT$"
+Provider=%S_Provider%
+DriverVer=05/19/2006,2.00.00
+Class=Ports
+ClassGUID={4d36e978-e325-11ce-bfc1-08002be10318}
+CatalogFile=%S_DriverName%.cat
+
+
+
+
+;******************************************************************************
+; Manufacturer section
+;------------------------------------------------------------------------------
+[Manufacturer]
+%S_Mfg%=_Devices
+
+
+;******************************************************************************
+; Device section
+;------------------------------------------------------------------------------
+[_Devices]
+%S_DeviceDesc0&PID_002C%=_Install0,FTDIBUS\COMPORT&VID_0640&PID_002C
+;%S_DeviceDesc0&PID_0022%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_0022
+;%S_DeviceDesc0&PID_0027%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_0027
+;%S_DeviceDesc0&PID_0028%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_0028
+;%S_DeviceDesc0&PID_0029%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_0029
+;%S_DeviceDesc0&PID_002A%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_002A
+;%S_DeviceDesc0&PID_002B%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_002B
+;%S_DeviceDesc0&PID_002C%=_Install0,FTDIBUS\COMPORT&VID_058b&PID_002C
+
+
+;******************************************************************************
+; Install section
+;------------------------------------------------------------------------------
+[_Install0.NTx86]
+CopyFiles=_CopyFiles_sys
+CopyFiles=_CopyFiles_UI
+AddReg=_AddReg_Serui
+
+[_Install0.NTx86.Services]
+AddService = %S_DriverName%, 0x00000002, _NT_AddService
+
+[_Install0.NTx86.HW]
+AddReg=_AddReg_ConfigData
+
+;******************************************************************************
+; NT Service sections
+;------------------------------------------------------------------------------
+[_NT_AddService]
+ServiceType    = 1                  ; SERVICE_KERNEL_DRIVER
+StartType      = 3                  ; SERVICE_DEMAND_START
+ErrorControl   = 1                  ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %10%\system32\drivers\%S_DriverName%.sys
+
+
+;******************************************************************************
+; Copy Files section
+;------------------------------------------------------------------------------
+[_CopyFiles_sys]
+; Specify the correct file name of the driver binary.
+STR9_comStick_com.sys
+[_CopyFiles_UI]
+FTLang.dll
+ftserui2.dll
+ftd2xx.dll
+
+
+;******************************************************************************
+; AddReg HW section
+;------------------------------------------------------------------------------
+[_AddReg_ConfigData]
+HKR,,"ConfigData",1,11,00,3F,3F,10,27,00,00,88,13,00,00,C4,09,00,00,E2,04,00,00,71,02,00,00,38,41,00,00,9C,80,00,00,4E,C0,00,00,34,00,00,00,1A,00,00,00,0D,00,00,00,06,40,00,00,03,80,00,00,00,00,00,00,D0,80,00,00
+
+
+;******************************************************************************
+; AddReg section
+;------------------------------------------------------------------------------
+
+[_AddReg_Serui]
+HKR,,EnumPropPages32,,"ftserui2.dll,SerialPortPropPageProvider"
+
+
+
+;******************************************************************************
+; Options
+;------------------------------------------------------------------------------
+[ControlFlags]
+ExcludeFromSelect=*
+
+
+;******************************************************************************
+; Destination Directories
+;------------------------------------------------------------------------------
+[DestinationDirs]
+DefaultDestDir  = 11    ; SYSTEM directory
+_CopyFiles_sys = 10,System32\Drivers
+_CopyFiles_UI = 10,system32
+
+
+;******************************************************************************
+; Disk Layout
+;------------------------------------------------------------------------------
+[SourceDisksNames]
+1=%S_DiskName%,,,
+
+[SourceDisksFiles]
+STR9_comStick_com.sys=1
+ftserui2.dll = 1
+FTLang.Dll = 1
+ftd2xx.dll = 1
+
+
+;******************************************************************************
+; Text Strings
+;------------------------------------------------------------------------------
+[Strings]
+; provider name
+S_Provider="Hitex Development Tools"
+; manufacturer name
+S_Mfg="Hitex Development Tools"
+
+; device description
+S_DeviceDesc0&PID_002C="Hitex STR9-comStick USB COM Port"
+;S_DeviceDesc0&PID_0022="USB COM Port"
+;S_DeviceDesc0&PID_0027="Infineon USB COM Port"
+;S_DeviceDesc0&PID_0028="Infineon Tricore USB COM Port"
+;S_DeviceDesc0&PID_0029="Infineon XC166 USB COM Port"
+;S_DeviceDesc0&PID_002A="Infineon XC800 USB COM Port"
+;S_DeviceDesc0&PID_002B="Infineon XC166E/XC2000 USB COM Port"
+;S_DeviceDesc0&PID_002C="USB COM Port"
+
+
+; disk name
+S_DiskName="DAS Driver Disk"
+
+; file name of driver executable 
+S_DriverName="STR9_comStick_com"
+
+
+
+
+

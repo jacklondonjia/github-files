@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: csTARGET.html 123 2011-11-01 13:01:33Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+
+<title>IAR C-SPY Macraigor ドライバ用リリースの―ト </title>
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+IAR C-SPY Macraigor ドライババージョン6.30.4用リリースの―ト
+        </h2>
+    </div>
+    <div class="breadcrumb">
+<a href="index.JPN.html">ARM用IARインフォメーションセンタ </a> | <a href="release_notes.JPN.html">リリースノート</a> | <a href="components.JPN.html">コンポーネント</a> | IAR C-SPY Macraigor 用 リリースノート
+    </div>
+    <div class="mainblock">
+        <ul>
+<li><a href="#important">重要な情報</a> </li>
+<li><a href="#features">新機能</a> </li>
+<li><a href="#problems">既知の問題</a> </li>
+<li><a href="#pcorr">プログラム修正</a> </li>
+<li><a href="#manuals">ユーザガイドの訂正</a> </li>
+<li><a href="#misc">その他</a> </li>
+<li><a href="#history">リリース履歴</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+<a name="important" id="important"></a>重要な情報
+        </h3>
+﻿<ul>
+  <li>
+サポートされているMacraigorのJTAGインタフェースは、mpDemon（イーサネット経由）、usbDemon、usb2Demon、usb2Spriteです。<br>
+  </li><p>
+  <li>
+パラレルポートを使用するWigglerとRavenの各インタフェースは、現在はサポートされていません。
+  </li><p>
+  <li>
+usb2Spriteを使用するには、プロジェクト設定でusb2Demonをデバイスとして選択します。
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+<a name="features" id="features"></a>新機能
+        </h3>
+﻿<ul>
+  <li>
+なし。
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+<a name="problems" id="problems"></a>既知の問題
+        </h3>
+﻿<ul>
+  <li>
+    <p>
+パラレルポートを使用するWigglerおよびRavenインタフェースの場合、デバッグセッションを開始すると、&quot;Unable to load device driver&quot;というエラーメッセージが表示されます。深刻なエラーではなく、[OK]をクリックしてデバッグを続行できます。<br>[EW19352]
+    </p>
+  </li>
+
+  <li>
+MMU (ARM920Tなど)を持つARM9コアには、IAR C-SPYデバッガによる特殊な処理が必要です。仮想アドレス空間にアクセスするには、Macraigorで定義されたとおりの実装に、RAM内のワークスペースとして小さいメモリバッファが必要です。<P>
+
+C-SPYドライバは、スタックポインタの下にある64バイトのRAMを使用することで、使用可能なRAMを識別しようとします。これは、ターゲットアプリケーションが停止したときにのみ実行されます。アルゴリズムは強固ではないため、失敗する場合もあります。失敗したときの一般的なエラーメッセージは、&quot;Target Error: Register Buffer Error&quot;です。<br>
+
+例：<br><br><code>--mac_set_temp_reg_buffer=0x400FFC0</code><br><br>
+
+これは、物理アドレス<code>0x400ffc0</code>で始まる64バイトのメモリを、JTAGインタフェースドライバによる内部のスクラッチ領域として使用します。<br>
+
+RAMを検出するアルゴリズムが失敗した場合、<code>--mac_set_temp_reg_buffer</code>オプションを使用すれば、物理アドレスを手動で提供できます。
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+<a name="pcorr" id="pcorr"></a>プログラム修正
+        </h3>
+﻿<ul>
+  <li>
+なし。
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+<a name="manuals" id="manuals"></a>ユーザガイドの訂正
+        </h3>
+﻿<ul>
+<li>なし。</li>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+<a name="misc" id="misc"></a>その他
+        </h3>
+﻿<ul>
+<li>なし。</li>
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+<a name="history" id="history"></a>リリース履歴
+        </h3>
+﻿<h4>V6.21 2011-07-05</h4>
+<b>プログラム修正</b>
+ 
+<ul>
+<li>なし。</li>
+</ul>
+ 
+ 
+<b>新機能</b>
+ 
+<ul>
+<li>なし。</li>
+</ul>
+ 
+ 
+<h4>V6.20 2011-04-29</h4>
+<b>プログラム修正</b>
+  <ul>
+  <li>
+なし。
+  </li>
+  </ul>
+
+<b>新機能</b>
+  <ul>
+  <li>
+なし。
+  </li>
+  </ul>
+
+<h4>V6.10 2010-11-04</h4>
+<b>プログラム修正</b>
+  <ul>
+  <li>
+なし。
+  </li>
+  </ul>
+
+<b>新機能</b>
+  <ul>
+  <li>
+なし。
+  </li>
+  </ul>
+
+<h4>V5.50 2010-04-21 </h4>
+<b>プログラム修正</b>
+  <ul>
+  <li>
+    <p>
+Macraigor WigglerデバッガがSharp LH79524と併用できるようになりました。<br>[EW19382]
+    </p>
+  </li>
+
+  </ul>
+
+<b>新機能</b>
+  <ul>
+  <li>
+なし。
+  </li>
+  </ul>
+
+<h4>V5.41 2009-12-14 </h4>
+<b>プログラム修正</b>
+  <ul>
+    <li>
+なし。
+    </li>
+  </ul>
+
+<b>新機能</b>
+  <ul>
+    <li>
+なし。
+    </li>
+  </ul>
+
+<h4>V5.40 2009-07-10 </h4>
+<b>プログラム修正</b>
+  <ul>
+    <li>
+なし。
+    </li>
+  </ul>
+<b>新機能</b>
+  <ul>
+    <li>
+なし。
+    </li>
+  </ul>
+
+<h4>V5.30 2009-01-23 </h4>
+<b>プログラム修正</b>
+
+<ul>
+  <li>
+なし。
+  </li>
+</ul>
+
+<b>新機能</b>
+<ul>
+  <li>
+なし。
+  </li>
+</ul>
+
+<h4>V5.20 2008-06-24 </h4>
+<b>プログラム修正</b>
+
+<ul>
+  <li>
+    <p>
+Cortex-Mで、ハードウェアブレークポイントが消去されるときに削除されませんでした。これは、ブレークポイントが1つだけ設定されたときに発生していました。<br>[EW20251]
+    </p>
+  </li>
+  <li>
+    <p>
+[逆アセンブリ]ウィンドウが、割込みベクタを0x00-0x20で表示中にVICAddressレジスタなど (0xFFFFFF00 - 0xFFFFFFFF )へのアクセスを作成していました。これによって、IRQがトリガされなくなっていました。<br>[EW20160]
+    </p>
+  </li>
+</ul>
+
+<b>新機能</b>
+<ul>
+  <li>
+なし。
+  </li>
+</ul>
+
+<h4>V5.11 2007-11-28</h4>
+
+<b>プログラム修正</b>
+<ul>
+  <li>
+    <p>
+非常に小さいアプリケーションをダウンロードすると、クラッシュすることがありました。
+    </p>
+  </li>
+  <li>
+    <p>
+複数のターゲットオプションを持つJTAGスキャンチェーンが正しく機能しませんでした。
+    </p>
+  </li>
+  <li>
+    <p>
+<b>実行中プログラムにアタッチする</b>オプションを使用していて、スタックプラグインが有効な場合に、デバッグセッションを終了するとデバッガがクラッシュしました。<br>[EW19229]
+    </p>
+  </li>
+</ul>
+
+<b>新機能</b>
+<ul>
+  <li>
+ARM11およびCortex-M3のサポートが追加されました。
+  </li>
+</ul>
+
+<h4>V5.10 2007-07-02</h4>
+
+<b>プログラム修正</b>
+<ul>
+  <li>
+CPU ARM7TDMI-Sを使用すると、実行を開始するときに&quot;Invalid Register Code&quot;というエラーメッセージが出力されました。<br>[EW19160]
+  </li>
+</ul>
+
+<b>新機能</b>
+<ul>
+  <li>
+データブレークポイント。詳しくは、<a href="../EWARM_DebuggingGuide.JPN.pdf">EWARMデバッグガイド</a>の<i>パート6：C-SPY ハードウェアデバッガシステム</i>を参照してください。
+  </li>
+</ul>
+    </div>
+</body>
+</html>

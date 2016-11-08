@@ -1,0 +1,3410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: ewTARGET.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the ARM IAR Embedded Workbench product package</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for the ARM IAR Embedded Workbench product package version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a> | Release notes
+        for the ARM IAR Embedded Workbench product package
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+<ul>
+  <li>
+    <b>Device selection</b><br> 
+    You can select the device you are using, which means that the core, the default
+    <code>ddf</code> file, and the flash loader (if available) are selected automatically.
+    This is possible for all devices that are supported with header (<code>.h</code>)
+    files and device definition (<code>.ddf</code>) files.
+  </li>
+  <p>
+  <li><p><a name="upgrade"><b>Upgrade information</b></a></p>
+    <ul>
+      <li><p><b>Before you install</b><br>
+        To avoid any problems, do not install the 6.x release in a
+        directory where you have previously installed a 5.x, 4.x, 3.x or 2.x version of
+        IAR Embedded Workbench for ARM.<br>
+        Either uninstall an earlier product, or install this release in
+        a separate directory. However, as before, it is possible to install
+        different products, all using version 6.x of the generic IDE
+        component, in the same root directory.
+      </p></li>
+
+      <li><p><b>Migrating your application</b><br>
+        If you are migrating from version 5.x, 4.x or 3.x to this version, we
+        recommend that you read the <a
+        href="../EWARM_MigrationGuide.ENU.pdf">ARM IAR Embedded Workbench
+        Migration Guide</a>.<br>
+        Additional general information can be found in the technical note 
+        <a href="http://supp.iar.com/Support/?Note=40394">40394</a>.<br>
+        Stacks are required to be aligned on 8-byte boundraries,
+        additional information specific to stack alignment can be found in the technical note 
+        <a href="http://supp.iar.com/Support/?Note=96045">96045</a>.
+      </p></li>
+
+      <li><p><b>New Freescale Kinetis part numbering scheme</b><br>
+        Version 6.30 implements the new Freescale Kinetis part numbering scheme.
+        The following old device selections will be automatically converted to the new part numbering scheme:
+        <ul>
+          <li>K40Xxxx &rArr; MK40DX256Zxxx10</li>
+          <li>K53Xxxx &rArr; MK53DN512Zxxx10</li>
+          <li>K60Xxxx &rArr; MK60DN512Zxxx10</li>
+        </ul>
+        Other devices must be manually converted.
+      </p></li>
+    </ul>
+  </li>
+  <li><p>
+    <b>Using Cortex-R4 in big-endian mode</b><br>
+    When big-endian is selected for a Cortex-R4 core, the
+    default big endian mode is BE32. The normal big endian mode for Cortex-R4 is
+    BE8, so make sure that you select the correct mode for your target.
+  </p></li>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+<ul>
+  <li><p> 
+    If the Memory window displays the middle of a selection that is larger
+    than the Memory window and the formatting (1x, 2x ,4x) is changed, the
+    Memory window scrolls to the bottom of the selection.<br>
+    [EW13204]
+  </p></li>
+
+  <li><p> 
+    IAR Embedded Workbench shortcut keys do not work in the Terminal I/O
+    window.<br>
+    [EW14290]
+  </p></li>
+
+  <li><p> 
+    The Build message window might fail to scroll to the bottom when you build
+    a project.  This occurs for certain combinations of message line
+    length and window width if a line must be wrapped.  A simple
+    workaround is to make the width of the IDE window larger or
+    smaller.<br>
+    [EW15473]
+  </p></li>
+
+  <li><p>
+    There is no vertical scroll bar in the left window when you split an editor window vertically.<br>
+    [EW15588]
+  </p></li>
+
+  <li><p>
+    If the compiler optimization option <b>Instruction scheduling</b> was specified,
+    it is lost when you convert a project from version 3.xx to 4.xx.<br>
+    [EW15605]
+  </p></li>
+
+  <li><p> 
+    You cannot select the last line in a file just by clicking
+    on the line number. This is possible for all other lines.<br>
+    [EW15705]
+  </p></li>
+
+  <li><p>
+    The read/modify/write operation on some NXP LPC I/O registers
+    defined in the <code>iolpcxxxx.h</code> files might cause reading and writing
+    of undefined bits.<br>
+    [EW16180]
+  </p></li>
+
+  <li><p>
+    The IAR Embedded Workbench IDE postbuild action freezes when trying to run a GUI-based application.<br>
+    A workaround is to prepend the postbuild command line with: <code>cmd /c</code>.<br>
+    [EW18171]
+  </p></li>
+
+  <li><p>
+    A missing debug driver GUI DLL (WTD) might cause a warning dialog box to appear every time a project
+    is opened.<br>
+    [EW18350]
+  </p></li>
+
+  <li><p>
+    If the IAR Embedded Workbench IDE window is minimized during flash download, the sizes of the
+    subwindows change and become very small.<br>
+    [EW18642]
+  </p></li>
+
+  <li><p>
+    The<code> MS </code>definition in<code> tms470r1b1m_bit_definitions.h</code>, 
+    conflicts with the<code> MS </code>definition in<code> iotms470r1b1m.h</code>.<br>
+    [EW18691]
+  </p></li>
+
+  <li><p>
+    Moving an undocked window to another screen on a dual monitor system causes resizing problems.<br>
+    [EW19039]
+  </p></li>
+
+  <li><p>
+    The IDE fails to expand <code>$TARGET_BNAME$</code> when using it in the call of
+    an external tool and the output file doesn't exist.<br>
+    [EW21158, EW21197]
+  </p></li>
+
+  <li><p>
+    Directing the output from the output converter to a file with extension <code>.out</code> causes EWARM to hang.<br>
+    [EW21166]
+  </p></li>
+
+  <li><p>
+    The TDGC peripheral is missing from the header and ddf files for the Atmel AT91SAM9263.<br>
+    [EW21551]
+  </p></li>
+
+  <li><p> 
+    The EWARM may crash with a protection fault, or display an empty workspace window, if ClearCase 7.1 is installed
+    on the same computer. Read more in technical note <a href="http://supp.iar.com/Support/?Note=63639">63639</a>.<br>
+    [EW21945]
+  </p></li>
+
+  <li><p> 
+    The example projects for TI RDK-IDM do not work on Rev C16 boards.<br>
+    [EW21960]
+  </p></li>
+
+  <li><p> 
+    <b>ctrl-v</b> and <b>ctrl-c</b> have problems when used with the Online Help system.
+    As a workaround you can use Copy and Paste from the context menu.<br>
+    [EW22313]
+  </p></li>
+
+  <li><p> 
+    If <b>Tools&gt;Options&gt;Project&gt;Generate browse information</b> is selected, then the
+    EWARM will hang if no license is found, for example if no license dongle is inserted or if
+    no license server is found.<br>
+    [EW22350]
+  </p></li>
+
+  <li><p> 
+    If output converter settings are changed in the IAR Embedded Workbench IDE, and the IDE is kept running,
+    then an attempt to run <code>IarBuild.exe</code> will terminate silently with exit code 1.<br>
+    [EW22481]
+  </p></li>
+
+  <li><p> 
+    The context menu <b>Go to definition</b> might fail if the function is defined in a header file.<br>
+    [EW22518,EW22612]
+  </p></li>
+
+  <li><p> 
+    Sometimes the value of a float type placed in a packed struct is displayed incorrectly.<br>
+    [EW22529]
+  </p></li>
+
+  <li><p> 
+    A file corruption problem might cause dependency files (filename extension <code>.dep</code>) to
+    describe some include files as files that generate output files (like, for example, <code>.c</code>
+    and <code>.cpp</code> files). This will cause the IAR Embedded Workbench IDE to terminate unexpectedly when:<br>
+    - you perform a <b>Find in Files</b> search with the <b>Project files and user include files</b> option selected<br>
+    or<br>
+    - you choose the editor window context menu command <b>Open file.h</b> on an <code>#include "file.h"</code> line.<br>
+    [EW22792]
+  </p></li>
+
+  <li><p> 
+    Having a shift-left operator within a macro definition, as in:<br>
+    <code>#define RUN_LED  1<<10</code><br>
+    can cause a number of functions following such a definition to be omitted from the editor <b>Go to Function</b>
+    window.<br>
+    [EW22809]
+  </p></li>
+
+  <li><p>
+    If the <b>Linker configuration file editor</b> fails to modify a linker configuration file because
+    it is read-only, this is not reported.<br>
+    [EW22817]
+  </p></li>
+
+  <li><p> 
+    If you have a network license and updates IAR Embedded Workbench to version 6.21 or later,
+    the license key must be re-entered in the installation wizard.<br>
+    [EW22831]
+  </p></li>
+
+  <li><p>
+    If you have IAR Embedded Workbench IDE installed for several 
+    different tool chains in the same directory, the IDE might be in mixed 
+    languages if the tool chains are available in different languages.
+  </p></li>
+
+  <li><p>
+    The Event log mechanism based on ITM is not supported when using the ST ST-LINK debug probe. Support will be added in the next update.
+  </p></li>
+
+  <li><p>
+    <a href="../../../common/doc/KnownProblems.pdf">IAR Embedded Workbench IDE - 
+    Known problems</a>
+  </p></li>
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+<li>
+  <p>
+    The source browser no longer consumes memory without returning it.<br>
+    [EW22527]
+  </p>
+</li>
+
+<li>
+  <p>
+    C++ options are no longer used when <code>--c++</code> isn't used.<br>
+    [EW22532]
+  </p>
+</li>
+
+<li>
+  <p>
+    Files in editor panes are now restored correctly.<br>
+    [EW22602]
+  </p>
+</li>
+
+<li>
+  <p>
+    Some of the linker configuration files for Freescale Kinetis no longer handle
+    the border between the RAM banks at 0x20000000 incorrectly.<br>
+    [EW22635]
+  </p>
+</li>
+
+<li>
+  <p>
+    The setup for Fujitsu MB9EF126 no longer specifies the wrong ARM core.<br>
+    [EW22661]
+  </p>
+</li>
+
+<li>
+  <p>
+    The getting started example for Phytec LPC3180 now works with newer versions of the NAND memory.<br>
+    [EW22666]
+  </p>
+</li>
+
+<li>
+  <p>
+    Definitions for CCR3/CCR4 are no longer missing in the <code>iostm32l151xx.ddf</code> file.<br>
+    [EW22680]
+  </p>
+</li>
+
+<li>
+  <p>
+    <code>RCC_APB2LPENR</code> and <code>RCC_APB1LPENR</code> are now correctly named in the header files for STM32L15x.<br>
+    [EW22683]
+  </p>
+</li>
+<li>
+  <p>
+    TI Stellaris examples with bootloaders at address zero now work also when debugging.<br>
+    [EW22753]
+  </p>
+</li>
+
+<li>
+  <p> 
+    In EWARM 6.30.3:<br>
+    The <b>Overwrite old file</b> option on the <b>Tools&gt;Options&gt;Messages</b> options page
+    now works also when the path given in the log file text box contains an argument variable,
+    for example <code>$PROJ_DIR$</code>.<br>
+    [EW22709]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    Function-like macros with zero parameters caused the Source Browser to lose the
+    definition following the macro. For example, after this definition:
+    <pre>    #define MACRO() macro_body</pre>
+    <code>x</code> in the following lines would not be recognized the Source Browser:
+    <pre>    MACRO()
+    int x;</pre>
+    This has been corrected.<br>
+    [EW22794]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The debugger device description file for Freescale Kinetis K20 is now included.<br>
+    [EW22811]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The My Pages link in the Information Center now opens My Pages in an external web browser.<br>
+    [EW22813]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The <code>TZIC_PRIOMASK</code> register in the header file <code>iomcimx535.h</code> has the correct address now.<br>
+    [EW22821]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The <code>PWR_CR/LPSDSR</code> bit in the header file <code>iostm32L151xx.h</code> has the correct name now.<br>
+    [EW22835]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The VFP option was greyed out for Freescale Kinetis devices with floating point unit.<br>
+    [EW22860]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    A number of register definitions were missing from the Analog devices header
+    files ioaduc7023.h, ioaduc7060.h and ioaduc7122.h.<br>
+    [EW22863]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.4:<br>
+    The LPC2468 simple examples wrongly enabled IRQ before enabling the VIC.<br>
+    [EW22870]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.4:<br>
+    Some of the STM32f4xx examples wrongly configured the SWO clock to 120 MHz, it is now set to the correct value 150 MHz.<br>
+    [EW22904]
+  </p>
+</li>
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+<ul>
+
+  <b>Adding device support</b><br>
+    A set of documents is available that describes how to add additional
+    device support to IAR Embedded Workbench for ARM.<br><br>
+
+        <table border="1" cellpadding="2" cellspacing="0"
+        bordercolor="#808080" bordercolordark="#FFDE00"
+        bordercolorlight="#808080" ID="Table2">
+            <tr>
+                <td align="center"><p align="left"><font size="2"><b>Document</b></font></p>
+                </td>
+                <td align="center"><font size="2"><b>Description</b></font></td>
+                <td align="center"><font size="2"><b>Template</b></font></td>
+            </tr>
+            <tr>
+                <td><font size="2">Flash loader</font></td>
+                <td align="center"><a
+                href="../FlashLoaderGuide.ENU.pdf"><font
+                size="2"><img src="images/pdf.gif" border="0" width="25"
+                height="25"></font></a></td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td><font size="2">Device header format</font></td>
+                <td align="center"><a
+                href="../EWARM_HeaderFormat.pdf"><font
+                size="2"><img src="images/pdf.gif" border="0" width="25"
+                height="25"></font></a></td>
+                <td align="center"><a
+                href="../EWARM_HeaderTemplate.pdf"><font
+                size="2"><img src="images/pdf.gif" border="0" width="25"
+                height="25"></font></a></td>
+            </tr>
+            <tr>
+                <td><font size="2">DDF format</font></td>
+                <td align="center"><a
+                href="../EWARM_DDFFormat.pdf"><font
+                size="2"><img src="images/pdf.gif" border="0" width="25"
+                height="25"></font></a></td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+  <p>
+
+  <b>Running GUI-based programs from the project manager custom build rules</b><br>
+    To run a GUI-based program from a custom build rule, the program must be wrapped
+    with <code>cmd /c</code>, for example:<br>
+    <code>cmd /c prog.exe $PROJ_PATH$</code>.
+  <p>
+
+  <b>Adding the paths of project header files to the build</b><br>
+    To activate this feature, add the special variable <code>$PATHS_OF_PROJECT_HEADER_FILES$</code>
+    on the Extra options page in the C/C++ compiler category of the Project Options dialog.
+    The result is that the directory path of each member header file in the project
+    is added to the command line using the -I command line option.
+    For example, if the project contains the header files <code>C:/a/fa.h</code> and <code>C:/b/fb.h</code>,
+    the compiler command line will get the additional arguments <code>-IC:/a/</code> and <code>-IC:/b/</code>. 
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+  <h4>V6.21 2011-07-05</h4>
+  <b>Program corrections</b>
+ 
+<ul>
+
+<li>
+  <p>
+    A build problem where <code>$VARIABLES$</code>, in some circumstances, were not expanded relative to
+    the configuration actually being built has been corrected.<br>
+    [EW22400]
+  </p>
+</li>
+
+<li>
+  <p>
+    The <b>Undo Checkout</b> command on the Version Control System submenu for SCC now works correctly.<br>
+    [EW22462]
+  </p>
+</li>
+
+<li>
+  <p>
+    Wrong RCC_AHBRSTR definition in iostm32L151xx.h and iostm32L152xx.h.<br>
+    [EW22514]
+  </p>
+</li>
+
+<li><p>
+  In EWARM 6.21.2:<br>
+  Corrected some register definitions in iostm32f207xx.h.<br>
+  [EW22577]
+</p></li>
+
+<li><p>
+  In EWARM 6.21.2:<br>
+  Missing GPIOH definition in iostm32L151xx.h and iostm32L152xx.h.<br>
+  [EW22580]
+</p></li>
+
+<li><p>
+  In EWARM 6.21.2:<br>
+  The device configuration file for STM32F205Vx was missing.<br>
+  [EW22587]
+</p></li>
+
+<li><p>
+  In EWARM 6.21.2:<br>
+  Corrected some register definitions in ios3fn41f.h.<br>
+  [EW22588]
+</p></li>
+
+<li><p>
+  In EWARM 6.21.2:<br>
+  Selecting Hilscher Net.x50 wrongly used ARM926 as core, it now uses the correct core ARM966.<br>
+  [EW22600]
+</p></li>
+
+<li><p>
+  In EWARM 6.21.3:<br>
+  The Freescale Kinetis K70 flashloader did not work correctly.
+</p></li>
+
+  <li><p>
+    <a href="../../../common/doc/CorrectedProblems.pdf">IAR Embedded Workbench IDE - 
+    Corrected problems</a>
+  </p></li>
+</ul> 
+ 
+  <b>New features</b>
+ 
+<ul>
+See the <a href="readme.ENU.html">top level release note document</a> for a list of new features.
+</ul> 
+ 
+<h4>V6.20 2011-04-29</h4>
+<b>Program corrections</b>
+<ul>
+  <li><p>The USB VirtualCom driver now works on Windows 7.<br/>
+    [EW22181]
+  </p></li>
+  <li><p> 
+    The register HcBCR0 has been added to the device specific files for Toshiba TMPA900CM.<br/>
+    [EW22264]
+  </p></li>
+  <li><p>
+    <code>IarBuild.exe</code> can now run the same command lines in <b>Project Options&gt;Build Actions</b>
+    as the IAR Embedded Workbench IDE.<br/>
+    [EW22293]
+  </p></li>
+  <li><p> 
+    The EXTI registers have been added to the device specific files for ST STM32F2xx.<br/>
+    [EW22288]
+  </p></li>
+  <li><p>
+    The dialog box to choose a directory for <b>Find in Files</b> is now displayed with the correct dialog box title and
+    button name.<br/>
+    [EW22304]
+  </p></li>
+  <li><p>
+    If two or more IAR Embedded Workbench toolchains (for different microcontroller architectures)
+    were installed in the same directory, and some of the toolchains were only available in English,
+    launching IAR Embedded Workbench in a non-English language meant that the Information Center
+    was not available for English-only toolchains. This has been corrected.<br/>
+    [EW22341]
+  </p></li>
+  <li><p> 
+    The definition of EECLKDIV in the device-specific files for NXP LPC1778/LPC1788 has been corrected.<br/>
+    [EW22358]
+  </p></li>
+  <li><p> 
+    The block layout in the ST STM32F105xB flashloader has been corrected.<br/>
+    [EW22366]
+  </p></li>
+  <li><p> 
+    The definition of TSI in the device specific files for Freescale K60 has been corrected.<br/>
+    [EW22388]
+  </p></li>
+  <li><p> 
+    Non-existent SPI registers defined in the device-specific files for Freescale K60 have been removed.<br/>
+    [EW22395]
+  </p></li>
+  <li><p>
+    In EWARM 6.20.2:<br/>
+    The RAM configuration in the Freescale Kinetis getting started example is now correct.<br/>
+    [EW22428]
+  </p></li>
+  <li><p>
+    In EWARM 6.20.2:<br/>
+    The correct linker configuration file is now specified in the Freescale K60 getting started example.<br/>
+    [EW22429]
+  </p></li>
+  <li><p>
+    In EWARM 6.20.2:<br/>
+    A syntax error in the jlink script file for OMAP-L138 has been corrected.<br/>
+    [EW22431]
+  </p></li>
+  <li><p>
+    In EWARM 6.20.4:<br/>
+    Wrong register definitions for the Samsung S3FN60D device.<br/>
+    [EW22466]
+  </p></li>
+  <li><p>
+    In EWARM 6.20.4:<br/>
+    Wrong memory map specification in the linker files for The Samsung S3FN21F, S3FN41F and S3FN60D devices.<br/>
+    [EW22467]
+  </p></li>
+  </ul>
+<b>New features</b>
+  <ul>
+  <li><p><b>DSP library for Cortex-M3/M4</b><br/>
+    The ARM CMSIS DSP library is now supported and delivered with the product.
+    The library comes with a powerful collection of DSP functionality;
+    FIR/IIR filters, FFT, DCT, Clarke and Park transforms, PID controller and much more.
+    See the
+    <a href="../../CMSIS/Documentation/DSP_Lib/html/index.html">CMSIS DSP Software Library documentation</a>
+    for more information.
+    <br/>
+    The CMSIS support is enabled from
+    <b>Project&gt;Options...&gt;General Options&gt;Library Configuration</b>,
+    CMSIS include paths and the DSP library will automatically be included when enabled.
+  </p></li>
+  <li><p><b>Cortex-A8</b><br/>
+    Support for code generation for and debugging of ARM Cortex-A8 cores.
+  </p></li>
+  <li><p><b>Cortex-A9</b><br/>
+    Support for code generation for and debugging of ARM Cortex-A9 cores.
+  </p></li>
+  <li><p><b>Subversion</b><br/>
+    The version control integration has been extended with support for Subversion (SVN).
+  </p></li>
+  <li><p><b>Power debugging enhancements</b><br/>
+     <ul>
+      <li>The J-Link Ultra now supports sampling rates up to 10 kHz.</li>
+      <li>Power data can be filtered based on a threshold value.</li>
+      <li>Execution can be stopped based on a threshold value (power breakpoint).</li>
+      <li>Power samples can be logged to a file, either the collected data up to that point or live acquisition.</li>
+    </ul>
+  </p></li>
+  <li><p><b>Automatic selection of printf/scanf formatter</b><br/>
+    The compiler/linker will parse the printf/scanf format specifiers and select the smallest possible formatter from the library.
+  </p></li>
+  <li><p><b>Virtual Function Elimination (VFE)</b><br/>
+    The compiler/linker will optimize C++ applications and remove unused virtual functions.
+  </p></li>
+  <li><p><b>RTOS context sensitive help</b><br/>
+    Context-sensitive help is available for some RTOS'es, and gives easy access to descriptions of API functions.
+  </p></li>
+
+</ul>
+<h4>V6.10 2010-11-04</h4>
+<b>Program corrections</b>
+<ul>
+<li><p> 
+  The <code>AT91C_ISRAM_SIZE</code> definition in the Atmel header file <code>ioat9sam7se512.h</code> was incorrect,
+  the correct value is <code>0x00008000</code>.<br/>
+  [EW21581]
+</p></li>
+
+<li>
+  <p>
+    A file path exceeding the <code>_MAX_PATH</code> Windows limit could cause the
+    IAR Embedded Workbench to freeze or quit unexpectedly. Now such situatations
+    are detected and flagged as errors.<br/>
+    [EW21645]
+  </p>
+</li>
+
+<li>
+  <p>
+    Using a path containing <b>..</b> to defined output directories could make it
+    impossible to start the debugger. This has been corrected.<br/>
+    [EW21839]
+  </p>
+</li>
+
+<li>
+  <p>
+    The DLIB template project is now possible to build without modifications.<br/>
+    [EW21902]
+  </p>
+</li>
+
+<li><p> 
+    The register bit definition <code>ADEN</code> has been added to <code>iotmpm370FxFG.h</code>.<br/>
+    [EW21994]
+</p></li>
+
+<li>
+  <p>
+    The <b>Project&gt;Options...&gt;Linker&gt;Output&gt;Output file</b> text box accepted a file path
+    instead of just a filename which could lead to project building problems. This
+    has been corrected and the option has been renamed.<br/>
+    [EW22004]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    Incorrect function description for <code>GPIO_SetInterrupt()</code> in
+    <code>examples\NXP\LPC13xx\LPC1300CMSIS\Drivers\source\lpc13xx_gpio.c</code>.<br/>
+    [EW22086]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    Incorrect register width definitions in <code>iolpc3250.h</code>.<br/>
+    [EW22114,EW22154]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    The IDE no longer terminates unexpectedly when changing editor font type and size.<br/>
+    [EW22115]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    Missing volatile declarations in
+    <code>examples\ST\STM32F10x\IAR-STM32F107VC-SK\Accelerometer_Demo\modules\i2c1_drv.c</code>
+    caused application error at high optimization levels.<br/>
+    [EW22139]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    The Atmel AT91SAM9260 TWI_SR register bits EOSACC, SCLWS and ARBLST was missing in the processor support files.<br/>
+    [EW20728]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    The Atmel AT91SAM9260 TWI_SR register bits TXBUFF, RXBUFF, ENDTX, ENDRX
+    was defined in the processor support files, but they do not exist in real hardware.<br/>
+    [EW20729]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    The IDE command <b>Stop Build</b> now works properly when it is applied to pre- or post
+    build actions when they are started in a new command shell.<br/>
+    [EW22075]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    Large and complex projects no longer cause the IAR Embedded Workbench source browser to freeze.<br/>
+    [EW22126]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    The flashloader did not work with AT91SAM7S256 revision C.<br/>
+    [EW22165]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    Recursive definitions of a preprocessor macro no longer causes IAR Embedded Workbench to
+    terminate abnormally.<br/>
+    [EW22177]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    The numbers of errors and warnings reported at end of build are now correct.<br/>
+    [EW22202]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br/>
+    The header file iolpc3250.h failed the MISRA-C check.<br/>
+    [EW22268]
+  </p>
+</li>
+  </ul>
+<b>New features</b>
+<ul>
+<li><p><b>Power debugging</b><br/>
+Power debugging is a methodology that provides software developers with information about
+how the software implementation in an embedded system affects system level power consumption.
+By coupling source code to power consumption, testing and tuning for power optimization is enabled.
+The debug probe samples the momentary current drawn by the system and feeds it to
+the debugger where the measured current is synchronized with time stamped program counter values.
+This allows the debugger to present power consumption directly correlated to the source code. 
+The debugger supports power data from the following sources:
+<ul>
+  <li>J-Link Ultra<br/>
+	  Power data is measured with high accuracy at the board level.
+	  A future adapter will be available in Q2 2011 to measure power at the MCU level.
+	  Supports calibration.</li>
+  <li>J-Link<br/>
+	  Power data is measured with low accuracy at the board level.
+	  Does not support calibration.</li>
+  <li>The Energy Micro EFM32 Gecko development and starter kits<br/>
+	  They have a J-Link compatible debug probe integrated on-board. Power data is measured with high accuracy at the MCU level.
+	  Does not need calibration.</li>
+</ul>
+<p></p>
+Power data can be visualized as a power log, a graph on a time scale, or in the function profiler as energy consumption.<br/>
+More information can be found in
+<a href="../EWARM_DebuggingGuide.ENU.pdf">IAR Embedded Workbench&reg; C-SPY Debugging Guide</a>
+</p></li>
+<li><p><b>C-SPY Debugging Guide introduced</b><br/>
+ A new user guide called C-SPY Debugging Guide has been introduced. The purpose of this guide is to help you fully use
+ the features in the IAR C-SPY Debugger for debugging your application.
+</p></li>
+<li><p><b>C99</b><br/>
+ The product now uses the current C standard defined in 1999, known as C99, as the default C language.
+</p></li>
+<li><p><b>C++</b><br/>
+ Support for the C++ language has been added. By default, it fully supports the ISO/IEC 14882:2003 C++ standard.
+ The EC++ and EEC++ dialects are still available.
+</p></li>
+<li><p><b>Cortex-A5</b><br/>
+ Support for code generation and debugging of ARM Cortex-A5 cores.
+</p></li>
+<li><p><b>RTOS integration</b><br/>
+ Product information, evaluation versions, and example projects for third party RTOS and middleware solutions 
+ are now integrated into IAR Embedded Workbench for easy evaluation. RTOS and middleware information and example projects can 
+ be accesses via IAR Information Center.
+</p></li>
+<li><p><b>C library</b><br/>
+ The DLIB library now has improved support for threaded environments.
+</p></li>
+<li><p><b>Floating point optimizations</b><br/>
+ The compiler can now optimize floating-point expressions better by using the option <code>--relaxed_fp</code>.
+ If enabled, the compiler tries to use a smaller floating-point type in floating-point expressions.
+</p></li>
+<li><p><b>CMSIS SVD</b><br/>
+ The debugger supports the CMSIS System View Description files to display peripheral register content.
+</p></li>
+<li><p><b>P&E Micro JTAG probes</b><br/>
+ The P&E Micro Multilink, Cyclone and OSJTAG are supported. Read about how to configure C-SPY to
+ use a P&E Micro probe in <a href="../PEMicroSettings.pdf">Configuring the IAR Workbench Debugger to use a P&E Microcomputer Systems Interface</a>.
+</p></li>
+<li><p><b>Freescale MQX plugin</b><br/>
+ The Freescale MQX kernel awareness plugin is now included in the product.
+</p></li>
+<li><p><b>FreeRTOS/OPENRTOS plugin</b><br/>
+ The FreeRTOS/OPENRTOS kernel awareness plugin is now included in the product.
+</p></li>
+</ul>
+
+<h4>V5.50 2010-04-21 </h4>
+<b>Program corrections</b>
+<ul>
+  <li><p> 
+    The interrupt handler used in Atmel ARM7 examples did not align the stack on 8 byte boundaries as required by the ARM EABI.<br/>
+    [EW21302]
+  </p></li>
+
+  <li><p> 
+    Incorrect content in the Atmel header files <code>ioat91sam3s1.h</code>, <code>ioat91sam3s2.h</code> and <code>ioat91sam3s4.h</code>.<br/>
+    [EW21511]
+  </p></li>
+
+  <li><p> 
+    Incorrect <code>ADC2_SMPR2</code> and <code>ADC3_SMPR2</code> definitions in the ST header files
+    <code>iostm32f10xx4.h</code>, <code>iostm32f105xx.h</code>, <code>iostm32f10xxB.h</code>, <code>iostm32f10xxE.h</code> and <code>iostm32f107xx.h</code><br/>
+    [EW21667]
+  </p></li>
+
+  <li><p> 
+    Incorrect definition of <code>_AT91S_SYS</code> in the Atmel header file <code>ioat91sam9260.h</code>.<br/>
+    [EW21719]
+  </p></li>
+
+  <li><p> 
+    The flash loader for TI TMS470R1B1M failed to write in the address range <code>0x70000-0x7ffff</code>.<br/>
+    [EW21722]
+  </p></li>
+
+  <li><p>
+    In EWARM 5.50.5:<br/>
+    Go to definition now works for registers defined in device header files
+    (using <code>__IO_REG*</code> macros).<br/>
+    [EW21755]
+  </p></li>
+
+  <li><p>
+    In EWARM 5.50.5:<br/>
+    The option <code>Cortex-M4F</code> in
+    <b>Project&gt;Options...&gt;General Options&gt;Target&gt;Core</b>
+    now works with the Assembler.<br/>
+    [EW21772]
+  </p></li>
+
+  <li><p>
+    In EWARM 5.50.5:<br/>
+    The LPC2923 flashloader did not work correctly.<br/>
+    [EW21787]
+  </p></li>
+
+  <li><p>
+    In EWARM 5.50.5:<br/>
+    The USB register base address was wrong in iolpc2923.h.<br/>
+    [EW21788]
+  </p></li>
+
+  <li><p>
+    In EWARM 5.50.5:<br/>
+    The Toshiba TMPM380-SK examples wrongly specified the RAM size to 32 kbyte instead of the correct value 16 kbyte.<br/>
+    [EW21867]
+  </p></li>
+
+  <li><p>
+    In EWARM 5.50.6:<br/>
+    A corrupt settings file (<code>.wsdt</code>) no longer causes IAR Embedded Workbench to terminate abnormally.<br/>
+    [EW21750]
+  </p></li>
+
+  <li>
+    <p>
+      In EWARM 5.50.6:<br/>
+      Fixed problem with the NUMONYX M29W640GT flash on Toshiba TMPA900 board.<br/>
+      [EWARM-1015]
+    </p>
+  </li>
+  </ul>
+<b>New features</b>
+<ul>
+<li><p><b>Cortex-M4</b><br/>
+ Support for code generation and debugging of ARM Cortex-M4 cores.
+</p></li>
+<li><p><b>Trace enhancements</b><br/>
+ A new Timeline window allows correlated visualization of call stack, interrupt log, and data log values plotted against time.
+</p></li>
+<li><p><b>Position-independent code and data</b><br/>
+ The compiler can now optionally generate position-independent code and/or position-independent data.
+</p></li>
+<li><p><b>C library floating-point optimizations</b><br/>
+ A number of C library floating-point functions have been optimized for speed and size.
+</p></li>
+<li><p><b>CP15 register display</b><br/>
+ The debugger can display CP15 coprocessor registers when using the J-Link/J-trace debug probe.
+</p></li>
+<li><p><b>SC000</b><br/>
+ Support for code generation and debugging of ARM SC000 secure cores.
+</p></li>
+</ul>
+
+<h4>V5.41 2009-12-14 </h4>
+<b>Program corrections</b>
+<ul>
+    <li>
+      <p>
+        When switching from multi-file compilation mode to single-file compilation,
+        the error "Build error: Multiple tools write to the same file" is no longer issued.<br/>
+        [EW20855]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The tutorials are now configured to be built for Cortex-M3.<br/>
+        [EW21356]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        <code>INT_SSI</code> in <code>iomcimx27.h</code> is no longer defined incorrectly.<br/>
+        [EW21410]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Opening a context menu in the Editor window does no longer produce strange error entries in the
+        Debug Log window.<br/>
+        [EW21412]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Corrected some register definitions in <code>ioat91cap7.ddf</code>.<br/>
+        [EW21415]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The example <code>arm\examples\TexasInstruments\Stellaris\boards\rdk-bdc\qs-bdc</code>
+        does no longer select wrong device.<br/>
+        [EW21432]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The example <code>arm\examples\NXP\LPC17xx\IAR-LPC-1768-SK\simple\ADC</code> no longer fails to build when
+        configured to be interrupt driven.<br/>
+        [EW21465]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The default flash loader for LPC1764 is now correct.<br/>
+        [EW21486]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        Adding a file to a project will now use the current case of the filename, even if it was previously known with another case.<br/>
+        [EW21490]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        Some register definitions was missing in the header and ddf file for TI Stellaris LM3S5B91.<br/>
+        [EW21497]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        Some timer register definitions was missing in the header and ddf file for ST STM3210x.<br/>
+        [EW21548]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        The AHB mode GPIOJ and GPIOA-GPIOJ register definitions was missing in the header and ddf file for TI Stellaris LM3Sxxxx.<br/>
+        [EW21562]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        The PINSEL initialization code for NXP LPC2xxx examples disabled the trace port.<br/>
+        [EW21610]
+      </p>
+    </li>
+  </ul>
+<b>New features</b>
+<ul>
+<li><p><b>Cortex-R4F</b><br/>
+   Support for code generation and debugging of ARM Cortex-R4F cores with VFP unit.
+</p></li>
+<li><p><b>Cortex-M0 speed optimizations</b><br/>
+   Cortex-M0 code generation have been tuned to generate code with faster execution speed.
+</p></li>
+<li><p><b>Trace start and stop triggers</b><br/>
+   The instruction trace can be started and stopped based on conditions like code locations and data accesses.
+   This feature is now available for the J-Trace for ARM trace probe,
+   in addition to the J-Trace for Cortex-M3 trace probe.
+</p></li>
+<li><p><b>SWO support in J-Trace for Cortex-M3</b><br/>
+   The J-Trace for Cortex-M3 trace probe now supports SWO trace.
+   The firmware will be automatically upgraded by the debugger.
+</p></li>
+<li><p><b>Enhanced Find in files</b><br/>
+  Regular expressions can now be used in the Find in files search field.
+</p></li>
+<li><p><b>Workspace-relative paths</b><br/>
+   Workspace-relative paths are used for opened editor windows, which
+   makes it easier to move a workspace to a new location.
+</p></li>
+</ul>
+
+<h4>V5.40 2009-07-10 </h4>
+<b>Program corrections</b><br/>
+<ul>
+  <li><p>
+    An '#undef' preprocessor directive not followed by a preprocessor symbol no longer causes the IAR Embedded Workbench IDE to exit unexpectedly.<br/>
+    [EW20779]
+  </p></li>
+  <li><p>
+    Duplicate of problem (20812) corrected in EWARM 5.30.2:
+    A library project could not be built without a preceding Clean command.<br/>
+    [EW20814]
+  </p></li>
+  <li><p>
+    Flash loader specific arguments were not correctly documented.
+    Starting with this release, the documentation is provided as part of the flash loader edit mechanism.<br/>
+    [EW20848]
+  </p></li>
+  <li><p>
+    The LPC2468 uip_webserver example did not work stand-alone (without debugger control).<br/>
+    [EW20851]
+  </p></li>
+  <li><p>
+    iolpc2470.h has been completed with some bit definitions.<br/>
+    [EW20905]
+  </p></li>
+  <li><p>
+    The Atmel AT91SAM9XE512 flash loader for internal flash has been corrected.<br/>
+    [EW20908,20990]
+  </p></li>
+  <li><p>
+    A LPC2378 example included a function with an erroneous clock calculation.<br/>
+    [EW20930]
+  </p></li>
+  <li><p>
+    A problem that could cause an upgrade from EWARM 5.30.1 to 5.30.2 to fail has been corrected.<br/>
+    [EW20951]
+  </p></li>
+  <li><p>
+    The flash loader for AT91sam7xc512 could hang.<br/>
+    [EW20955]
+  </p></li>
+  <li><p>
+    The STM32 watchdog must be disabled to not interfere and make the flashloading fail.
+    Use the utility .../arm/bin/jlinkstm32.exe to disable the watchdog.<br/>
+    [EW20995]
+  </p></li>
+  <li><p>
+    When the startup screen copied an example application for TexasInstruments TMS470R1B1M,
+    the wrong folder was copied.<br/>
+    [EW20997]
+  </p></li>
+  <li><p>
+    Selecting LM3Sx6xx for the Luminary LM3S2616 failed because this chip only have 16 kbyte RAM.
+    The fix was to add LM3S2616 as a selectable device.<br/>
+    [EW21012]
+  </p></li>
+  <li><p>
+    The Atmel AT91SAM9263-EK project basic-sd-spi-project failed to copy external_libs
+    correctly when started from the startup screen.<br/>
+    [EW21013]
+  </p></li>
+  <li><p>
+    The Atmel AT91SAM9XE256  flash loader for internal flash has been corrected.<br/>
+    [EW21072]
+  </p></li>
+  <li><p>
+    The CRC calculation unit registers on the STM32 devices were missing.<br/>
+    [EW21078]
+  </p></li>
+  <li><p>
+    All device header files now use C style comments.<br/>
+    [EW21081]
+  </p></li>
+  <li><p>
+    In EWARM 5.40.4:<br/>
+    The Toshiba TMPM330 flash loader caused the error:<br/>
+    <code>Unknown or ambiguous symbol. __argc</code><br/>
+    to be displayed. The error did not affect the correctness of the flash download.<br/>
+    [EW21172]
+  </p></li>
+  <li><p>
+    In EWARM 5.40.4:<br/>
+    Some examples for ST STM32 failed to build.<br/>
+    [EW21179,EW21184]
+  </p></li>
+  <li><p>
+    In EWARM 5.40.4:<br/>
+    Some of the examples for Analog Devices did not have the flash loader enabled.<br/>
+    [EW21208]
+  </p></li>
+  <li><p>
+    In EWARM 5.40.4:<br/>
+    The LPC2468 flash loader was wrongly built in debug mode, causing debug messages to be sent over the serial port.<br/>
+    [EW21216]
+  </p></li>
+  <li><p>
+    In EWARM 5.40.4:<br/>
+    You cannot use the Output converter on library files. This option is now excluded from the EWARM Category list for library projects.<br/>
+    [EW21291]
+  </p></li>
+  </li>
+</ul>
+
+<b>New features</b><br/>
+<ul>
+  <li><p><b>New Cortex-M3 debug features</b><br/>
+     Several new presentation methods are available for display and analysis of Cortex-M3 SWV/SWO data
+  </p></li>
+  <li><p><b>Information Center</b><br/>
+     An integrated navigation system that gives easy access to tutorials, product documentation, and example projects.
+     Select <b>Help</b>&gt;<b>Information Center</b> to display the Information Center.
+  </p></li>
+  <li><p><b>Cortex-R4</b><br/>
+     Support for code generation and debugging of ARM Cortex-R4 cores.
+  </p></li>
+  <li><p><b>Cortex-M0</b><br/>
+     Support for code generation and debugging of ARM Cortex-M0 cores.
+     Debugging on Cortex-M0 hardware is supported using the J-Link probe.
+  </p></li>
+  <li><p><b>J-Trace for Cortex-M3</b><br/>
+     Using the J-Trace for Cortex-M3 debug, the debugger can now take advantage of
+     the ETM trace port available on some Cortex-M3 devices. Instruction trace
+     can be started and stopped based on conditions like code locations and data accesses.
+     This feature requires the J-Trace for Cortex-M3 trace probe.
+  </p></li>
+  <li><p><b>Trace start and stop triggers</b><br/>
+     The instruction trace can be started and stopped based on conditions like code locations and data accesses.
+     This feature requires the J-Trace for Cortex-M3 trace probe.
+  </p></li>
+  <li><p><b>Direct flash erase and download</b><br/>
+     Flash erase and download can be performed without starting the debugger.
+  </p></li>
+  <li><p><b>Debugging multiple images</b><br/>
+  C-SPY is now capable of debugging several independently built images during one debug session. 
+  Under <b>Project options&gt;Debugger&gt;Images</b> you specify the location of the images to be 
+  downloaded in addition to the current application. There is also a new debugger window called 
+  <b>Images</b> where you select for which application debug information will be displayed. 
+  </p></li>
+  <li><p><b>Cortex-M3 data breakpoint enhancements</b><br/>
+     A data breakpoint in Cortex-M3 is now able to break on a specific value
+     in addition to the address of the accessed variable.
+  </p></li>
+  <li><p><b>Auto refresh in the debugger memory window</b><br/>
+     The debugger memory window can be refreshed during program execution,
+     both manually and periodically.
+  </p></li>   
+</ul>
+
+<h4>V5.30 2009-01-23 </h4>
+<b>Program corrections</b><br/>
+<ul>
+  <li>
+    <p>
+      In EWARM 5.30.2:<br/>
+      All files were opened in the IAR Embedded Workbench editor, even if an external editor had been set
+      up and should have been used instead.<br/>
+      [EW20794]
+    </p>
+  </li>
+  <li>
+    <p>
+      In EWARM 5.30.2:<br/>
+      A library project could not be built without a preceding Clean command.<br/>
+      [EW20812]
+    </p>
+  </li>
+  <li>
+    <p>
+      In EWARM 5.30.2:<br/>
+      A C/C++ macro definition containing a '#' character no longer causes the Embedded Workbench IDE
+      to exit unexpectedly.<br/>
+      [EW20823]
+    </p>
+  </li>
+  <li>
+    <p>
+      In EWARM 5.30.2:<br/>
+      Downloading to AT91SAM7S64 failed.<br/>
+      [EW20858]
+    </p>
+  </li>
+  <li>
+    <p>
+      In EWARM 5.30.2:<br/>
+      In some cases, during initialization of the Stack plugin immediately after downloading the
+      ELF/DWARF input file, the Embedded Workbench IDE exited unexpectedly.<br/>
+      [EW20903]
+    </p>
+  </li>
+  <li>
+    <p>
+      Previously, there was no way to select the checksum algorithm sum32
+      in<b> Project>Options>Linker>Checksum</b>.<br/>
+      [EW20236]
+    </p>
+  </li>
+  <li>
+    <p>
+      The flash loader for Atmel AT91SAM9260EK was missing.<br/>
+      [EW20301]
+    </p>
+  </li>
+  <li>
+    <p>
+      Previously, the display of the SD-card size in the example
+      <code>arm\examples\ST\STR91x\STR912-SK-IAR\MassStorage </code>was incorrect.<br/>
+      [EW20333]
+    </p>
+  </li>
+  <li>
+    <p>
+      The Toshiba TMPA910CR header file <code>iotmpa910cr.h</code> previously defined some of
+      the peripheral registers incorrectly.<br/>
+      [EW20364]
+    </p>
+  </li>
+  <li>
+    <p>
+      Interrupt handlers in Atmel examples failed to align the stack on an
+      8-byte boundary before calling the <code>AIC</code> interrupt vector function.<br/>
+      [EW20412]
+    </p>
+  </li>
+  <li>
+    <p>
+      If an input expression in the <b>Linker configuration file editor</b> dialog box
+      contained space or tab characters, the expression could incorrectly be evaluated to 0.<br/>
+      [EW20424]
+    </p>
+  </li>
+  <li>
+    <p>
+      A debugger description file (<code>.ddf</code>) for Atmel AT91SAM7A1 and AT91SAM7A2 was
+      previously missing. it is now available.<br/>
+      [EW20418]
+    </p>
+  </li>
+  <li>
+    <p>
+      Flash download to NXP LPC2364 did not work.<br/>
+      [EW20456, 20566]
+    </p>
+  </li>
+  <li>
+    <p>
+      The ILINK checksum fields <b>Alignment</b> and <b>Initial value</b> are now correctly enabled and disabled.<br/>
+      [EW20487]
+    </p>
+  </li>
+  <li>
+    <p>
+      Go to definition did not work for functions declared with the <code>__noreturn</code> keyword.<br/>
+      [EW20605]
+    </p>
+  </li>
+  <li>
+    <p>
+      The system startup files <code>cstartup_M.s</code> and <code>cstartup_M.c</code> have been
+      added to the evaluation version.<br/>
+      [EW20670]
+    </p>
+  </li>
+  <li>
+    <p>
+      It is no longer necessary to update ilinkarm options when debugging an externally built project.<br/>
+      [EW20707]
+    </p>
+  </li>
+  <li>
+    <p>
+      The Embedded Workbench could crash if a large selection in the text edtor was right-clicked.<br/>
+      [EW20751]
+    </p>
+  </li>
+</ul>
+
+<b>New features</b><br/>
+<ul>
+  <li><b>New Cortex-M3 debug features</b><br/>
+     Several new presentation methods are available for display and analysis of Cortex-M3 SWV/SWO data
+     <ul>
+       <li>Function profiler.</li>
+       <p>
+       <li>Disassembly window with instruction trace count.</li>
+       <p>
+       <li>Data Log window that logs accesses to up to four different memory locations or areas, including time information.
+           A condensed summary for each memory location is also available.</li>
+       <p>
+       <li>Interrupt Log window that logs entrances and exits to and from interrupts, including time information.
+           A condensed summary for each interrupt source is also available.</li>
+       <p>
+       <li>Interrupt Graph window that shows interrupt activity on a time scale for each interrupt source.</li>
+       <p>
+       <li>Enhanced SWO trace window.</li>
+       <p>
+       <li>J-Link download speed using the SWD interface have been improved by 40%.</li>
+     </ul>
+     <p>
+     For more information see the <A href="../EWARM_DebuggingGuide.ENU.pdf">Debugging guide</A>.
+  </li>
+  <p>
+  <li><b>Compiler size optimizations</b><br/>
+     The compiler optimizer has been tuned to generate industry-leading code size for Cortex-M3 code.
+  </li>
+  <p>
+  <li><b>Compressed initializers</b><br/>
+     The linker can compress initialized data to minimize flash use.
+     The compressed data will be atomatically uncompressed when moved from flash to RAM by the startup code.
+     For more information see the <A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>.
+  </li>
+  <p>
+  <li><b>MISRA C:2004 support</b><br/>
+    IAR Embedded Workbench now supports checking of 
+    source code for conformance to the MISRA C:2004 standard.
+  </li>
+  </p>
+  <li><b>ST ST-LINK debug probe</b><br/>
+    Support for the ST ST-LINK JTAG debug probe.
+  </li>
+  </p>
+  <li><b>ARM7EJ-S</b><br/>
+    Support for the ARM7EJ-S core.
+  </li>
+  </p>
+  <li>
+    The fields and content in the <b>Linker configuration file editor</b> is dynamically adapted to
+    the type of the core, classical ARM or Cortex.
+  </li>
+</ul>
+
+<h4>V5.20 2008-06-24</h4>
+<b>Program corrections</b><br/>
+<ul>
+  <li><p>
+    The definitions <code>SPI_CSR0-SPI_CSR3</code> have been restored to the file <code>ioat91sam7s64.ddf</code>.<br/>
+    [EW16853]
+  </p></li>
+  <li><p>
+    The <code>UDP_CSR0-3</code> and <code>UDP_FDR0-3</code> definitions for the USB interface have been restored to
+    the C header and DDF files for Atmel AT91SAM7S64, 128, and 256.<br/>
+    [EW17163]
+  </p></li>
+  <li><p>
+    The IDE no longer freezes or crasches, if the extension of any output file from the
+    linker or output converter is a valid extension for an input file to the
+    assembler or compiler.<br/>
+    [EW17515]
+  </p></li>
+  <li><p>
+    Using the IDE variable <code>TARGET_DIR</code> to reach a parent directory,
+    for example <code>$TARGET_DIR$\..\..</code>, caused the IDE to crash.<br/>
+    [EW17756]
+  </p></li>
+  <li><p>
+    The <code>AIC_SMR0-AIC_SMR31</code> and <code>AIC_SVR0-AIC_SVR31</code>
+    definitions have been restored to the files <code>ioat91sam7s64.ddf</code>
+    and <code>ioat91sam7xc256.ddf</code>.<br/>
+    [EW17830,19000]
+  </p></li>
+  <li><p>
+    Atmel example projects can now be opened from the Startup screen.<br/>
+    [EW17869]
+  </p></li>
+  <li><p>
+    Paths containing dollar sign characters '$' are now handled correctly.<br/>
+    [EW18252]
+  </p></li>
+  <li><p>
+    Recursive macros can now be used in a preprocessor expression with the
+    "Generate browse information" option selected in the IDE options dialog box.<br/>
+    [EW18721]
+  </p></li>
+  <li><p>
+    Circular #include preprocessor directives can now be used.<br/>
+    [EW19037]
+  </p></li>
+  <li><p>
+    The fill pattern can now be of any length as long as it is composed of full bytes,
+    but it must be given in hexadecimal notation, starting with 0x.<br/>
+    [EW19697]
+  </p></li>
+  <li><p>
+    Texas Instruments example projects can now be opened from the Startup screen.<br/>
+    [EW19795]
+  </p></li>
+  <li><p>
+    The str91x-isc.mac debugger macro file did not work correctly with G and H
+    revisions of the STR91x.<br/>
+    [EW19931]
+  </p></li>
+  <li><p>
+    Some STM32 application layouts could cause errors when downloading code to flash.<br/>
+    [EW20027]
+  </p></li>
+  <li><p>
+    Missing SPI and AIC registers have been added to<code> ioat91sam7s256.ddf</code>.<br/>
+    [EW20028]
+  </p></li>
+  <li><p>
+    In<code> iostr912f.h</code>, the<code> UART_RSECR </code>register is no longer incorrectly
+    named<code> UART0_RSR</code>.<br/>
+    [EW20074]
+  </p></li>
+  <li><p>
+    An incorrect preprocessor directive in the form of<br/>
+    <code>#define X(y) #x</code><br/>
+    could make the Embedded Workbench IDE terminate abnormally. This has been corrected.<br/>
+    [EW20096]
+  </p></li>
+   <li><p>
+    The<code> --BE32 </code>command line option is now sent to the linker if BE32
+    is selected in the option dialog.<br/>
+    [EW20118]
+  </p></li>
+   <li><p>
+    Multiple definitions of<code> HECC_CR, HECC_MR, HECC_SR, HECC_PR, HECC_NPR, HECC_VR </code>
+    have been removed from the file<code> ioat91sam9260.ddf</code>.<br/>
+    [EW20121]
+  </p></li>
+</ul>
+<b>New features</b>
+<ul>
+  <li><b>Multi-file compilation</b><br/>
+     It is now possible to use the IDE to define compilation units with 
+     multiple files that will be compiled as one unit, giving the compiler
+     a larger scope for code optimizations.
+  </li>
+  <p>
+  <li><b>Cortex-M3 SWV/SWO</b><br/>
+     Cortex-M3 SWV (Single Wire Viewer) trace packets sent over the Cortex-M3 SWO channel can be presented by the debugger.
+     The user have full control over the selection of trace packet types.
+     The communication rate is 6 MHz when using J-Link v7 or newer (500 kHz for older J-Link versions)
+  </li>
+  <p>
+  <li><b>Printf via SWO at the click of a button</b><br/>
+     For Cortex-M3, printf output can be sent via the SWO channel (that is part of the SWD interface),
+     and displayed in the debugger terminal I/O window.
+     The advantage is real-time performance for debug log messages because the CPU does not need to be halted.<br/>
+     To enable: <b>Project Options&gt;General Options&gt;Library Configuration&gt;Via SWO</b>.
+   </li>
+  <p>
+  <li><b>Printf via DCC</b><br/>
+     For ARM7 and ARM9, printf output can be sent via the DCC channel,
+     and displayed in the debugger terminal I/O window.
+     The advantage is real-time performance for debug log messages because the CPU does not need to be halted.<br/>
+     Further information can be found <a href="csarmjlink.ENU.html#mcorr">here</a>.
+  </li>
+  <p>
+  <li><b>Flash breakpoints</b><br/>
+     Flash breakpoints allows an unlimited number of breakpoints to be active even when locating code in flash.
+     Flash breakpoints is available for the J-Link probe and  available as a separate product.
+  </li>
+  <p>
+  <li><b>Compiler speed optimizations</b><br/>
+     The compiler optimizer has been tuned to generate industry-leading execution speed for Cortex-M3 code.
+  </li>
+  <p>
+  <li><b>VFP</b><br/>
+     Support for the VFPv1 and VFPv2 floating point coprocessors.
+  </li>
+  <p>
+  <li><b>Linking with references to other link images</b><br/>
+     Symbols from one link image can be used as input when linking another image.
+     This is useful when an application depends on code in a resident (ROM) image.
+     See the description of the ISymExport tool for more information.
+  </li>
+  <p>
+  <li><b>J-Link control panel</b><br/>
+     When a debug session is active, the J-Link control panel can be activated using
+     the J-Link button in the Windows notification area.
+     The control panel gives access to J-Link setup parameters and shows J-Link status information.
+  </li>
+  <p>
+  <li><b>$CONFIG_NAME$</b><br/>
+     A new argument variable $CONFIG_NAME$ has been added.
+     It expands to the name of the current build configuration, for example Debug or Release. 
+  </li>
+  <p>
+  <li><b>IAR proprietary variant of semihosting</b><br/>
+     An IAR proprietary variant of semihosting can be selected that does not use
+     the SVC instruction and thus does not need to set a breakpoint on the SVC vector.
+     This is an advantage for applications which require the SVC vector for their own
+     use, for example an RTOS.
+  </li>
+</ul>
+
+
+<h4>V5.11 2007-11-28</h4>
+<b>Program corrections</b>
+<ul>
+  <li><p>
+    Changing the default object file output directory no longer causes the IDE to
+    link two copies of the output file.<br/>
+    [EW17458]
+  </p></li>
+  <li><p>
+    The Texas Instruments HET assembler <code>het470.exe</code> could in some cases
+    fail to generate the C output files.<br/>
+    The HET assembler wrapper <code>het470wrap.exe</code> was provided in an attempt to
+    create a clean environment for the HET assembler <code>het470.exe</code>.<br/>
+    In addition, the custom build rule in the examples was modified with the dummy argument <code>-iii</code>,
+    which was been observed to reduce the problem in some environments.<br/>
+    The problem is now completely solved by an updated het470.exe.<br/>
+    [EW18098]
+  </p></li>
+  <li><p>
+    Default flash loader command line arguments can be read from device
+    configuration (<code>i79</code>) files.<br/>
+    [EW18713]
+  </p></li>
+  <li><p>
+    The AT91SAM7S512 flash loader can now handle the dual Embedded Flash Controllers.<br/>
+    [EW19036]
+  </p></li>
+  <li><p>
+    The function browser in the editor window now recognizes functions within a
+    'namespace' block.<br/>
+   [EW19230]
+  </p></li>
+  <li><p>
+    Missing registers have been added to the STR912FA device support files.<br/>
+    [EW19349]
+  </p></li>
+  <li><p>
+   All example projects for the STR912-SK board now run also after a power
+   cycle of the board.<br/>
+   [EW19353]
+  </p></li>
+  <li><p>
+    The ILINK configuration file editor no longer loses data at the end of
+    the file each time it is edited.<br/>
+    [EW19447,19401]
+  </p></li>
+  <li><p>
+    Adding additional libraries using the <b>Linker->Library</b> option dialog
+    box now works.<br/>
+    [EW19477]
+  </p></li>
+  <li><p>
+    The TMS470R1M1B cannot have an <code>LDR</code> instruction at the reset vector due to
+    the chip protection mechanism, it must be a <code>B</code> instruction.
+    A specific <code>cstartup.s</code> file has been added to the relevant examples.<br/>
+    [EW19479]
+  </p></li>
+  <li><p>
+    When copying a project configuration, the 'exclude from build' status of
+    the files in the project is copied now.<br/>
+    [EW19482]
+  </p></li>
+  <li><p>
+    All header files for NXP LPC devices now correctly define<code> IO0PIN </code>and<code> IO1PIN </code>as
+    read-only.<br/>
+    [EW19489]
+  </p></li>
+  <li><p>
+    The LPC2378 and LPC2468 flash loaders now make use of the last 4-Kbyte of flash.<br/>
+    [EW19524]
+  </p></li>
+  <li><p>
+    Division by 0 within preprocessor directives no longer causes IAR Embedded
+    Workbench to terminate abnormally.<br/>
+    [EW19549]
+  </p></li>
+  <li><p>
+    Changing output directories no longer results in build problems.<br/>
+    [EW19551]
+  </p></li>
+  <li><p>
+    STM32 examples no longer give verify errors on 4 bytes from <code>0x20000004</code>.<br/>
+    [EW19680]
+  </p></li>
+  <li><p>
+    Checksum fill patterns in the range <code>0x00-0x0F</code> now work. However, patterns
+    larger than <code>0xFF</code> with 0 in the most significant nibble still do not work.<br/>
+    [EW19697]
+  </p></li>
+  <li><p>
+   The <b>Treat all warnings as errors</b> option on the <b>Linker > Diagnostics</b>
+   page no longer causes linker failure.<br/>
+   [EW19699]
+  </p></li>
+  <li><p>
+    The flash loader for the i.MX21 now supports the Spansion S29WS128N0PBFW01
+    used on the RoHS compliant i.MX21 ADSE.<br/>
+    [EW19706]
+  </p></li>
+  <li><p>
+    Incorrect bit struct definitions in<code> iomcimx27.h </code>have been corrected.<br/>
+    [EW19728]
+  </p></li>
+  <li><p>
+    The <code>readme.txt</code> in <code>arm\examples\ST\STR91x\STR91xlibrary\examples\UART</code>
+    now correctly specifies a male/female PC RS232 cable.<br/>
+    [EW19732]
+  </p></li>
+</ul>
+
+<b>New features</b>
+  <ul>
+  <li><b>Cortex-M1</b><br/>
+     Support for code generation and debugging of ARM Cortex-M1 cores.
+     Debugging on Cortex-M1 hardware is supported using the J-Link probe.
+  </li>
+  <p>
+  <li><b>ARM11 debug with J-Link</b><br/>
+     The J-Link driver now supports ARM11.
+  </li>
+  <p>
+  <li>
+    <b>Expanding system environment variables</b><br/>
+    System environment variable can now be expanded from within the IDE in the same way as the built-in argument variables.<br/>
+    Syntax: <code><$_<i>environment variable name</i>_$</code><br/>
+    For example, to use the system environment variable <code>HOMEPATH</code> in a path inside the IDE:<br/>
+    <code>$_HOMEPATH_$\CONFIG\linkerconf.icf</code>.
+  </li>
+  <p>
+  <li>
+    <b>Editor background color</b><br/>
+    You can now select a background color for the text editor.<br/>
+  </li>
+  <p>
+  <li>
+    <b>J-Link STR9 Commander (Command line tool)</b><br/>
+    J-Link Commander (<code>arm\bin\JLinkSTR91x.exe</code>) is a tool that can be used to configure ST STR91x cores.
+    It permits some STR9 specific commands, like setting the flash configuration register and erasing the flash.
+    This tool can be used to erase the flash of the controller even if a program is in flash, which causes the ARM core to stall.
+    The tool is described in the
+    <a href="../JLinkARM.pdf">J-Link/J-Trace User Guide</a>.<br/>
+  </li>
+</ul>
+
+
+<h4>V5.10 2007-05-25</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    It is possible to select Arm/Thumb mode on each individual C/C++ source code file in the IDE.<br/>
+    [EW14209]
+  </p></li>
+
+  <li><p>
+    In a custom build rule, the files listed in <b>Additional input files</b> were not always
+    selected correctly when determining if the rule should be applied during a build operation.<br/>
+    [EW18659]
+  </p></li>
+
+  <li><p>
+    The DDF files for NXP LPC2xxx devices contained redundant instances of the fast IO registers.<br/>
+    [EW18720]
+  </p></li>
+
+  <li><p>
+    The example AT91SAM7S-Interrupt did not enable flash download in the FLASH_Debug configuration.<br/>
+    [EW18733]
+  </p></li>
+
+  <li><p>
+    A startup error in the Atmel FlashAT91SAM7Sx flash loader has been corrected.<br/>
+    [EW18734]
+  </p></li>
+
+  <li><p>
+    The <code>iomc9328mx1.h</code> file now defines UART3.<br/>
+    [EW18748]
+  </p></li>
+
+  <li><p>
+    The <code>iomc9328mx1.h</code> file now defines the <code>SSI2_CLK_EN</code>
+    and <code>UART3_CLK_EN</code> bits.<br/>
+    [EW18766]
+  </p></li>
+
+  <li><p>
+    The LPC2148 Audiodevice example used the wrong configuration of
+    <code>PINSEL1_bit.P0_17</code> and <code>PINSEL1_bit.P0_18</code> for capture mode.<br/>
+    [EW18817]
+  </p></li>
+
+  <li><p>
+    The <code>iotms470r1a288.h</code> file now defines the <code>C2SIB</code> registers.<br/>
+    [EW18834]
+  </p></li>
+
+  <li><p>
+    Corrected problems with the STR750 and STR912 mass storage examples.<br/>
+    [EW18897,EW18941,EW18942]
+  </p></li>
+
+  <li><p>
+    Corrected the definition of IC2 for MAC7121.<br/>
+    [EW18905]
+  </p></li>
+
+  <li><p>
+    The <code>iolpc2210.h</code> file now defines the <code>U0TER</code>,
+    <code>U1TER</code>, <code>T0CTCR</code>, <code>T1CTCR</code> and <code>SCS</code> registers.<br/>
+    [EW18928]
+  </p></li>
+
+  <li><p>
+    The <code>default.i79</code> file was corrupt.<br/>
+    [EW18952]
+  </p></li>
+
+  <li><p>
+    The Nohau NXP LPC288x example failed to load to flash memory.<br/>
+    [EW18953]
+  </p></li>
+
+  <li><p>
+    Corrected the LPC214x USB uart virtual com example.<br/>
+    [EW18965]
+  </p></li>
+
+  <li><p>
+    Corrected the Freescale i.MX21 flash loader.<br/>
+    [EW18985]
+  </p></li>
+
+  <li><p>
+    The <code>iolpc2138.h</code> file now defines P0_26-P0_31 in the
+    <code>__pinsel1_bits</code> struct.<br/>
+    [EW19002]
+  </p></li>
+
+  <li><p>
+    Corrected the addresses of AD0 and AD1 in the header file <code>iolpc2138.h</code>.<br/>
+    [EW19075]
+  </p></li>
+
+  <li><p>
+    The <b>Additional include directories</b> list in the IDE options dialog box,
+    <b>Project-&gt;Options-&gt;C/C++ Compiler-&gt;Preprocessor</b>, was not saved
+    between sessions, if the list started with a blank line.<br/>
+    [EW19084]
+  </p></li>
+
+  <li><p>
+    The <code>iotms470r1b1m.h</code> file now defines <code>DWCTRL</code>, <code>DWKEY</code>
+    and <code>DWPRLD</code>.<br/>
+    [EW19131]
+  </p></li> 
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li><b>ARM EABI compliance</b><br/>
+     The IAR C/C++ compiler, assembler, linker and debugger comply with ARM EABI 2.0 -
+     the Embedded Application Binary Interface for ARM - based on ELF/DWARF 3.0.
+     The advantage of AEABI compliance is that any such module can be linked
+     with any other AEABI compliant module, even modules provided by other vendors.
+     This will for example allow modules created by GNU, ARM RealView and
+     IAR Embedded Workbench for ARM to be linked together.
+     For more information,
+     see <a href="http://www.arm.com/products/DevTools/ABI.html">
+     http://www.arm.com/products/DevTools/ABI.html</a>.
+     <p>
+  </li>
+
+  <li><b>ETB</b><br/>
+     The debugger can now display trace data from the ETB (Embedded Trace Buffer)
+     available on some ARM devices. This is supported when the J-Link probe is used.
+     <p>
+  </li>
+
+  <li><b>Data breakpoints</b><br/>
+     Data breakpoints is now supported on real hardware.
+     The data breakpoint feature is supported by the J-Link, RDI, Macraigor, and
+     Luminary FTDI debugger drivers.
+     <p>
+  </li>
+
+  <li><b>GDB server connectivity</b><br/>
+     A debugger driver for connection to GDB server is included.
+     It is intended for use with the ST STR9-comStick development kit.
+     All other uses are considered experimental. 
+     <p>
+  </li>
+
+  <li><b>I/O register definition files</b><br/>
+
+    I/O register definition files for symbolic access to registers are used
+    both when programming (C and assembler) and during
+    debugging. Additional files in this release are provided for:
+
+    <ul>
+      <li>Freescale MCIMX27, MCIMX31</li>
+      <li>Luminary LM3S317, LM3S617, LM3S618, LM3S817, LM3S818,
+          LM3S2110, LM3S2139, LM3S2410, LM3S2412, LM3S2432,
+          LM3S2533, LM3S2620, LM3S2637, LM3S2651, LM3S2730, LM3S2739,
+          LM3S2939, LM3S2948, LM3S2950, LM3S2965, LM3S6100, LM3S6110,
+          LM3S6420, LM3S6422, LM3S6432, LM3S6610, LM3S6633, LM3S6637,
+          LM3S6730, LM3S6938, LM3S6952, LM3S6965</li>
+      <li>NXP LPC2109</li>
+      <li>NXP SJA2020</li>
+      <li>ST STM32F101, STM32F103,
+          STR751, STR752, STR755,
+          STR910FA, STR911FA, STR912FA</li>
+      <li>Winbond W90P710</li>
+    </ul><p>
+  </li>
+</ul>
+
+
+<h4>V4.41A  2006-12-08</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    The ST STR71x flash loader will fill gaps in the code with ones instead of skipping over them.<br/>
+    [EW18036]
+  </p></li>
+
+  <li><p>
+    Fast GPIO definitions, for example <code>FIODIR</code>, were missing in <code>iolpc2148.h</code> and <code>iolpc2101.h</code>.<br/>
+    [EW18315]</p>
+  </li>
+
+  <li><p>
+    Adding a trailing semicolon to the <b>File types</b> list box in the <b>Find in Files</b>
+    dialog box, no longer causes the Embedded Workbench IDE to exit unexpectedly.<br/>
+    [EW18357]
+  </p></li>
+
+  <li><p>
+    Incorrect definitions for <code>ENET_MAH</code>, <code>ENET_MAL</code>, <code>ENET_MAH_BUF</code> and
+    <code>ENET_MAL_BUF</code> in <code>iostr912.h</code> have been corrected.<br/>
+    [EW18397]</p>
+  </li>
+
+  <li><p>
+    The flash loader for Analog Devices ADuC702x did not work for the latest revision of the device.<br/>
+    [EW18412]</p>
+  </li>
+
+  <li><p>
+    The <code>Make</code> command will no longer always rebuild the whole project if the application
+    output file is located outside the project directory.<br/>
+    [EW18441]
+  </p></li>
+
+  <li><p>
+    Interrupt simulation was always incorrectly enabled after reload of a project.<br/>
+    [EW18480]
+  </p></li>
+
+  <li><p>
+    There was a problem in all NXP LPC2xxx flash loaders.
+    Writing code with gaps to the flash memory could earlier fail if the gap spanned more than 512 bytes into a sector,
+    in that case the sector failed to be erased.<br/>
+    [EW18546]
+  </p></li>
+
+  <li><p>
+    The definition of the <code>SCS</code> register for NXP LPC23xx has been corrected.<br/>
+    [EW18599]
+  </p></li>
+
+  <li><p>
+    Incorrect core setting for TI OMAP5910 and Atmel AT91SAM9260.<br/>
+    [EW18602]
+  </p></li>
+
+  <li><p>
+    The code for the FIQ handler has been corrected in NXP <code>LPC213x\IAR-P213x\app\demo.c</code>.<br/>
+    [EW18618]
+  </p></li>
+
+  <li><p>
+    The watchdog was not disabled in the <code>ARM\examples\Philips\LPC3180\Phytec\Gettingstarted\main.c</code> file.
+    This caused the watchdog to time out and jump to an unknown address.<br/>
+    [EW18619]
+  </p></li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li><b>IAR PowerPac for ARM</b><br/>
+     IAR PowerPac for ARM is an integrated middleware family that combines a small memory
+     footprint RTOS and a versatile file system. The bundled evaluation version of PowerPac
+     supports three tasks for the RTOS and one open file in the file system.
+     <p>
+  </li>
+
+  <li><b>Live watch on target hardware</b><br/>
+     The debugger supports ARM DCC (ARM Debug Communication Channel) to display live watch of global/static variables, memory, and peripherals.<p>
+  </li>
+
+  <li><b>Code coverage using J-trace</b><br/>
+     The execution data captured with J-Trace can be presented in a code coverage view.<p>
+  </li>
+
+  <li><b>I/O register definition files</b><br/>
+
+    I/O register definition files for symbolic access to registers are used
+    both when programming (C and assembler) and during
+    debugging. Additional files in this release are provided for:
+
+    <ul>
+      <li>Atmel AT91SAM7X512, AT91SAM7XC512,
+          AT91SAM9260, AT91SAM9263</li>
+      <li>Freescale MC9328MX31</li>
+      <li>Hilscher netX50, netX100, netX500</li>
+      <li>Luminary LM3S328,
+          LM3S601, LM3S610, LM3S611, LM3S612, LM3S613, LM3S615, LM3S628,
+          LM3S801, LM3S811, LM3S812, LM3S815, LM3S828</li>
+      <li>NXP LPC2364, LPC2366, LPC2368, LPC2378,
+          LPC2458, LPC2468, LPC2880, LPC2888, LPC3180</li>
+      <li>Samsung S3C2510A</li>
+      <li>ST STR750</li>
+      <li>Winbond W90P710, W90N740, W90N745.</li>
+    </ul><p>
+  </li>
+
+  <li><b>New Find commands</b><br/>
+      Two new search commands have been added, <b>Find Next (Selected)</b>
+      and <b>Find Previous (Selected)</b>. If there is a non-empty selection, 
+      that text is immediately searched for. Otherwise, if the insertion point
+      is placed in a word, that word is searched for.<p></p>
+  </li>
+  <li><b>New source browser filter</b><br/>
+      A new filter, <b>Non-member functions & variables</b> has been added to  
+      the source browser context menu. This filter will limit the display to 
+      functions and variables that are not members of a class.<br/>
+  </li>
+</ul>
+
+
+<h4>V4.40A  2006-05-18</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li>
+    None.
+  </li>
+  </ul><br/>
+
+  <b>New features</b>
+  <ul>
+  <li><b>Cortex M3</b><br/>
+     Support for code generation and debugging for ARM Cortex M3 cores.
+     Debugging on Cortex M3 hardware is supported using the J-Link probe or the Luminary FTDI solution.<p>
+  </li>
+
+  <li><b>Macraigor usb2Demon and usb2Sprite</b><br/>
+     The Macraigor usb2Demon and usb2Sprite JTAG probes are supported.<p>
+  </li>
+
+  <li><b>&micro;C/OS-II RTOS plugin</b><br/>
+     The Micri&micro;m &micro;C/OS-II kernel awareness plugin is now included in the product.<p>
+  </li>
+
+  <li><b>Memory save/restore</b><br/>
+     Transfers memory contents from/to file in intel-hex or motorola format.<p>
+  </li>
+
+  <li><b>Full control over hardware and software breakpoint selection</b><br/>
+     The type of individual breakpoints and the default breakpoint type can now be controlled.
+     Available breakpoint types are auto, hardware and software.<br/>
+     The type of a specific breakpoint is displayed in a tool tip.<p>
+  </li>
+
+  <li><b>Statics watch window</b><br/>
+     Displays global and static variables, including function and class statics.<p>
+  </li>
+
+  <li><b>Symbolic memory window</b><br/>
+     Displays memory content annotated with global symbols.<p>
+  </li>
+
+  <li><b>Stack check window.</b><br/>
+     The stack check window has been enhanced with more configuration capatibilities.<br/>
+     The selected options are now stored at the project level instead of at Embedded Workbench level.<p>
+  </li>
+</ul>
+</ul>
+
+
+<h4>V4.31A  2006-02-03</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    The addresses of the <code>PEDR</code> and <code>PEDDR</code> registers were incorrect in <code>ioep73xx.h</code>.<br/>
+    [EW17024]
+  </p></li>
+
+  <li><p>
+    The vector area size for the Freescale MAC7100 example was incorrect.<br/>
+    [EW17149]
+  </p></li>
+
+  <li><p>
+    There was an error in the definition of the <code>RCPC HCLK</code> Prescaler register
+    in <code>iolh75401.h</code> and <code>iolh75400.h</code>.<br/>
+    [EW17183]
+  </p></li>
+
+  <li><p>
+    The Philips flash loader did not disable the PLL prior to programming flash.
+    This could cause data errors due to a too high (PLL) system clock.<br/>
+    [EW17242]
+  </p></li>
+
+  <li><p>
+    The <code>T0CTCR</code> and <code>T1CTCR</code> registers were missing
+    in <code>iolpc2130.h</code>, <code>iolpc2131.h</code>, <code>iolpc2132.h</code>, <code>iolpc2134.h</code>,
+    <code>iolpc2136.h</code>, <code>iolpc2138.h</code>, <code>iolpc2142.h</code> and <code>iolpc2148.h</code>.<br/>
+    [EW17243]
+  </p></li>
+
+  <li><p>
+    The file declaring intrinsic functions was incorrectly named <code>intrinsic.h</code>,
+    the correct name is <code>intrinsics.h</code>.<br/>
+    [EW17253]
+  </p></li>
+
+  <li><p>
+    Pressing the <b>Toggle Source</b> button in the Trace window could under certain
+    circumstances crash the debugger. <br/>
+    [EW17256]
+  </p></li>
+
+  <li><p>
+    Incorrect address definition for the <code>BCON</code> registers in
+    <code>iostr710.h</code> and <code>iostr710.ddf</code>.<br/>
+    [EW17378]
+  </p></li>
+
+  <li><p>
+    Definition of the register <code>DYNMRCON</code> has been added to
+    <code>iolh79524.h</code> and <code>iolh79525.h</code>.<br/>
+    [EW17493]
+  </p></li>
+
+  <li><p>
+    The flash loader for STR71x devices, <code>FlashSTR71xF.d79</code>, did not program bank 1 correctly.<br/>
+    [EW17494]
+  </p></li>
+
+  <li><p>
+    A linker output file with a <code>.s</code> file name extension could cause the IDE to hang during build.<br/>
+    [EW17509]
+  </p></li>
+
+  <li><p>
+    "First Record" appeared as tooltip for variables in the debugger editor windows
+    until an explicit focus was made on the editor window.<br/>
+    [EW17564]
+  </p></li>
+
+  <li><p>
+    The LPC2148 LCD example failed to service more than one UART interrupt.<br/>
+    [EW17632,EW17652]
+  </p></li>
+
+  <li><p>
+    Changed the definition of <code>REV</code> to <code>_REV</code> in <code>iomac7100.h</code> and
+    <code>iomac7200.h</code> to avoid name conflicts in the assembler.<br/>
+    [EW17767]
+  </p></li>
+</ul>
+<b>New features</b>
+<ul>
+  <li><b>J-Trace support</b><br/>
+     J-Trace is an advanced trace probe that can capture trace data from ARM devices
+     with ETM (Embedded Trace Macrocell) support. J-Trace is fully supported by the
+     C-SPY debugger.<p>
+  </li>
+
+  <li><b>J-Link JTAG probe download speed</b><br/>
+     J-Link and J-Trace now achieves download speeds of up to 580 Kbyte/sec for ARM7 and 370 Kbyte/sec for ARM9.<br/>
+     J-Link and J-Trace also supports adaptive clocking using the <code>RTCK</code> JTAG signal.<p>
+  </li>
+
+  <li><b>Multi-core debugging</b><br/>
+     The C-SPY debugger and J-Link supports debugging of multiple ARM cores with multiple instances
+     of the IAR Embedded Workbench IDE. There can be multiple cores on the same JTAG scan chain, multiple
+     J-Links on the same host computer, or a combination of the two.<p>
+  </li>
+
+  <li><b>Stack window</b><br/>
+    To monitor the memory consumption and integrity of the stack, a new Stack 
+    window has been added. It shows the stack contents as raw data, C/C++ 
+    variables, and function frames. It also shows current and maximum stack 
+    consumption graphically. Warnings can be issued when the stack exceeds a 
+    certain level or if the stack pointer points outside the stack memory.<p>
+  </li>
+
+  <li><b>New breakpoint category - Log breakpoint</b><br/>
+    Log breakpoints make it easy to log messages whenever execution passes 
+    a certain code location without having to add any code to the 
+    target application. When a log breakpoint is triggered, it writes to the 
+    Debug Log window and then the application continues execution.<p>
+  </li>
+
+  <li><b>New way to toggle breakpoints</b><br/>
+    You can now set or clear a breakpoint 
+    by double-clicking in the left margin of the editor window; the breakpoint 
+    location is marked by a red X. If there is more than one possible breakpoint
+    location in the source line, the breakpoint is placed on the first location.<p>
+  </li>
+
+  <li><b>ADS and RealView migration guides</b><br/>
+      Migration guides to help you migrate from the ARM ADS and RealView tools to
+      IAR Embedded Workbench for ARM.
+      <ul>
+      <li><a href="../EWARM_ADSMigrationGuide.ENU.pdf">ADS Migration Guide</a></li>
+      <li><a href="../EWARM_RealViewMigrationGuide.ENU.pdf">RealView Migration Guide</a></li>
+      </ul><p>
+  </li>
+
+  <li><b>embOS C-SPY plugin</b><br/>
+      A C-SPY debugger plugin for the embOS realtime operating system 
+      from Segger Microcontroller Systems is included in this release. The plugin
+      provides embOS awareness during debugging sessions and enables you to inspect 
+      the state of several embOS primitives such as the task list, resource semaphores, 
+      mailboxes, or timers. For more information,
+      see <a href="../embOS_IAR_Plugin.pdf">embOS plugin
+      for IAR Embedded Workbench.</a><p></p>
+  </li>
+
+  <li><b>
+    Compatible with the SMX RTOS from Micro Digital</b><br/>
+    The IAR Embedded Workbench for ARM now supports the SMX RTOS,
+    and a plugin for the IAR C-SPY Debugger is available from Micro Digital.
+    Please visit Micro Digital at <a href="http://www.smxrtos.com/">
+    http://www.smxrtos.com</a> for details about SMX RTOS and their
+    IAR C-SPY Debugger plugin.<p>
+  </li>
+
+  <li><b>
+    Compatible with the NORTi RTOS from MISPO</b><br/>
+    The IAR Embedded Workbench for ARM now supports the NORTi,
+    and a plugin for the IAR C-SPY Debugger is available from MISPO.
+    Please visit MISPO at <a href="http://www.mispo.co.jp/">
+    http://www.mispo.co.jp</a> for details about NORTi and their
+    IAR C-SPY Debugger plugin.<p>
+  </li>
+
+  <li><b>I/O register definition files</b><br/>
+
+    I/O register definition files for symbolic access to registers are used
+    both when programming (C and assembler) and during
+    debugging. New additions in this release are:
+
+    <ul>
+      <li>Analog Devices ADuC7019, ADuC7030, ADuC7031, ADuC7032, ADuC7033,
+          ADuC7128, ADuC7129, ADuC7229</li>
+      <li>Atmel AT91SAM7A1, AT91SAM7A2, AT91SAM7S321,
+          AT91SAM7X128, AT91SAM7XC128, AT91SAM7X256, AT91SAM7XC256,
+          AT91SAM9261,
+          AT91FR40162S, AT91C140</li>
+      <li>Freescale MAC7116</li>
+      <li>Freescale MC9328MX21, MC9328MXL, MC9328MXS</li>
+      <li>NetSilicon NS9360</li>
+      <li>OKI ML696201, ML69Q6203, ML696500, ML69Q6501</li>
+      <li>Philips LPC2101, LPC2102, LPC2103,
+          LPC2141, LPC2144, LPC2146, LPC2210, LPC2220,
+          LPC3100</li>
+      <li>ST STR730, STR911, STR912, SpearNet</li>
+      <li>Texas Instruments TMS470R1A64, TMS470R1A288, TMS470R1B1M</li>
+    </ul><p>
+  </li>
+
+    <li>It is now possible to specify the segment alignment and the initial 
+        start value for the CRC checksum calculation. These settings are available 
+        on the <b>Processing</b> page under <b>Project&gt;Options&gt;Linker</b>.</LI><P></P>
+
+    <LI>A block selected in the editor can be commented/uncommented by single 
+        commands.</li><p></p>
+
+    <LI>The editor now indicates an appropriate line width for printing, either based on 
+    a user-configurable fixed number of characters or on the current printer page 
+    width.
+    <P></P></LI>    
+
+    <LI>Workspace and project files are now optionally saved before a project is 
+      built.</li><p>
+    
+    <LI>Improved <b>Find, Find and Replace</b>, and <b>Incremental Search</b>
+        dialog boxes.</li><p>
+    
+    <LI>Custom file types are now available in the <b>Find in Files</b> dialog box.</li><p>
+    
+    <LI>A parameter to filter build messages has been added to the command-line 
+      build utility <code>iarbuild</code>.</li><p>
+    
+    <LI>To make pre- and post-build actions easier, browse buttons have been 
+      added.</li><p>
+</ul>
+
+
+<h4>V4.30A  2005-06-23</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    Removed ; at end of macro definitions in io_macros.h. ; are already present at
+    end of register definitions in chip header files.
+    This resulted in many unnecessary remarks about double semicolons, if remarks were enabled.<br/>
+    [EW16428]
+  </p></li>
+
+  <li><p>
+    If a project was placed in the Embedded Workbench installation directory,
+    Find in Files regarded the project's files as system include files.
+    This meant that when the option "Project files and user include files"
+    (i.e. no system include files) was selected, no files were searched through.<br/>
+    [EW16441]
+  </p></li>
+
+  <li><p>
+    The Memory window now displays "--" for each individual memory unit that cannot
+    be read-accessed, as opposed to the whole row.<br/>
+    [EW16446]
+  </p></li>
+
+  <li><p>
+    The MAM registers were missing and the GPIO and SPI0 registers had the wrong names
+    in the header files iolpc2131.h, iolpc2132.h and iolpc2138.h.<br/>
+    [EW16459,EW16463]
+  </p></li>
+
+  <li><p>
+    Some interrupt vector numbers were missing in the header files iolpc2119.h, iolpc2129.h, iolpc2194.h,
+    iolpc2292.h and iolpc2294.h.<br/>
+    [EW16460]
+  </p></li>
+
+  <li><p>
+    Errors and missing fields in the header files ioat91sam7s32.ddf and ioat91sam7s64.ddf.<br/>
+    [EW16504,EW16583,EW16693]
+  </p></li>
+
+  <li><p>
+    In debugger windows, bitfields are now shown with the correct value,
+    instead of the value of the whole encompassing integer.<br/>
+    [EW16524]
+  </p></li>
+
+  <li><p>
+    If you selected a cursive font like "Monotype Corsiva",
+    all fonts selected thereafter also became cursive.<br/>
+    [EW16604]
+  </p></li>
+
+  <li><p>
+    AT91SAM7 flash programming could give a verification error even when the flash memory was correctly programmed.<br/>
+    [EW16610]
+  </p></li>
+
+  <li><p>
+    Variable names in SAM7 macro files could easily conflict with global variables
+    in the application, causing confusion when displaying such variables in the debugger watch window.<br/>
+    [EW16643]
+  </p></li>
+
+  <li><p>
+    A problem with source code control operations on Embedded Workbench projects
+    connected to Microsoft Visual SourceSafe has been corrected.
+    Now all operations can be performed on the projects.<br/>
+    [EW16644]
+  </p></li>
+
+  <li><p>
+    Loading of large projects, or specifically projects with large dependency files (.dep),
+    has been speeded up considerably.<br/>
+    [EW16731]
+  </p></li>
+
+  <li><p>
+    The  XTI_CTRL and XTI_SR registers had incorrect address definitions
+    in the header files iostr710.h, iostr711.h, and iostr712.h.<br/>
+    [EW16746]
+  </p></li>
+
+  <li><p>
+    The bitfields urxint1, utxint1, urxint2 and utxint2 were incorrectly defined in
+    the header file ioep73xx.h.<br/>
+    [EW16794]
+  </p></li>
+
+  <li><p>
+    Bit names have been added to the definition of PINSEL2 in the header files iolpc2212.h and iolpc2214.h.<br/>
+    [EW16884]
+  </p></li>
+
+  <li><p>
+    The bit EN_HALT has been added to the definition of the RCCU_CCR register
+    in the header files iostr710.h, iostr711.h, and iostr712.h.<br/>
+    [EW16912]
+  </p></li>
+
+  <li><p>
+    Creating a new project gave the warning:<br/>
+    Chip config file $TOOLKIT_DIR$\config\chip\ not found.<br/>
+    [EW16922]
+  </p></li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li><b>ARM11</b><br/>
+     Support for code generation and debugging for ARM11 cores.
+     With this new addition, EWARM supports the ARM families
+     ARM7, ARM9, ARM9E, ARM10 and ARM11 (ARM instruction set v4, v5 and v6).
+     The Intel XScale architecture (excluding co-processors) is also supported.<p>
+  </li>
+
+  <li><b>Speed optimizations</b><br/>
+     The compiler speed optimizations have been improved.
+     In addition, the floating point library have been rewritten and
+     is about twice as fast as the previous version.<p>
+  </li>
+
+  <li><b>Multi-file compilation</b><br/>
+     Several source files can be combined and compiled at the same
+     time by the compiler. This allows the optimizer to operate on
+     a larger set of code and can result in smaller code.<p>
+  </li>
+
+  <li><b>OSEK Run Time Interface (ORTI) support</b><br/>
+
+    The ORTI Interface specifies a way to inform the debugger about all the
+    internals of an OSEK OS. Based on this interface, C-SPY now provides
+    sophisticated debug awareness for any ORTI-compliant OS.<p>
+  </li>
+
+  <li><b>OSE Epsilon RTOS plugin</b><br/>
+
+    The OSE Epsilon Kernel Awareness plugin is delivered and
+    installed as a part of the IAR Embedded Workbench&reg;
+    IDE.<p>
+  </li>
+
+  <li><b>Multiple flash loaders</b><br/>
+
+    Multiple flash loaders can be configured to support systems with
+    more than one flash memory.<p>
+  </li>
+
+  <li><b>Generic flash loader</b><br/>
+
+    The generic flash loader mechanism was introduced in version 4.10.<br/>
+    The document <a href="../FlashLoaderGuide.ENU.pdf">IAR Embedded Workbench
+    flash loader developer guide</a> describes the flash loader
+    functionality, the API and how to develop a flash loader. The source
+    code for supported flash loaders can be found in the
+    <code>...\arm\src\flashloader</code> directory.<p>
+  </li>
+
+  <li><b>I/O register definition files</b><br/>
+
+    I/O register definition files for symbolic access to registers are used
+    both when programming (C and assembler header files) and during
+    debugging. New additions in this release are:
+
+    <ul>
+      <li>Atmel AT91SAM7S128, AT91SAM7S256, AT91SAM7A3, AT91RM3400</li>
+      <li>Cirrus EP9302, EP9307</li>
+      <li>Freescale MAC7106, MAC7126, MAC7136, MAC7202, MAC7212,
+          MAC7222, MAC7242, MAC7252</li>
+      <li>NetSilicon NS9360</li>
+      <li>OKI ML67Q4050, ML67Q4051, ML67Q4060, ML67Q4061</li>
+      <li>Philips LPC2131, LPC2134, LPC2136, LPC2142, LPC2148</li>
+      <li>Samsung S3C2410, S3C2440A, S3C2440X, S3F445HX</li>
+      <li>ST STR715, STR730</li>
+      <li>Texas Instruments TMS470R1A1M</li>
+    </ul><p>
+  </li>
+
+  <li><b>Editor features</b><br/>
+
+    <ul>
+    <li>
+      Code templates in the editor allow for quick insertion of commonly
+      used code constructs. You can add your own customized code templates.
+    </li>
+
+    <li>
+      Include files can be conveniently accessed via a context menu.
+    </li>
+
+    <li>
+      Automatic parenthesis matching.
+    </li>
+    </ul>
+  </li><p>
+
+  <li><b>Trace</b><br/>
+    New trace handling. In addition to hardware trace, the new trace mechanism
+    is also available in the simulator.<p>
+  </li>
+
+  <li><b>J-Link TCP/IP server</b><br/>
+
+    The debugger can connect remotely to a J-Link JTAG interface
+    on another PC running the J-Link TCP/IP server.<p>
+  </li>
+
+
+  <li>
+    By using the <strong>Show As</strong> command, available from the
+    context menu in watch-type windows, you can select a different type
+    interpretation of a variable than the one used by default. This command can be
+    used on any variable, but typically, it is useful for assembler labels
+    as they by default are treated as variables of type <font
+    face="Courier">int</font>.<br/>
+  </li>
+  <p>
+  <li>
+    The Memory window now displays "--" for each <em>individual</em>
+    memory unit that cannot be read-accessed, as opposed to the whole row.<br/>
+  </li>
+  <p>
+  <li>
+    It is now possible to launch the interactive debugger with a
+    given debug file, and pass command line parameters. <br/>
+  </li>
+
+</ul>
+
+
+<h4>V4.20A  2005-01-10</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    Adding multiple source files with the same name would cause valid but
+    annoying repeating error messages in the Build log window. This has been
+    corrected and now the error message doesn't appear until an actual build
+    operation is performed (and it only appears once).<br/>
+    [EW15483]
+  </p></li>
+
+  <li><p>
+    The option to choose project files has been put back in the <b>Find in
+    Files</b> dialog box. The dialog box has also been redesigned.<br/>
+    [EW15634]
+  </p></li>
+
+  <li><p>
+    Errors in custom build settings could cause annoying repeating error
+    messages in the Build log window. Also, certain custom build errors
+    could cause some problems with subsequent builds even after being
+    corrected.<br/>
+    [EW15638 (EW15636)]
+  </p></li>
+
+  <li><p>
+    The SSI2 and UART3 registers were missing in the file
+    <code>iomc9328mx1.h</code>.<br/>
+    [EW15658,EW15677]
+  </p></li>
+
+  <li><p>
+    Incorrect bit definitions were used for the ICR registers of the GPIO
+    module in the file <code>iomc9328mx1.h</code>.<br/>
+    [EW15662]
+  </p></li>
+
+  <li><p>
+    DMA channel registers were numbered 1-11 instead of 0-10 in the file
+    <code>iomc9328mx1.h</code>.<br/>
+    [EW15572]
+  </p></li>
+
+  <li><p>
+    An icon in the workspace window looked confusingly like a check box.
+    It has been replaced by a less ambiguous icon.<br/>
+    [EW15688]
+  </p></li>
+
+  <li><p>
+    The option dialog box allowed settings that are incompatible with the
+    chosen chip (<code>.i79</code>) file.<br/>
+    [EW15724]
+  </p></li>
+
+  <li><p>
+    The file <code>low_level_init.s79</code> could not be assembled.<br/>
+    [EW15809]
+  </p></li>
+
+  <li><p>
+    The GPIO2 and GPIO3 registers were missing in the files
+    <code>iolpc2212.h</code> and <code>iolpc2214.h</code>.<br/>
+    [EW15999, EW16189]
+  </p></li>
+
+  <li><p>
+    The Philips flash loaders have changed names to
+    <code>FlashPhilipsLPC128k.d79</code> for 128 Kbytes devices and
+    <code>FlashPhilipsLPC256k.d79</code> for 256 Kbytes devices. LPC2212 now
+    uses the 128 Kbytes variant and LPC2124 uses the 256 Kbytes
+    flash loader.<br/>
+    [EW16057]
+  </p></li>
+
+  <li><p>
+    The derivative support files <code>iolpc2294.h</code> and
+    <code>iolpc2292.h</code> were missing definitions for the registers IO2PIN,
+    IO2SET, IO2DIR, IO2CLR, IO3PIN, IO3SET, IO3DIR and IO3CLR.<br/>
+    [EW16141]
+  </p></li>
+
+  <li><p>
+    A few register definitions in the PIO modules were missing in
+    <code>ioat91rm9200.h</code> and <code>ioat91rm9200.ddf</code>.<br/>
+    [EW16163]
+  </p></li>
+
+  <li><p>
+    Some interrupt sources were incorrect, and some were missing in the
+    files <code>iolpc2114.h</code>, <code>iolpc2124.h</code>, <code>iolpc2212.h</code>
+    and <code>iolpc2214.h</code>.<br/>
+    [EW16190]
+  </p></li>
+</ul>
+<b>New features</b>
+<ul>
+  <li><b>Integration with source code control systems</b><br/>
+
+    IAR Embedded Workbench can identify and access any third-party source
+    code control system that conforms to the SCC interface published by
+    Microsoft.
+  </li><p>
+
+  <li><b>MISRA C support</b><br/>
+
+    The Motor Industry Software Reliability Association (MISRA)
+    has developed a set of guidelines for C programming of
+    safety-related embedded automotive systems. IAR Embedded
+    Workbench now supports automatic checking of most of
+    these rules. For more information, see the <a
+    href="../EW_MisraC1998Reference.ENU.pdf">IAR
+        Embedded Workbench MISRA C Reference Guide</a>.
+  </li><p>
+
+  <li><b>Multiple and virtual inheritance</b><br/>
+
+    Support for C++ multiple inheritance and virtual inheritance.
+  </li><p>
+
+  <li><b>Source browser</b><br/>
+
+    The source browser has been improved. New features include
+    filtering and sorting of symbols. 
+  </li><p>
+
+  <li><b>Linking of raw binary images</b><br/>
+
+    The linker can link raw binary images directly. This is useful for linking
+    large binary data like multimedia files.
+  </li><p>
+
+  <li><b>Compiler optimizations</b><br/>
+
+    Improved optimizations will give faster target code execution and
+    smaller code size.<p>
+  </li>
+
+  <li><b>Improved context-sensitive help</b><br/>
+
+    Context-sensitive compiler reference information is now available in
+    the online help system, for example on intrinsic functions and extended
+    keywords.<p>
+  </li>
+
+  <li><b>Generic flash loader</b><br/>
+
+    The generic flash loader mechanism was introduced in version 4.10.<br/>
+    The document <a href="../FlashLoaderGuide.ENU.pdf">IAR Embedded Workbench
+    flash loader developer guide</a> describes the flash loader
+    functionality, the API and how to develop a flash loader. The source
+    code for supported flash loaders can be found in the
+    <code>...\arm\src\flashloader</code> directory.<p>
+  </li>
+
+  <li><b>Flash loaders</b><br/>
+
+    Flash loaders for the following devices are included in the installation
+    <ul>
+      <li>Analog Devices ADuC7020, ADuC7021, ADuC7022, ADuC7024, ADuC7025,
+          ADuC7026, ADuC7027</li>
+      <li>Atmel AT91SAM7S32, AT91SAM7S64</li>
+      <li>Freescale MAC7101, MAC7111, MAC7112, MAC7121, MAC7122, MAC7131, MAC7141, MAC7142</li>
+      <li>Philips LPC2104, LPC2105, LPC2106, LPC2114, LPC2124, LPC2212,
+          LPC2214, LPC2119, LPC2129, LPC2194, LPC2292, LPC2294</li>
+      <li>ST STR710, STR711, STR712</li>
+      <li>Texas Instruments TMS470R1A128, TMS470R1A256, TMS470R1A384</li>
+    </ul><p>
+  </li>
+
+  <li><b>I/O register definition files</b><br/>
+
+    I/O register definition files for symbolic access to registers are used
+    both when programming (C and assembler header files) and during
+    debugging. New additions in this release are:
+
+    <ul>
+      <li>Atmel AT91SAM7S32, AT91SAM7S64</li>
+      <li>Philips LPC2132, LPC2138</li>
+      <li>ST STR710, STR711, STR712, STR720</li>
+      <li>Texas Instruments TMS470R1A128, TMS470R1A256, TMS470R1A384</li>
+    </ul><p>
+  </li>
+
+  <li><b>Example projects</b><br/>
+
+    Example projects for various evaluation boards, including evaluation
+    boards from IAR Systems, Analog Devices, Aiji Systems, ARM, Atmel,
+    Cirrus Logic, Freescale, Keil, OKI, Olimex, Pasat, Philips, Phytec,
+    ST and Texas Instruments, are included in the installation, see the
+    <code>...\arm\examples</code> directory.<p>
+  </li>
+
+  <li>
+    <b>Find in files</b><br/>
+    The find in files search mechanism has been improved. Various search
+    scopes can be specified like project files, directory and file groups. 
+  </li><p>
+
+  <li>
+    <b>Drag and drop to project manager</b><br/>
+    Drag and drop of files to the project manager, and project files
+    to the workspace.
+  </li><p>
+
+  <li>
+    <b>Auto indent</b><br/>
+    The editor can auto indent according to C syntax.
+  </li><p>
+
+  <li>
+    <b>Pre and post build</b><br/>
+    Pre and post build commands can be configured.
+  </li><p>
+
+  <li>
+    <b>File viewers</b><br/>
+    Files in a project can now be opened with another application than the
+    built-in editor. Choose <b>Tools&gt;Configure Viewers</b> and configure
+    which application to use with a certain filename extension.
+  </li><p>
+
+  <li>
+    <b>File properties</b><br/>
+    You can now right-click a file in the Workspace window to display
+    the file properties.
+  </li><p>
+
+  <li>
+    <b>File status</b><br/>
+    File name and line number are now displayed in the <b>Build log
+    </b>window.
+  </li><p>
+
+  <li>
+    <b>Compiling a selection of source files</b><br/>
+    The <b>Compile </b>command can now be applied to a selection of source
+    files.
+  </li><p>
+
+  <li>
+    <b>Editing in the Memory window</b><br/>
+    Editing memory in the Memory window now applies to a whole unit
+    (8/16/32). When you start typing, an edit box appears with the contents
+    of the part of the memory you are about to modify. The data is not
+    written until the box is closed.
+  </li><p>
+
+  <li>
+    <b>Editor removal of trailing blanks</b><br/>
+    The editor now removes trailing blanks when text files are saved.
+    To turn off this feature choose <b>Tools&gt;Options</b>
+    and click the <b>Editor</b> tab and select <b>Remove trailing blanks</b>.<br/>
+  </li><p>
+</ul>
+
+<h4>V4.11A  2004-06-10</h4>
+<b>Program corrections</b><p>
+<ul>
+
+  <li><p>
+    The context help did not work for the debugger option dialogs associated
+    with JTAG and ROM monitors.<br/>
+    [EW15001]
+  </p></li>
+
+  <li><p>
+    Converting a project file (.pew) created with the old project
+    manager (3.30 and older) could crash the IDE.<br/>
+    The conversion actually succeeded and completed before the IDE crashed.
+    The workaround was to restart the Embedded Workbench and add the new project
+    file (.ewp) to the workspace.<br/>
+    Note that the new project file (.ewp) was created
+    just before the crash of the IDE when converting the old project (.pew).<br/>
+    [EW15027]
+  </p></li>
+
+  <li><p>
+    Pressing F1 in the C-SPY Live Watch window displayed help for the Watch window.<br/>
+    [EW15100]
+  </p></li>
+
+  <li><p>
+    The flash loader API documentation was missing from the product installation.<br/>
+    [EW15397]
+  </p></li>
+
+  <li><p>
+    The GPIO address in iolh75401.h had the wrong value.<br/>
+    [EW15399]
+  </p></li>
+
+  <li><p>
+    The obsolete segment HUGE_Z was used in swi_handler.s79 instead of DATA_Z.<br/>
+    [EW15415]
+  </p></li>
+
+  <li><p> 
+    The file <code>arm\src\sim\stack.xcl</code> contained obsolete segment names.<br/>
+    [EW15416]
+  </p></li>
+</ul>
+<b>New features</b>
+<ul>
+  <li><b>
+    Compiler optimizations</b><br/>
+    Improved speed optimizations will give faster target code execution.<p>
+  </li>
+
+  <li><b>
+    More C99 features</b><br/>
+    The following C99 features can now be used in the C language if language 
+    extensions (-e) are enabled:</li>
+    <ul>
+      <li>The <code>inline</code> keyword. It works as the C++ inline keyword (and the 
+      <code>#pragma inline</code> declaration).</li>
+      <li>Mixing declarations and statements within the same scope.</li>
+      <li>Having a declaration in the initialization expression of a for-loop.</li>
+    </ul><p>
+  </li>
+
+  <li><b>
+    CMX Tiny+ RTOS plugin</b><br/>
+    A CMX Tiny+ RTOS plugin for the IAR C-SPY Debugger is now included
+    in the product. When used together with the CMX Tiny+ RTOS, which is
+    available separately from CMX Systems, the plugin facilitates powerful
+    RTOS-aware debugging.
+    Visit the <a href="http://www.cmx.com/">http://www.cmx.com</a>
+    web site for details about CMX Tiny+.<p>
+  </li>
+
+  <li><b>
+    Macraigor USBdemon</b><br/>
+    The Macraigor USBdemon JTAG interface is supported.<p>
+  </li>
+
+  <li><b>
+    Generic flash loader</b><br/>
+    The generic flash loader mechanism was introduced in version 4.10.
+    The API has been improved in 4.11 to facilitate the development of custom flash loaders.<br/>
+    The document
+    <a href="../FlashLoaderGuide.ENU.pdf">IAR Embedded Workbench flash loader developer guide</a>
+    describes the flash loader functionallity, the API and how to develop
+    a flash loader. The source code for supported flash loaders can be found in the
+    <code>...\arm\src\flashloader</code> directory.<p>
+  </li>
+
+  <li><b>
+    Flash loaders</b><br/>
+    Flash loaders for the following devices are included in the installation
+    <ul>
+      <li>Analog Devices ADuC7020, ADuC7021, ADuC7022, ADuC7024, ADuC7025, ADuC7026, ADuC7027</li>
+      <li>Philips LPC2104, LPC2105, LPC2106, LPC2114, LPC2124, LPC2212, LPC2214,
+          LPC2119, LPC2129, LPC2194, LPC2292, LPC2294</li>
+    </ul><p>
+  </li>
+
+  <li><b>
+    I/O register definition files</b><br/>
+    I/O register definition files for symbolic access to registers are used
+    both when programming (C/assembler header files) and during debugging. New additions
+    in this release are
+    <ul>
+      <li>Analog Devices ADuC7020, ADuC7021, ADuC7022, ADuC7024, ADuC7025, ADuC7026, ADuC7027</li>
+      <li>Atmel AT91SAM7S64</li>
+      <li>Cirrus EP9301, EP9315</li>
+      <li>Motorola MAC7100, MAC7101, MAC7111, MAC7112, MAC7121, MAC7122, MAC7131, MAC7141, MAC7142</li>
+      <li>Philips LPC2130</li>
+    </ul><p>
+  </li>
+
+  <li><b>
+    USB dongles</b><br/>
+    The license management system now supports USB dongles.
+    Parallel port dongles will continue to be supported.<p>
+  </li>
+
+  <li><b>
+    NDEBUG</b><br/>
+    The project manager by default defines the symbol <code>NDEBUG</code>
+    for release projects.
+  </li><p>
+
+  <li><b>
+    Log of build output</b><br/>
+    The build messages generated when a project is built can be logged to a file.
+  </li><p>
+
+</ul>
+
+
+<h4>V4.10B  2004-03-09</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    Small windows close to the screen end could become inaccessible when
+    moving a project to a computer with lower screen resolution.<br/>
+    [EW13210]
+  </p></li>
+
+  <li><p>
+    The default linker control file produced by the command file
+    configuration tool generated a link error.<br/>
+    [EW14942]
+  </p></li>
+
+  <li><p>
+    The selection of the default flash loader did not work. Even if the
+    path was correct it would fail.<br/>
+    [EW14999]
+  </p></li>
+
+  <li><p>
+    The source browser could in some situations fail, the failing mode
+    could vary. The Workbench could hang, consume too much CPU power or use
+    large amounts of memory.<br/>
+    [EW15000]
+  </p></li>
+</ul>
+<b>New features</b>
+<ul>  
+  <li><b>
+    Compiler optimizations</b><br/>
+    Improved optimizations will give up to 10% smaller code in both ARM and
+    Thumb mode.<p>
+  </li>
+
+  <li><b>
+    Easier window management</b><br/>
+    Dockable windows make it easier to organize windows.
+    Windows can be organized in tab groups.<p>
+  </li>
+
+  <li><b>
+    Source browser</b><br/>
+    Builds a catalog of functions, variables, macros, classes and member
+    functions. The source browser allows quick navigation to definitions
+    and declarations.<p>
+  </li>
+
+  <li><b>
+    Improved context sensitive help</b><br/>
+    In addition to standard context help functions, it is now possible to
+    click on keywords and library functions in the editor and quickly
+    get to the help page.<p>
+  </li>
+
+  <li><b>
+    Generic flash downloader framework</b><br/>
+    Flash loaders can be loaded by the IAR C-SPY Debugger to handle code
+    download to flash memory. A set of flash loaders for various chips is
+    provided with the EWARM distribution.  Due to the vast amount of flash
+    solutions in the ARM marketplace it is likely that more flash loaders
+    will be provided by chip manufacturers, third party vendors and end
+    users.  Flash loader API, documentation and an example loader in source
+    form is provided to make it easy for developers to implement flash
+    algorithms.<p>
+  </li>
+
+  <li><b>
+    IAR/Segger J-Link JTAG interface</b><br/>
+    The IAR/Segger J-Link JTAG interface is supported by the debugger.<p>
+  </li>
+
+  <li><b>
+    ETM trace</b><br/>
+    The IAR C-SPY Debugger now supports the ARM ETM (Embedded Trace
+    Macrocell) trace when using the EPI Majic JTAG interface.<p>
+  </li>
+
+  <li><b>
+    Compatible with the RTXC Quadros from Quadros Systems</b><br/>
+    The IAR Embedded Workbench for ARM now fully supports the RTXC Quadros,
+    and a plugin for the IAR C-SPY Debugger is available from Quadros Systems.
+    Please visit Quadros Systems at <a href="http://www.quadros.com/">
+    http://www.quadros.com</a> for details about RTXC Quadros and their
+    IAR C-SPY Debugger plugin.<p>
+  </li>
+
+  <li><b>
+    Optimized handling of large applications</b><br/>
+    Large applications which are larger than 4 MB in Thumb mode and larger
+    than 32 MB in ARM mode, need relay functions to branch/call functions
+    outside that area. The linker will automatically use the optimal way of
+    branching. Because of this, there is no need for the small/large code
+    models used in previous versions.<p>
+  </li>
+
+  <li><b>
+    VFP floating-point support</b><br/>
+    The ARM VFP floating-point coprocessors are supported. The whole tool
+    chain is VFP aware; the compiler, assembler, and debugger.<p>
+  </li>
+
+  <li><b>
+    Coprocessor intrinsic functions</b><br/>
+    New intrinsic functions make it possible to access ARM coprocessors from
+    C/C++ without having to revert to assembler or inline assembler.<p>
+  </li>
+
+  <li><b>
+    Easy configuration of the C/C++ libraries</b><br/>
+    The C/C++ libraries come in two variants, normal and full. Each variant
+    can be further customized to reach an optimum balance between
+    functionality and size. To allow even more detailed tuning of the
+    libraries, the library configuration and individual source files can be
+    modified. A template project is available to make it easy to rebuild the
+    whole C/C++ library.<p>
+  </li>
+
+  <li><b>
+    I/O register definition files</b><br/>
+    I/O register definition files for symbolic access to registers are used
+    both when programming (header files) and during debugging. New additions
+    in this release are Atmel AT91RM9200, Intel XScale PXA255, OKI ML674000,
+    ML674001, ML67Q4002, ML67Q4003, ML675001, ML67Q5002, ML67Q5003, Motorola
+    Dragonball MC9328MX1, Philips LPC2114, LPC2124, LPC2212, LPC2214,
+    LPC2119, LPC2129, LPC2194, LPC2292, LPC2294, Sharp LH7A400, LH7A404,
+    LH75400, LH75401, LH75410 and LH75411.<p>
+  </li>
+
+  <li><b>
+    New example projects</b><br/>
+    Example projects for various evaluation boards, including boards from IAR
+    Systems, Aiji Systems, ARM, Atmel, Cirrus Logic, OKI, and Philips, are
+    included in the installation, see the ...\arm\examples directory.<p>
+  </li>
+
+  <li><b>
+    Nested interrupts</b><br/>
+    A new compiler keyword, <code>__nested</code>, will generate interrupt
+    function code that allows nested interrupts.<p>
+  </li>
+
+
+  <li><b>
+    Smart display of STL containers during debugging</b><br/>
+    Allows objects in STL containers to be viewed and manipulated.<p>
+  </li>
+
+  <li><b>
+    New auto-display debugger window</b><br/>
+    Displays currently active variables and objects.<p>
+  </li>
+
+  <li><b>
+    Startup screen</b><br/>
+    The workbench optionally displays a startup screen where projects can be
+    opened and created. New projects can be based on templates to get started
+    quickly.<p>
+  </li>
+
+  <li><b>
+    Template projects</b><br/>
+    When creating a project, you can base it on a project template. Project
+    templates can be C, C++, assembler or library projects. Template projects
+    can also be used to prefabricate project configurations that can be used
+    in development groups.<p>
+  </li>
+
+  <li><b>
+    Improved debugger plugin management</b><br/>
+    Gives an overview of available plugins and the possibility to
+    enable/disable individual plugins.<p>
+  </li>
+</ul>
+
+<h4>V4.10A  2004-02-21</h4>
+<ul>
+  <li><p>
+    Executing a "Memory Fill" command for very large chunks of memory could
+    take a long time and occasionally lead to debugger crashes.<br/>
+    [EW14252]
+  </p></li>
+
+  <li><p>
+    Mixing Embedded Workbench products based on different generations of
+    internal platforms could cause the wrong Workbench IDE to be opened
+    when double clicking on old project files (.pew). EWARM version 4.x is
+    installed in a separate directory, thereby solving this problem.<br/>
+    [EW14254]
+  </p></li>
+
+  <li><p>
+    The Embedded Workbench can now be closed and the workspace can be
+    changed even when the debugger is running.<br/>
+    [EW14375]
+  </p></li>
+
+  <li><p>
+    Opening a workspace in the EWARM-LE limited edition opened an error
+    dialog box with the message<br/> <code>Failed to locate the Debugger
+    package "DebuggerGui.dll"</code><br/> <code>No debugger will be
+    present</code><br/>
+    [EW14512]
+  </p></li>
+</ul>
+
+<h4>V3.40C  2003-12-15</h4>
+<ul>
+    <li>The linker file configurator did not start.<br/>
+     [EW14240,EW14242]
+    </li>
+</ul>
+
+<h4>V3.40A  2003-07-03</h4>
+<b>Program corrections</b><p>
+<ul>
+
+  <li><p>
+    Extra command line options did not allow space.<br/>
+    [EW12324]
+  </p></li>
+</ul>
+  <b>New features</b>
+ <ul>
+<li><b>
+    New Embedded Workbench project manager</b><br/>
+    In the new project manager the workspace concept is introduced.
+    It gives you the possibility to collect all your related projects in the same
+    workspace.<br/>
+    The new project manager also gives easy access to compiler and assembler list files.<p>
+  </li>
+
+  <li><b>
+    Express Logic ThreadX RTOS plugin</b><br/>
+    A ThreadX RTOS plugin for the IAR C-SPY debugger is now included
+    in the product. When used together with the ThreadX RTOS, which is
+    available separately from Express Logic Systems, the plugin facilitates powerful
+    RTOS-aware debugging.
+    Please visit <a href="http://www.expresslogic.com/">http://www.expresslogic.com</a>
+    for details about ThreadX.<p>
+  </li>
+
+  <li><b>
+    VFP floating point support</b><br/>
+    The ARM VFP floating point coprocessors are now supported.
+    The whole tool chain is VFP aware; the compiler, assembler, and debugger.<p>
+  </li>
+
+  <li><b>
+    Macraigor mpDemon JTAG interface</b><br/>
+    The Macraigor mpDemon JTAG interface is supported. All possible connections
+    (Ethernet, parallel, and serial) are supported.<p>
+  </li>
+
+  <li><b>
+    Macraigor on ARM9</b><br/>
+    The Macraigor C-SPY debugger driver now supports ARM9 cores.<p>
+  </li>
+
+  <li><b>
+    Support for EPI's Jeeni over ethernet</b><br/>
+    The IAR C-SPY debugger now supports connection to the Jeeni JTAG emulator from EPI
+    over Ethernet in addition to the serial port connection.<p>
+  </li>
+
+  <li><b>
+    I/O register definition files</b><br/>
+    I/O register definition files for symbolic access to registers are
+    used both when programming (header files) and during debugging.
+    New additions in this release are Cirrus EP9312, Philips LPC210x, OKI ML674001,
+    ML67Q4002 and ML67Q4003.<p>
+  </li>
+
+  <li><b>
+    New example projects</b><br/>
+    Example projects for various evaluation boards, including boards
+    from Aiji Systems, ARM, Atmel, Cirrus Logic, OKI, and Philips, are included
+    in the installation, see the ...\arm\examples directory.<p>
+  </li>
+
+</ul>
+
+<h4>V3.30A  2003-02-18</h4>
+<ul>
+  <li><b>
+    CMX-RTX RTOS plugin</b><br/>
+    A CMX-RTX RTOS plugin for the IAR C-SPY debugger is now included
+    in the product. When used together with the CMX-RTX RTOS, which is
+    available separately from CMX Systems, the plugin facilitates powerful
+    RTOS-aware debugging.
+    Please visit <a href="http://www.cmx.com/">http://www.cmx.com</a>
+    for details about CMX-RTX.<p>
+  </li>
+
+  <li><b>
+    Compatible with the uC/OS-II RTOS</b><br/>
+    The IAR Embedded Workbench for ARM now fully supports the uC/OS-II RTOS,
+    and a plugin for the IAR C-SPY debugger is available from Micri&micro;m.
+    Please visit Micri&micro;m at <a href="http://www.micrium.com/">
+    http://www.micrium.com</a> for details about uC/OS-II and their
+    IAR C-SPY debugger plugin.<p>
+  </li>
+
+  <li><b>
+    Extended EC++ support</b><br/>
+    Support for EC++ has been extended with templates and STL. Now it is
+    possible to use advanced C++ features such as templates, namespaces,
+    mutable, static cast, reinterpret cast, and const cast.<p>
+  </li>
+
+  <li><b>
+    Support for Angel</b><br/>
+    The IAR C-SPY debugger now supports the Angel ROM-monitor protocol,
+    which is very popular on evaluation boards. Now you can connect
+    directly to those boards by simply connecting a serial cable between
+    your PC and the evaluation board.<p>
+  </li>
+
+  <li><b>
+    Support for EPI's Jeeni</b><br/>
+    The IAR C-SPY debugger now supports the Jeeni JTAG emulator from EPI.
+    Now you can create your application in the IAR Embedded Workbench,
+    download it using Jeeni, and use the debug features of C-SPY.<p>
+  </li>
+
+  <li><b>
+    I/O register definition files</b><br/>
+    I/O register definition files for symbolic access to registers are
+    used both when programming (header files) and during debugging.
+    New additions in this release are Intel XScale IOP321, PXA210, and
+    PXA250, Cirrus EP73xx.h, and Samsung S3C4530A. It has also been
+    verified that the Atmel chips AT91F40816, AT91FR40162, AT91FR4042,
+    and AT91FR4081 are supported through existing definition files.<p>
+  </li>
+
+  <li><b>
+    Multibyte character support in compiler</b><br/>
+    The compiler now supports multibyte characters, which makes it
+    possible to write strings and comments in Asian languages.<p>
+  </li>
+
+  <li><b>
+    Linker setup editor</b><br/>
+    A user friendly graphical tool which generates the linker configuration
+    file (.xcl) is now integrated into the IAR Embedded Workbench for ARM.<p>
+  </li>
+
+  <li><b>
+    File I/O debugger support</b><br/>
+    Support for file I/O now allows the target application to
+    access the host PC file system.<p>
+  </li>
+
+  <li><b>
+    Simulator trace module</b><br/>
+    A new trace module now allows tracing of applications which are
+    executing in the IAR C-SPY simulator.<p>
+  </li>
+
+  <li><b>
+    Example Projects</b><br/>
+    Example projects for various evaluation boards, including boards
+    from Aiji Systems, ARM, Atmel, Cirrus Logic, and OKI, are included
+    in the installation.<p>
+  </li>
+
+</ul>
+
+<h4>V3.21A  2002-09-27</h4>
+<ul>
+  <li><p>
+    The wrong library was selected when generating code for XScale.<br/>
+    [EW12344]<p>
+  </p></li>
+
+</ul>
+
+<h4>V3.20A  2001-12-04</h4>
+<b>Program corrections</b><p>
+<ul>
+  <li><p>
+    The XLINK option '-ysa' could not be specified.<br/>
+    [EW11518]<p>
+  </p></li>
+</ul>
+<b>New features</b>
+<ul>
+  <li>
+    ARM instruction set version 5TE is supported in addition to version 4T.</li>
+    <br/>The ARM families ARM7, ARM9, ARM9E and ARM10 are supported.
+    <br/>The Intel XScale architecture (excluding co-processors) is supported.
+  <li>
+    <b>IAR Launcher</b> is an application that searches your computer for installed
+    IAR applications and then displays them in a convenient menu for quick
+    access. IAR Launcher resides in your system tray as an icon until you activate
+    it by clicking on it. Please see the separate readme file in the Start menu 
+    for more information.</li>
+  <li>
+    Example projects for a few evaluation boards are available in the directory ...\ARM\src.</li>
+</ul>
+
+<h4>V3.11A  2001-12-04</h4>
+<ul>
+  <li><p>
+    Source files with the .cpp or .cc extension are now treated as source files.
+  </p></li>
+
+</ul>
+
+<h4>V3.10A  2001-10-04</h4>
+<ul>
+  <li>
+    This version of the IAR Embedded Workbench introduces C-SPY 3.2, a new
+    debugger generation. Some of the principal features are:</li>
+    <ul>
+      <li>
+        Tight integration with the IAR Embedded Workbench IDE</li>
+      <li>
+        Support for real stack backtrace</li>
+      <li>
+        Support for RTOS-aware debugging</li>
+      <li>
+        A modular and extensible architecture</li>
+    </ul>
+  <li>
+    This product is supported on Windows 98, NT, ME, 2000 and XP.</li>
+  <li>
+    <b>IAR UML State Chart Design and Simulation Tool</b> is a collection of
+    software tools for designing and simulating real-time applications. This
+    tool is installed separately from the product CD.</li>
+  <li>
+    Support for Embedded C++.</li>
+  <li>
+    Support for the ARM9TDMI core.</li>
+  <li>
+    Support for the big-endian byte order.</li>
+
+</ul>
+    </div>
+</body>
+</html>

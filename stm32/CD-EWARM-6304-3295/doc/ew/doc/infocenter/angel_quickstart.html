@@ -1,0 +1,74 @@
+<html>
+<head>
+   <title>QuickStart reference for Angel ROM-monitors and JTAG interfaces</title>
+</head>
+<body bgcolor="#FFDE00">
+
+<h1>
+QuickStart reference for Angel ROM-monitors and JTAG interfaces</h1>
+<!-- $Id: angel_quickstart.html 47534 2011-10-13 07:33:25Z danielru $ -->
+<p>
+
+<h2>
+<a NAME="ANGELEVAL"></a>
+Getting started with the Angel evaluation board</h2>
+Follow these instructions to set up a project for your evaluation board:
+<h3>
+Example:</h3>
+
+<ul>
+<li>
+Connect the evaluation board to your host computer.</li>
+<p>
+<li>
+Start the IAR Embedded Workbench and create a new project, or open an existing project.
+</li>
+<p>
+<li>
+To use the Angel driver, open the project settings and select the Angel driver in the C-SPY Setup page.
+Angel-specific options can now be set in the Angel page, shown in the picture below.
+The Angel monitor always starts to communicate at 9600 baud, and then switches to the baudrate
+specified in Serial Port Settings.
+</li>
+</ul>
+
+<ul><img SRC="images/Angel_dialog_1.jpg" height=450 width=540>
+<br>&nbsp;
+<li>
+Make sure that you have a linker command file that matches your hardware. To select a linker command file, choose <b>Project>Options</b>
+and go to the Include page of the <b>XLINK</b> category. Sample linker command 
+files can be found for a number of boards under the <tt><font size=+1>...\arm\examples</font> </tt>directory.</li>
+<p>
+<li>
+To setup your own linker file, select Override default and click the <b>XCL file configuration</b> button to enter the linker file configuration tool.
+</li>
+</ul>
+
+<ul><img SRC="images/Angel_dialog_2.jpg" height=450 width=540>
+<br>&nbsp;
+<li>
+You can now start the debug session. Choose <b>Project>Debug</b> (or click
+the <b>C-SPY</b> button on the toolbar) to download the code to the target
+and start debugging.</li>
+</ul>
+
+<h3>
+Ready-made example projects:</h3>
+
+<ul>
+<li>
+Under the <tt><font size=+1>...\arm\examples</font> </tt>directory there is a number of ready
+made projects for Angel evaluation boards. The <tt><font size=+1>readme.txt</font></tt> file
+delivered with each project contains detailed information about the project. 
+Ready-made projects can be found for:<br>
+ARM Evaluator7t board<br>
+Atmel AT91EB40, AT91EB40A, AT91EB42, AT91EB55 and AT91EB63 boards<br>
+Cirrus Logic EDB7312 board<br>
+</li>
+</ul>
+
+
+<ul><font size=-1>Copyright &copy; 1999-2011 IAR Systems AB.</font></ul>
+
+</body>
+</html>

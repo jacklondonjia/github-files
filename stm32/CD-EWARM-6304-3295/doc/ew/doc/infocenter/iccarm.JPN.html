@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: iccTARGET.html 123 2011-11-01 13:01:33Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+
+<title>ARM用IAR C/C++ コンパイラのリリースノート</title>
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+ARMバージョン6.30.4用IAR C/C++ コンパイラのリリースノート
+        </h2>
+    </div>
+    <div class="breadcrumb">
+<a href="index.JPN.html">ARM用IARインフォメーションセンタ </a> | <a href="release_notes.JPN.html">リリースノート</a> | <a href="components.JPN.html">コンポーネント</a> | ARM用 IAR C/C++ コンパイラのリリースノート
+    </div>
+    <div class="mainblock">
+        <ul>
+<li><a href="#important">重要な情報</a> </li>
+<li><a href="#features">新機能</a> </li>
+<li><a href="#problems">既知の問題</a> </li>
+<li><a href="#pcorr">プログラム修正</a> </li>
+<li><a href="#manuals">ユーザガイドの訂正</a> </li>
+<li><a href="#misc">その他</a> </li>
+<li><a href="#history">リリース履歴</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+<a name="important" id="important"></a>重要な情報
+        </h3>
+﻿   <ul>
+      <li>
+        <p>
+文字の分類(<code>ctype.h</code>)に使用される、スペースを消費するテーブルを回避するには、<code>ctype.h</code>ファイルがインクルードされる前にプリプロセッサシンボル<code>__NO_CTYPE_TABLES</code>を定義してください。
+        </p>
+      </li>
+
+      <li>
+        <p>
+Cortex-M3用のコードを生成する際に、リストにベースレジスタを持つLDRDをコンパイラが回避するようになりました。これは、Cortex-M3の誤り602117への対応策です。
+        </p>
+      </li>
+
+      <li>
+<b>EWARM 6.10.2の新機能:</b><br>
+        <p>
+<code>--guard_calls</code>コマンドラインオプションが導入されました。<code>--guard_calls</code>は、常にEC++/C++で記述された、スレッドセーフのライブラリ関数呼出しを必要とするアプリケーションで使用する必要がある点に注意してください。詳しくは、<A href="../EWARM_DevelopmentGuide.JPN.pdf">開発ガイド</A>を参照してください。
+        </p>
+        <p>
+<code>--no_guard_calls</code>コマンドラインオプションが削除されました。
+        </p>
+        <p>
+<code>--aeabi</code>コマンドラインオプションの動作が変更になり、保護呼出しがデフォルトで使用されなくなりました。<br>ARM 5.xおよび6.10.1用IAR C/C++ CompilerからARM 6.10.2用IAR C/C++ Compilerへの移行:<br> <code>--aeabi</code> (<code>--no_guard_calls</code>なし)は<code>--aeabi --guard_calls</code>に置換<br> <code>--aeabi --no_guard_calls</code>は<code>--aeabi</code>に置換<br>
+        </p>
+      </li>
+
+      <li>
+<b>EWARM 6.20の新機能:</b><br>
+        <p>
+<code>time()</code>関数を実装したユーザは、名称を<code>__time32()</code>に変更してください。詳しくは、<A href="../EWARM_DevelopmentGuide.JPN.pdf">開発ガイド</A>を参照してください。
+        </p>
+      </li>
+
+      <li>
+<b>CMSIS統合に関する特記事項:</b><br>
+        <p>
+アプリケーションのソースコードにCMSISヘッダファイルが明示的にインクルードされている場合、<b>[CMSISを使用]</b>チェックボックス<b>[プロジェクト]&gt;[オプション]...&gt;[一般オプション]&gt;[ライブラリ構成]&gt;[CMSISを使用]</b>を選択しないでください。一部のCortex-Mアプリケーションの例には、CMSISのソースファイルが明示的にインクルードされています。これらのプロジェクトでは前述のチェックボックスを選択しないでください。<br><br> ただし、ARM用IAR C/C++ Compilerの進化によって、旧バージョンのCMSISと最新バージョンのコンパイラは互換性がありません。この問題を解決する簡単な一例は以下のとおりです:<br>a) F4を押して間違ったソース(ヘッダ)ファイルをエディタで開きます。通常は<code>core_cm3.h</code>というファイル名です。<br> b) エディタウィンドウの[ウィンドウ]タブを右クリックして、<b>[ファイルプロパティ...]</b>を選択します。<br> c) ファイル名に何らかの文字を追加(または削除)して、コンパイラが見つけられないようにします。<br> d) プロジェクトオプションを変更します:<b>[プロジェクト]&gt;[オプション...]&gt;[一般オプション]&gt;[ライブラリ構成]&gt;[CMSISを使用]</b>を選択します。<br>手順 a) から c) は、複数のファイルに対して行わなければならないことがあります。通常はこれらのファイル名<code>core_cm0.h</code>、<code>core_cm3.h</code>、<code>core_cm4.h</code>、<code>core_cmFunc.h</code>、<code>core_cmInstr.h</code>です。<br><br> ARM用IAR Embedded WorkbenchでのCMSISの統合について詳しくは、<A href="../EWARM_DevelopmentGuide.JPN.pdf">開発ガイド</A>を参照してください。
+        </p>
+      </li>
+    </ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+<a name="features" id="features"></a>新機能
+        </h3>
+﻿<ul>
+<li>なし。</li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+<a name="problems" id="problems"></a>既知の問題
+        </h3>
+﻿    <ul>
+      <li>
+        <p>
+C/C++ライブラリのヘッダファイル<code>time.h</code>が、ライブラリ関数<code>mktime</code>を宣言します。分割されたタイムコンポーネント<code>tm_isdst</code>（<code>tm</code>構造体関数パラメータの一部）にあるマイナスの値を用いて呼び出された場合、<code>mktime</code>は<em>Daylight Saving Time</em>が指定の時間に有効なのかどうかを判断できません。<br>[EW14632]
+        </p>
+      </li>
+    </ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+<a name="pcorr" id="pcorr"></a>プログラム修正
+        </h3>
+﻿<ul>
+<li>
+  <p>
+MISRA-C 2004を選択したときに、診断メッセージに正しい規則番号が記載されるようになりました。<br>[EW22347]
+  </p>
+</li>
+
+<li>
+  <p>
+定数式の根底型が他の式と同じように評価されるようになりました。これは、MISRA-C:2004 6.10.4の特定の定数式に関する規則から逸脱します。IARシステムズとMISRA-C委員会はどちらも、この規則に意図が反映されていないと考えています。<br>[EW22373]
+  </p>
+</li>
+
+<li>
+  <p>
+クラスコンストラクタに文字列リテラルがあるメンバ<code>char</code>配列を初期化しても、インターナルエラーが発生しなくなりました。<br>[EW22503]
+  </p>
+</li>
+
+<li>
+  <p>
+Cortex-M0でコンパイルする際に、<code>__REV16</code>組込み関数が使用できるようになりました。<br>[EW22715]
+  </p>
+</li>
+
+<li>
+  <p>
+符号のない式の補数<code>~</code>が、式に右シフトや定数を持つビット単位が含まれる場合に、誤って最適化されなくなりました。<br>[EW22725]
+  </p>
+</li>
+
+<li>
+  <p>
+ファイルスコープや名前空間スコープの変数を初期化するときに、C++ 一時オブジェクトが、正しく作成されるようになりました。<br>[EW22751]
+  </p>
+</li>
+
+<li>
+  <p>
+テストの直前にシフトされた式の「未満」、「以下」、「より大きい」、「以上」の符号付きテストで、正しい結果が出るようになりました。<br>[EW22752]
+  </p>
+</li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+<a name="manuals" id="manuals"></a>ユーザガイドの訂正
+        </h3>
+﻿<ul>
+<A href="../EWARM_DevelopmentGuide.JPN.pdf">開発ガイド</A>に説明がない新しい組込み関数が多数あります。<br><br>
+
+<code>__PLI</code><br> 構文:<code>void __PLI(void const *);</code><br> 説明:<code>PLI</code>命令を挿入します。この組込み関数では、ARMv7アーキテクチャを使用する必要があります。<br><br>
+
+<code>__PLD</code><br> 構文:<code>void __PLD(void const *);</code><br> 説明:<code>PLD</code>命令を挿入します。この組込み関数では、ARMv7アーキテクチャを使用する必要があります。<br><br>
+
+<code>__PLDW</code><br> 構文:<code>void __PLDW(void const *);</code><br> 説明:<code>PLDW</code>命令を挿入します。この組込み関数には、MP拡張(Cortex-A5とCortex-A9)を持つARMv7アーキテクチャが必要です。<br><br>
+
+<code>__MCR2</code><br> 構文:<code>void __MCR2(__ul <i>coproc</i>, __ul <i>opcode_1</i>, __ul <i>src</i>, __ul <i>CRn</i>, __ul <i>CRm</i>, __ul <i>opcode_2</i> );</code><br> パラメータ:<br>
+<ul>
+    <table cellpadding="2" cellspacing="0">
+      <tr>
+<td align="center"><p align="left"><code><i>coproc</i></code></td>
+<td align="center"><p align="left">コプロセッサ番号 0..15</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>opcode_1</i></code></td>
+<td align="center"><p align="left">コプロセッサ固有の処理コード</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>src</i></code></td>
+<td align="center"><p align="left">コプロセッサに書き込まれる値</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>CRn</i></code></td>
+<td align="center"><p align="left">書込み先のコプロセッサレジスタ</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>CRm</i></code></td>
+<td align="center"><p align="left">追加コプロセッサレジスタ。使用しない場合はゼロに設定します。</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>opcode_2</i></code></td>
+<td align="center"><p align="left">追加コプロセッサ固有の処理コード。使用しない場合はゼロに設定します。</td>
+      </tr>
+    </table>
+</ul>
+説明:コプロセッサ書込み命令(<code>MCR2</code>)を挿入します。値は、コプロセッサレジスタに書き込まれます。パラメータ<code><i>coproc</i></code>、<code><i>opcode_1</i></code>、<code><i>CRn</i></code>、<code><i>CRm</i></code>、<code><i>opcode_2</i></code>は、<code>MCR2</code>命令内にエンコードされるため、定数でなければなりません。<br>この組込み関数にはARMモードの場合、ARMv5Tアーキテクチャまたはそれ以降、Thumbモードの場合はARMv6T2かそれ以降が必要です。<br><br>
+
+<code>__MRC2</code><br> 構文:<code>unsigned long __MRC2( __ul <i>coproc</i>, __ul <i>opcode_1</i>, __ul <i>CRn</i>, __ul <i>CRm</i>, __ul <i>opcode_2</i> );</code><br> パラメータ:<br>
+<ul>
+    <table cellpadding="2" cellspacing="0">
+      <tr>
+<td align="center"><p align="left"><code><i>coproc</i></code></td>
+<td align="center"><p align="left">コプロセッサ番号 0..15</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>opcode_1</i></code></td>
+<td align="center"><p align="left">コプロセッサ固有の処理コード</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>CRn</i></code></td>
+<td align="center"><p align="left">読込み元のコプロセッサレジスタ</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>CRm</i></code></td>
+<td align="center"><p align="left">追加コプロセッサレジスタ。使用しない場合はゼロに設定します。</td>
+      </tr>
+      <tr>
+<td align="center"><p align="left"><code><i>opcode_2</i></code></td>
+<td align="center"><p align="left">追加コプロセッサ固有の処理コード。使用しない場合はゼロに設定します。</td>
+      </tr>
+    </table>
+</ul>
+説明:コプロセッサ読取り命令(<code>MRC2</code>)を挿入します。指定されたコプロセッサレジスタの値を返します。パラメータ<code><i>coproc</i></code>、<code><i>opcode_1</i></code>、<code><i>CRn</i></code>、<code><i>CRm</i></code>、<code><i>opcode_2</i></code>は、<code>MRC2</code>命令内にエンコードされるため、定数でなければなりません。<br>この組込み関数にはARMモードの場合、ARMv5Tアーキテクチャまたはそれ以降、Thumbモードの場合はARMv6T2かそれ以降が必要です。<br><br>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+<a name="misc" id="misc"></a>その他
+        </h3>
+﻿    <ul>
+      <li>
+        <p>
+ハードウェアの問題に対する対策を考案：
+        <ul>
+          <p>
+          <li>
+            <p>
+NXPデバイスLPC2478におけるCore.1の機能上の問題：ThumbステートでのAbort Linkレジスタの間違ったアップデート。<br><code> iccarm --enable_hardware_workaround=NXP_Core.1</code>を用いて作成された対策
+            </p>
+          </li>
+          </p>
+        </ul>
+        </p>
+      </li>
+    </ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+<a name="history" id="history"></a>リリース履歴
+        </h3>
+﻿<ul>
+<a href="iccarm_history.JPN.html">リリース履歴</a>を参照してください。
+    </ul>
+    </div>
+</body>
+</html>

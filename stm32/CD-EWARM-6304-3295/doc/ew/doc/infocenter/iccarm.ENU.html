@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: iccTARGET.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the IAR C/C++ Compiler for ARM</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for the IAR C/C++ Compiler for ARM version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a> | Release notes
+        for the IAR C/C++ Compiler for ARM
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+   <ul>
+      <li>
+        <p>
+          To avoid the space-consuming tables used for character classification (<code>ctype.h</code>), 
+          define the preprocessor symbol <code>__NO_CTYPE_TABLES</code> before the <code>ctype.h</code>
+          file is included.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The compiler now avoids the LDRD instruction with the base register in list when generating
+          code for Cortex-M3. This is to work around the Cortex-M3 erratum 602117.
+        </p>
+      </li>
+
+      <li>
+        <b>News in EWARM 6.10.2:</b><br>
+        <p>
+          The <code>--guard_calls</code> command line option is introduced. Note, <code>--guard_calls</code>
+          must always be used in applications written in EC++/C++ that need thread-safe library function calls.
+          For more information see the <A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>.
+        </p>
+        <p>
+          The <code>--no_guard_calls</code> command line option is removed.
+        </p>
+        <p>
+          The <code>--aeabi</code> command line option has modified behavior: Guard calls are not used by default.<br>
+          Migration instructions from IAR C/C++ Compiler for ARM 5.x and 6.10.1 to IAR C/C++ Compiler for ARM 6.10.2:<br>
+          <code>--aeabi</code> (without <code>--no_guard_calls</code>) shall be replaced with <code>--aeabi --guard_calls</code><br>
+          <code>--aeabi --no_guard_calls</code> shall be replaced with <code>--aeabi</code><br>
+        </p>
+      </li>
+
+      <li>
+        <b>News in EWARM 6.20:</b><br>
+        <p>
+          A customer that have implemented the <code>time()</code> function must now rename it into <code>__time32()</code>.
+          For more information see the <A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>.
+        </p>
+      </li>
+
+      <li>
+        <b>A special note on CMSIS integration:</b><br>
+        <p>
+          If your application source code include CMSIS header files explicitly, then you should not
+          check the <b>Use CMSIS</b> check-box
+          <b>Project&gt;Options...&gt;General Options&gt;Library Configuration&gt;Use CMSIS</b>. Some of the
+          Cortex-M application examples includes CMSIS source files explicitly, do not check the said
+          check-box in these projects.
+          <br><br>
+          However, due to the evolution of the IAR C/C++ Compiler for ARM, older versions of CMSIS are
+          incompatible with the current version of the compiler. One simple example of how to solve this issue is:<br>
+          a) Press F4 to bring up the erroneous source (header) file in the editor - in most cases named <code>core_cm3.h</code>.<br>
+          b) Right-click on the window tab of that editor window, choose <b>File Properties...</b>.<br>
+          c) Add (or remove) any character to the file name - so the compiler won't find it any more.<br>
+          d) Modify project options: Check <b>Project&gt;Options...&gt;General Options&gt;Library Configuration&gt;Use CMSIS</b>.<br>
+          Steps a) to c) might need to be done for more than one file. Normally, the names of these files are <code>core_cm0.h</code>,
+          <code>core_cm3.h</code>, <code>core_cm4.h</code>, <code>core_cmFunc.h</code> and <code>core_cmInstr.h</code>.
+          <br><br>
+          For more information about CMSIS integration in the IAR Embedded Workbench for ARM, see the <A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>.
+        </p>
+      </li>
+    </ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+    <ul>
+      <li>
+        <p>
+          The C/C++ library header file <code>time.h</code> declares the library function <code>mktime</code>. 
+          When called with a negative value in the broken-down time component <code>tm_isdst</code>, 
+          which is part of the <code>tm</code> struct function parameter, <code>mktime</code> fails 
+          to determine whether <em>Daylight Saving Time</em> is active for the specified 
+          time or not.<br>
+          [EW14632]
+        </p>
+      </li>
+    </ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+<li>
+  <p>
+    The diagnostic messages now refer to the correct rule numbers
+    when MISRA C 2004 is chosen.<br>
+    [EW22347]
+  </p>
+</li>
+
+<li>
+  <p>
+    The underlying type of a constant expression is now evaluated as
+    for any other expressions. This deviates from the specific constant
+    expression rule in MISRA-C:2004 6.10.4. Both IAR Systems and the MISRA-C
+    committe feels that this rule doesn't reflect the intention.<br>
+    [EW22373]
+  </p>
+</li>
+
+<li>
+  <p>
+    Initalizing a member <code>char</code> array with a string literal in a class
+    constructor no longer results in an internal error.<br>
+    [EW22503]
+  </p>
+</li>
+
+<li>
+  <p>
+    The intrinsic function <code>__REV16</code> is now available when compiling for Cortex-M0.<br>
+    [EW22715]
+  </p>
+</li>
+
+<li>
+  <p>
+    Complement <code>~</code> of an unsigned expression is no longer optimized 
+    incorrectly when the expression contains a right shift or a bitwise and with a constant.<br>
+    [EW22725]
+  </p>
+</li>
+
+<li>
+  <p>
+    C++ temporary objects needed when initializing file-scope and namespace-scope
+    variables are now created properly.<br>
+    [EW22751]
+  </p>
+</li>
+
+<li>
+  <p>
+    A signed test for less than, less equal, greater than or greater equal on an expression
+    that is shifted immediately before the test now gives correct result.<br>
+    [EW22752]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    Using the <code>__packed</code> attribute in situations that involve template functions no longer
+    causes an internal error.<br>
+    [EW22776]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    On the high optimization level, a mix of signed and unsigned values in complex array index
+    expressions no longer causes an internal error.<br>
+    [EW22787]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    Passing a constant as argument to an intrinsic function that inserts a specific
+    assembler instruction no longer causes an internal error in C++ mode.<br>
+    [EW22808]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    In rare cases the induction variable optimization could cause an internal error. This has been corrected.<br>
+    [EW22815]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    Using the multi-file compilation option <code>--mfc</code> with one or more zero-size source files
+    no longer causes the compiler to terminate with an internal error.<br>
+    [EW22828]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The debug information in ELF files now refers to the correct source file name when the command line option
+    <code>--preinclude</code> is used.<br>
+    [EW22848]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    When some diagnostics (in particular, the undefined behavior warnings about unordered accesses etc)
+    were triggered on uses of fields in a block-local anonymous struct/union variable, the compiler
+    aborted with an internal error. This problem has been corrected.<br>
+    [EW22850]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The thread-exit function now correctly deallocates the potentially allocated daylight saving time structure.<br>
+    [EW22862]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    An instructions inside an IT-block is no longer a candidate for dead-code removal, since removing it will leave
+    the IT-instruction inconsistent.<br>
+    [EW22864]
+  </p>
+</li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+There are a number of new intrinsic functions which lack description in the
+<A href="../EWARM_DevelopmentGuide.ENU.pdf">Development guide</A>:<br><br>
+
+<code>__PLI</code><br>
+Syntax: <code>void __PLI(void const *);</code><br>
+Description: Inserts a <code>PLI</code> instruction. This intrinsic function requires an ARMv7 architecture.<br><br>
+
+<code>__PLD</code><br>
+Syntax: <code>void __PLD(void const *);</code><br>
+Description: Inserts a <code>PLD</code> instruction. This intrinsic function requires an ARMv7 architecture.<br><br>
+
+<code>__PLDW</code><br>
+Syntax: <code>void __PLDW(void const *);</code><br>
+Description: Inserts a <code>PLDW</code> instruction. This intrinsic function requires an ARMv7 architecture with MP extensions (Cortex-A5 and Cortex-A9).<br><br>
+
+<code>__MCR2</code><br>
+Syntax: <code>void __MCR2(__ul <i>coproc</i>, __ul <i>opcode_1</i>, __ul <i>src</i>, __ul <i>CRn</i>,
+ __ul <i>CRm</i>, __ul <i>opcode_2</i> );</code><br>
+Parameters:<br>
+<ul>
+    <table cellpadding="2" cellspacing="0">
+      <tr>
+        <td align="center"><p align="left"><code><i>coproc</i></code></td>
+        <td align="center"><p align="left">The coprocessor number 0..15.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>opcode_1</i></code></td>
+        <td align="center"><p align="left">A coprocessor-specific operation code.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>src</i></code></td>
+        <td align="center"><p align="left">The value to be written to the coprocessor.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>CRn</i></code></td>
+        <td align="center"><p align="left">The coprocessor register to write to.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>CRm</i></code></td>
+        <td align="center"><p align="left">An additional coprocessor register; set to zero if not used.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>opcode_2</i></code></td>
+        <td align="center"><p align="left">An additional coprocessor-specific operation code; set to zero if not used.</td>
+      </tr>
+    </table>
+</ul>
+Description: Inserts a coprocessor write instruction, <code>MCR2</code>. A value will be written
+  to a coprocessor register. The parameters <code><i>coproc</i></code>, <code><i>opcode_1</i></code>, <code><i>CRn</i></code>, <code><i>CRm</i></code>, and
+  <code><i>opcode_2</i></code> will be encoded in the <code>MCR2</code> instruction and must therefore be constants.<br>
+  This intrinsic function requires an ARMv5T architecture or higher for ARM mode,
+  or ARMv6T2 or higher for Thumb mode.<br><br>
+
+<code>__MRC2</code><br>
+Syntax: <code>unsigned long __MRC2( __ul <i>coproc</i>, __ul <i>opcode_1</i>, __ul <i>CRn</i>,
+ __ul <i>CRm</i>, __ul <i>opcode_2</i> );</code><br>
+Parameters:<br>
+<ul>
+    <table cellpadding="2" cellspacing="0">
+      <tr>
+        <td align="center"><p align="left"><code><i>coproc</i></code></td>
+        <td align="center"><p align="left">The coprocessor number 0..15.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>opcode_1</i></code></td>
+        <td align="center"><p align="left">A coprocessor-specific operation code.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>CRn</i></code></td>
+        <td align="center"><p align="left">The coprocessor register to read from.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>CRm</i></code></td>
+        <td align="center"><p align="left">An additional coprocessor register; set to zero if not used.</td>
+      </tr>
+      <tr>
+        <td align="center"><p align="left"><code><i>opcode_2</i></code></td>
+        <td align="center"><p align="left">An additional coprocessor-specific operation code; set to zero if not used.</td>
+      </tr>
+    </table>
+</ul>
+Description: Inserts a coprocessor read instruction, <code>MRC2</code>. Returns the value of the specified
+  coprocessor register. The parameters <code><i>coproc</i></code>, <code><i>opcode_1</i></code>, <code><i>CRn</i></code>, <code><i>CRm</i></code>, and
+  <code><i>opcode_2</i></code> will be encoded in the <code>MRC2</code> instruction and must therefore be constants.<br>
+  This intrinsic function requires an ARMv5T architecture or higher for ARM mode,
+  or ARMv6T2 or higher for Thumb mode.<br><br>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+    <ul>
+      <li>
+        <p>
+        Generate workarounds for hardware problems:
+        <ul>
+          <p>
+          <li>
+            <p>
+            Functional problem Core.1 in NXP device LPC2478: Incorrect update of the Abort Link register in Thumb state.<br>
+            Workaround generated with<code> iccarm --enable_hardware_workaround=NXP_Core.1</code>
+            </p>
+          </li>
+          </p>
+        </ul>
+        </p>
+      </li>
+    </ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+    <ul>
+      See <a href="iccarm_history.ENU.html">release history</a>.
+    </ul>
+    </div>
+</body>
+</html>

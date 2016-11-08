@@ -1,0 +1,1697 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: cspy.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the IAR C-SPY Debugger for ARM </title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for the IAR C-SPY Debugger for ARM version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a>
+            | Release notes for the IAR C-SPY Debugger for ARM
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+<ul>
+  <li>
+    <p>
+      The C-SPY macro <code>__loadModule(<i>filename</i>, <i>suppress</i>)</code> has been renamed to <code>__loadImage(<i>patch</i>, <i>offset</i>, <i>debugInfoOnly</i>)</code>.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      The C-SPY macro <code>__sleep(<i>microseconds</i>)</code> has been replaced with <code>__delay(<i>milliseconds</i>)</code>.
+      Note the different time resolution.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      C-SPY in IAR Embedded Workbench for ARM comes with an improved mechanism and 
+      configuration scheme for the flash loader function. An existing project that employs a flash
+      loader with a legacy configuration, will be automatically migrated to the new scheme with
+      default settings. The default settings will in most cases be sufficient. Old settings are converted
+      to a new configuration file (with the extension <code>.board</code>) and may be used if the
+      default settings are not appropriate. Read more about the new mechanism and configuration
+      scheme for flash loaders in the <a href="../FlashLoaderGuide.ENU.pdf">Flash Loader Guide</a>.
+    </p>
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li><p><b>ETM/ETB selection</b><br>
+    It is now possible to chose between ETM and ETB for devices with support for both.
+  </p></li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+<ul>
+  <li><p>
+    The semihosting (Terminal I/O) does not work correctly after flash download when using the XDS100 
+    debugger driver.
+    A workaround is to stop the debugger, and then start debugging without download.
+  </p></li>  
+    
+  <li><p>
+    The support for Cortex-M interrupts is limited in the simulator.
+    Only one interrupt at a time is simulated. No nested interrupts, 
+    tail-chaining etc. The NVIC interrupt controller is not simulated.
+    Interrupts can only be enabled/disabled globally using the PRIMASK
+    register or the intrinsic functions <code>__enable_interrupt()</code> and
+    <code>__disable_interrupt()</code>.
+  </p></li>
+
+  <li><p>
+    The disassembler does not fully support unified assembler.
+  </p></li>
+
+  <li><p>
+    Watch on a static variable defined within a function fails because the variable is
+    handled in the wrong scope. The workaround is to use the Locals window
+    or to specify a name within the scope in the Watch window, for example
+    <code>main::the_static_var</code>.
+  </p></li>
+  
+  <li><p>
+    When performing a <b>Go To</b> command in the Memory window in little-endian mode,
+    the position (shown as <code>pos #######</code> in the lower right corner of the IDE
+    main window) will not be the same as the value entered in the <b>Go To</b> field.<br>
+    [EW14355]
+  </p></li>
+
+  <li><p>
+    Choosing <b>Project Options&gt;Debugger&gt;Plugins</b> and selecting the <b>Factory
+    settings</b> option does not have any effect.<br>
+    [EW16078]
+  </p></li>
+
+  <li><p>
+    Profiling large projects can be slow.<br>
+    [EW17781]
+  </p></li>
+
+  <li><p>
+    If the same name is used for a data type and a data object, the data object
+    is not displayed in the Watch window.<br>
+    [EW19334, EW21566]
+  </p></li>
+
+  <li><p>
+    An array located at an absolute address is displayed in the Watch window as a single
+    integer instead of an array. Problem does not occur if variable is located at a user defined segment.<br>
+    [EW20207]
+  </p></li>
+
+  <li><p>
+    The stack graph and the data log graph, in the Timeline window for Cortex-M with ETM, do not correlate
+    exactly in time. To find the source of a data log event, double-click on the event.
+  </p></li>
+
+  <li><p>
+    Sometimes "step into" is executed as a "step over" when standing on variadic function
+    calls (i.e. with variable number of arguments).<br>
+    [EW20673]
+  </p></li>
+
+  <li><p>
+    The <b>step over</b> (F10) function does not work when standing on the last instruction in an interrupt routine.<br>
+    [EW22343]
+  </p></li>
+
+  <li><p>
+    <b>Attach to program</b> does not work when debugging on ARM7 and ARM9.<br>
+    [EW22435]
+  </p></li>
+
+  <li><p>
+    A static variable, defined in more than one source file, will become ambiguous if a pre-include
+    file is used by the compiler.<br>
+    [EW22487]
+  </p></li>
+
+  <li><p>
+    In some cases it is difficult to disable power sampling in the debugger. If the Status text box for PC Sampling in the
+    SWO Configuration dialog box says "ON: PC Sampling for Power Logs", then the power sampling can be disabled by 1. Enabling
+    Function Profiling, 2. Right-clicking in the Function Profiler window and deselecting <b>Power Sampling</b>.<br>
+    [EW22779]
+  </p></li>
+
+  <li><p>
+    The Timeline Window is not updated correctly when data log configuration is changed during a debug session.
+    For example when adding or enabling/disabling Data Log Breakpoints. It is updated correctly if the debugger is
+    restarted.<br>
+    [EW22807]
+  </p></li>
+
+  <li><p>	
+    When reading the <code>FIQ</code> register group in the XDS100 debugger driver, incorrect values are recorded. 
+    The actual behavior depends on the current cpu mode.
+    This will cause the stack checking to give false warnings in the log window.
+    A workaround is to turn off the stack checking from the menu <b>Tools>Options>Stack</b> and 
+    disable all stack options.<br>
+    [EW22839]
+  </p></li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+
+<li>
+  <p>
+    Evaluating a cast expression that contains a plain char, such as <code>(char *)42</code>, when the
+    application does not use the plain char type anywhere, could result in a crash. This has
+    been corrected.<br>
+    [EW20519]
+  </p>
+</li>
+
+<li>
+  <p>
+    C-SPY no longer terminates unexpectedly when right-clicking in a ThreadX RTOS plugin view.<br>
+    [EW22508]
+  </p>
+</li>
+
+<li>
+  <p>
+    A warning message no longer pops up when debugging an AM1808 device.<br>
+    [EW22557]
+  </p>
+</li>
+
+<li>
+  <p>
+    In the Watch window, pointers to Thumb functions are now displayed with the correct function name.<br>
+    [EW22664]
+  </p>
+</li>
+
+<li>
+  <p>
+    Single stepping or running to breakpoints when the Call Stack window is open no longer
+    causes the IDE to become unresponsive.<br>
+    [EW22765]
+  </p>
+</li>
+
+<li>
+  <p>
+    If you used two or more monitors, ending a debug session with the main IDE window
+    open on one monitor but the Disassembly window on another monitor, IAR Embedded
+    Workbench could terminate unexpectedly when you restarted the debug session.
+    This has been corrected.<br>
+    [EW22762]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The debugger no longer terminates unexpectedly during long trace acquisition (several hours)
+    in the Timeline window.<br>
+    [EW22452]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The simulator now simulates the <code>SPSR</code> instruction correctly in System mode.<br>
+    [EW22801]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    A problem in the breakpoint handling in the P&E Micro debugger driver could lead to unexpected behavior when stepping in the source code.
+    This has been corrected.<br>
+    [EW22838]
+  </p>
+</li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+    <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+<ul>
+  <li><p>
+    <b>Running the debugger as a command line tool</b><br>
+      This is now covered in the <a href="../EWARM_DebuggingGuide.ENU.pdf">Debugging Guide</a>.
+  </p></li>
+  <li><p>
+    <b>Passing command line parameters to a debugged application</b><br>
+
+    A rudimentory mechanism exists to pass command line parameters to a
+    debugged application. Use the <code>/args</code> option on the <b>Extra
+    Options</b> page in the <b>Debugger</b> category of the <b>Project
+    options</b> dialog box. Syntax:
+<pre>
+    /args arg0 arg1 ...
+</pre>
+    Multiple lines with <code>/args</code> are allowed. For example:
+<pre>
+    /args --logfile log.txt
+    /args --verbose
+</pre>
+    In the application, the following variables must be defined.
+    The variables will be initialized by the debugger at application start.
+<pre>
+    __no_init int __argc;
+    __no_init const char* __argv[MAX_ARGS];
+    __no_init __root char __argvbuf[MAX_ARG_SIZE];
+</pre>
+    <table cellpadding="2" cellspacing="0">
+      <tr>
+        <td align="center"><p align="left"><code>__argc</code>
+        </td>
+        <td align="center"><p align="left">The number of arguments in <code>__argv</code></td>
+      </tr>
+      <tr>
+        <td><p align="left"><code>__argv</code></p></td>
+        <td align="center"><p align="left">An array of pointer to strings holding the arguments, must be large enough to fit the number of parameters</td>
+      </tr>
+      <tr>
+        <td><p align="left"><code>__argvbuf</code></p></td>
+        <td align="center"><p align="left">Storage area for <code>__argv</code>, must be large enough to hold all command line parameters</td>
+      </tr>
+    </table>
+  </p></li>
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+  <h4>V6.21 2011-07-05</h4>
+  <b>Program corrections</b>
+<ul>
+
+<li>
+  <p>
+    Executing <b>Add to Watch</b> on a selection in the editor
+    window not only opens the Watch window but now also adds an entry to it.<br>
+    [EW22408]
+  </p>
+</li>
+
+<li>
+  <p>
+    Disassembly of an unknown address no longer causes the debugger to crash.<br>
+    [EW22458]
+  </p>
+</li>
+
+<li>
+  <p>
+    The Stack window no longer crashes upon opening when, under certain circumstances, C-Spy has insufficient information about target system stacks to display stack information as intended.<br>
+    [EW22486]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.2:<br>
+    The C-SPY driver for P&E Micro no longer causes the debugger to crash.<br>
+    [EW22554]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.3:<br>
+    The checkmark in front of the <b>Mixed-Mode</b> entry on the disassembly window context menu is now displayed correctly.<br>
+    [EW22604]
+  </p>
+</li>
+ 
+</ul>
+ 
+  <b>New features</b>
+ 
+<ul>
+  <li><p><b>Support for Texas Instruments XDS100v2</b><br>
+    The Texas Instruments debug probe XDS100v2 is now supported for TI TMS570 devices.
+    To use XDS100v2, select <b>TI XDS100</b> in the <b>Driver</b> drop-down list on the 
+    Debugger>Setup options page. 
+	The XDS100v2 debug driver requires the Texas Instruments emulator package to be 
+	installed. To install the emulator package, start 
+	<code>...\arm\drivers\ti-xds\ti_emupack_setup.exe</code> and follow the installation 
+	procedure. Make sure to install the emulator package in the suggested default location. 
+	This will allow the debugger to find the emulator package automatically.
+	If for some reason the package is installed in a custom location, the option 
+	<code>--xds_rootdir=<em>path</em></code> must be specified on the options page Debugger>Extra Options.
+  </p></li>
+</ul> 
+ 
+  <h4>V6.20 2011-04-29</h4>
+  <b>Program corrections</b>
+  <ul>
+
+<li>
+  <p>
+    Variables of array, struct, union or class type placed at an absolute address are now displayed
+    properly in the Watch window family.<br/>
+    [EW19987]
+  </p>
+</li>
+
+<li>
+  <p>
+    Correct values are now displayed for the <code>LR</code> and <code>PSP</code> registers in the
+    Register window.<br/>
+    [EW22279]
+  </p>
+</li>
+
+<li>
+  <p>
+    The simulator now resets the pending bit of the <code>PendSV</code> exception when that exception
+    is executed. It also simulates exception priorities in a better way. Changing exception
+    priorities dynamically and using priority grouping is now supported.<br/>
+    [EW22301]
+  </p>
+</li>
+
+<li>
+  <p>
+    The 32-bit thumb instruction <code>LDR(literal)</code> is now decoded and simulated correctly for
+    all combinations of operands.<br/>
+    [EW22360]
+  </p>
+</li>
+
+<li>
+  <p>
+    <code>LSRS R0,R0,#32</code> is now simulated correctly.<br/>
+    [EW22371]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.4:<br/>
+    Now programming flash works correctly with macro <code>execUserFlashInit()</code>.<br/>
+    [EW22473]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+          <li><p>None.</p></li>
+  </ul>
+
+  <h4>V6.10 2010-11-04</h4>
+  <b>Program corrections</b>
+  <ul>
+
+<li>
+  <p>
+    There was a redundant warning when the flash loader checked for the presence of arguments.
+    This warning is no longer issued.<br/>
+    [EW21861]
+  </p>
+</li>
+
+<li>
+  <p>
+    Namespaces could not be used when the IAR C-SPY Debugger resolved names. This has been corrected.<br/>
+    [EW21868]
+  </p>
+</li>
+
+<li>
+  <p>
+    A variable declared in an assembly file could be given an incorrect address when displayed in a
+    Watch window. This has been corrected.<br/>
+    [EW21873]
+  </p>
+</li>
+
+<li>
+  <p>
+    The embOS and PowerPac RTOS awareness plugins did not display the Settings and About dialog
+    boxes correctly on Windows7.<br/>
+    [EW21901]
+  </p>
+</li>
+
+<li>
+  <p>
+    Setting up a Trace/SWO port now leaves other bits in the SFR (e.g. <code>DBGMCU_CR</code>)
+    untouched.<br/>
+    [EW21970]
+  </p>
+</li>
+
+<li>
+  <p>
+    The last index in a trace is now included when saved to file.<br/>
+    [EW22012]
+  </p>
+</li>
+
+<li>
+  <p>
+    C-SPY macro <code>__setLogBreak()</code> is now recognized by all relevant debugger drivers.<br/>
+    [EW22030]
+  </p>
+</li>
+
+<li>
+  <p>
+    Stepping and setting breakpoints now take <code>#line</code> directives into account.<br/>
+    [EW22044]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    The uCOS-II plugin now save settings in the registry subtree <code>HKEY_CURRENT_USER</code>
+    instead of <code>HKEY_LOCAL_MACHINE</code>.<br/>
+    [EW22109]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    When displaying the <code>CP15</code> register <code>CPACR</code> in the Register window,
+    the values for the individual bits are now correctly displayed.<br/>
+    [EW22128]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br/>
+    The IDE no longer crashes if the Message Queues window of the ThreadX plugin contains a lot
+    of messages in a single queue.<br/>
+    [EW22142]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.3:<br/>
+    Type definitions containing pointers to functions no longer produces incorrect debug information
+    that led to unexpected IAR Embedded Workbench termination when the debugger was started.<br/>
+    [EW22176]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+
+  <li><p>
+    <b>Memory region blacklist</b> (new in 6.10.2)<br/>
+    The device description file can optionally specify valid memory regions for a device.
+    User access outside valid regions will be blocked.
+  </p></li>
+
+  <li><p>
+    <b>New context menu entry in editor while debugging with trace</b><br/>
+    If Trace is available in a driver, a new context menu item <b>Find in Trace</b> will 
+    appear in the editor context menu (when the debugger is running). If you click in 
+    source code that corresponds to code in the target, and the trace window is not 
+    empty, the menu item will be enabled. If you select it, it will directly search 
+    the trace window for occurrences of the given trace data and report the result 
+    in the standard Find in Trace window. 
+  </p></li>
+
+  <li><p>
+    <b>Navigating to code from Timeline window and related windows</b><br/>
+    Existing functionality: Double-clicking in the Timeline window (when it has something
+    to show, of course) will open an editor window with the insertion point at the corresponding
+    source code location, if any. This also happens when double-clicking in some other related
+    windows, such as the Data Log or Interrupt Log windows.<br/>
+    New functionality for the same situation: If the disassembly window is already open,
+    its insertion point will also be positioned at the proper location. If the desired code location has no
+    corresponding source code (and the code thus cannot be shown in an editor window) the
+    code will only be shown in the disassembly window, and this window will then be opened
+    if necessary. 
+  </p></li>
+
+  <li><p>
+    <b>The power log system will show if a log has been produced during processor 'idle' mode</b><br/>
+    The Power Log window, the PowerStripe tooltip, and the system saving power logs to a file
+    will all be displaying the word 'idle' as the PC value if the target has signalled that the
+    log is generated during idle mode. 
+  </p></li>
+  </ul>
+
+  <h4>V5.50 2010-04-21 </h4>
+  <b>Program corrections</b>
+  <ul>
+  <li>
+    <p>
+      In EWARM 5.50.5:<br/>
+      The CMX plugin module now updates the task window when used with J-Link and Cortex-M.<br/>
+      [EW21819]
+    </p>
+  </li>
+
+  <li>
+    <p>
+      In EWARM 5.50.6:<br/>
+      When returning from an exception routine executing in ARM to Thumb state, the return <code>pc</code>
+      value was sometimes incorrect in the simulator.<br/>
+      [EW21908]
+    </p>
+  </li>
+
+  <li>
+    <p>
+      In EWARM 5.50.6:<br/>
+      The simulation of the instructions <code>QADD</code>, <code>QDADD</code> and <code>QDSUB</code> no longer
+      produces incorrect result for some input values.<br/>
+      [EW21971]
+    </p>
+  </li>
+
+  <li>
+    <p>
+      In EWARM 5.50.6:<br/>
+      The debugger no longer terminates with a crasch when the trace-based profiling is
+      activated while the Trace window is closed.<br/>
+      [EW21919]
+    </p>
+  </li>
+
+  <li>
+    <p>
+      In EWARM 5.50.6:<br/>
+      The <code>UNPRIV</code> bit in the <code>CONTROL</code> register is now reset correctly in the simulator.
+      This means that the simulator no longer starts in unprivileged mode for Cortex-M3 and Cortex-M4 devices.<br/>
+      [EW21982]
+    </p>
+  </li>
+
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    The Function Profiler window can now optionally use a flat sampling method when the input is ETM trace.
+    This will give accurate profiling even in situations where the debugger fails to build
+    a correct call chain, for example when the application uses a RTOS.
+  </li>
+  </ul>
+
+  <h4>V5.41 2009-12-14 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      <p>
+        The <code>LDREX</code> and <code>STREX</code> instructions are no longer missing in the simulator for Cortex-M3.<br/>
+        [EW19814]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Dragging an expression containing a dereferenced function pointer onto the Memory window no longer causes the debugger to crash.<br/>
+        [EW21390]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        Editing a Trace Starting, Stopping or Filter point, set on a source line, no longer results in an error message.<br/>
+        [EW21393]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The CMX RTOS plugin no longer fails if some symbols, for example "queue", are missing in the target project.<br/>
+        [EW21437]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        When simulating the <code>RFE</code> instructon, bits are no longer copied incorrectly from memory to the <code>CPSR</code> register.<br/>
+        [EW21580]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.41.2:<br/>
+        Code size limitation control in C-SPY no longer includes constant data or data initializers.<br/>
+        [EW21591]
+      </p>
+    </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+    <li>
+        <p><b>New C-SPY macro function</b><br/>
+         <code>__targetDebuggerVersion()</code> returns the version of the debugger.
+         This makes it possible to write debugger macro scripts that adapt to different versions of the debugger.
+        </p>
+      </li>
+  </ul>
+  
+  <h4>V5.40 2009-07-10 </h4>
+  <b>New features</b>
+  <ul>
+  <li>
+    <p>
+      Interrupt definitions in <code>ddf</code> files is available in the interrupt
+      simulation setup dialogs for Cortex-M devices.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      These new features have been added to cspybat:
+      <ul>
+        <li>code coverage</li>
+        <li>download only mode</li> 
+        <li>timeout option</li>
+      </ul>
+    </p>
+  </li>
+
+  <li>
+    <p>
+      A new C-SPY macro <code>__delay(milliseconds)</code>.
+    </p>
+  </li>
+  </ul>
+  <b>Program corrections</b>
+  <ul>
+<li>
+  <p>
+    The debugger could end up in infinite loops while unwinding call stack.<br/>
+    [EW20280]
+  </p>
+</li>
+
+<li>
+  <p>
+    Debug information for stepping was off by one line when an include file was completely empty.<br/>
+    [EW20541]
+  </p>
+</li>
+
+<li>
+  <p>
+    The C-SPY macro <code>__gdbserver_exec_command</code> was missing.<br/>
+    [EW20857]
+  </p>
+</li>
+
+<li>
+  <p>
+  It is now possible to simulate exceptions with exception numbers below 16 for Cortex-M cores.<br/>
+  [EW20866,EW20867,EW20931]
+  </p>
+</li>
+
+<li>
+  <p>The possibility to edit interrupt descriptions has been disabled for cores
+    that has only <code>IRQ</code> and <code>FIQ</code> interrupts. This will prevent confusing error
+    messages from appearing.<br/>
+    [EW20868]
+  </p>
+</li>
+
+<li>
+  <p>
+    A rare problem with downloading files in the Motorola S37 format into the wrong memory location has been corrected.<br/>
+    [EW20964]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    Using the <code>--drv_vector_table_base</code> option no longer causes the flash loader to fail.<br/>
+    [EW21171]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    The Function Profiler now shows correct values.<br/>
+    The disassembly in the trace window is now correct for Cortex-M.<br/>
+    [EW21187]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    The source file paths retrieved from the externally built ELF/DWARF object file are now correctly interpreted by the debugger.<br/>
+    [EW21223]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    Line number information in the debugger is now accurate. Highlighting and breakpoint setting now works correctly.<br/>
+    [EW21268]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    Downloading to flash memory no longer causes the IDE to become unresponsive.<br/>
+    [EW21297]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    Stepping in a complex C++ program no longer causes the displayed source code location not to reflect the current program counter.<br/>
+    [EW21300]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br/>
+    The CMX plugin no longer fails to detect the CMX RTOS when the RTOS is compiled in thumb mode.<br/>
+    [EW21311]
+  </p>
+</li>
+  </ul>
+
+<h4>5.30 2009-01-23</h4>
+
+<b>Program corrections</b>
+
+<ul>
+  <li>
+    <p>
+      The Auto window is available in this release.
+    </p>
+  </li>
+  <li>
+    <p>
+      The CMX plugin module uses one breakpoint instead of two during its initialization.
+      This reduces the risk of plugin failure due to lack of hardware breakpoints.<br/>
+      [EW19139]
+    </p>
+  </li>
+  <li>
+    <p>
+      The result of some floating-point expressions was incorrectly displayed in the
+      Watch window.<br/>
+      [EW20303]
+    </p>
+  </li>
+  <li>
+    <p>
+      With the Luminary FTDI driver, data breakpoints could only be used right after first download.
+      For any subsequent download, data breakpoints were disabled and could not be enabled.<br/>
+      [EW20360]
+    </p>
+  </li>
+  <li>
+    <p>
+      <code>CPSID</code> and <code>CPSIE</code> were incorrectly exchanged when disassembling
+      in ARM mode. This has been corrected.<br/>
+      [EW20521]
+    </p>
+  </li>
+  <li>
+    <p>
+      The <code>MCR</code> instruction was incorrectly disassembled as <code>MCR2.</code>
+      This has been corrected.<br/>
+      [EW20523]
+    </p>
+  </li>
+  <li>
+    <p>
+      The flash loader based on a previous flash loader framework could not properly be
+      invoked from<code> cspybat.exe</code>. This has been corrected.<br/>
+      [EW20529]
+    </p>
+  </li>
+  <li>
+    <p>
+      The C-SPY macro<code> __openFile ( input_file, "r+b" ) </code>could earlier fail if
+      the input file had the read-only attribute set. This has been corrected.<br/>
+      [EW20268]
+    </p>
+  </li>
+  <li>
+    <p>
+      The debugger did not support the semihosting command <code>SYS_FLEN</code> which caused
+      the C library functions <code>fseek()</code> and <code>ftell()</code> to fail. This has been corrected.<br/>
+      [EW20680]
+    </p>
+  </li>
+  <li>
+    <p>
+      When the Simulator attempted to execute a VFP instruction with VFP disabled (EN in FPSCR),
+      it correctly took the UNDEF interrupt (offset 0x4) but the LR was off by 2 bytes - not 4 bytes
+      as it should. This has been corrected.<br/>
+      [EWARM-169]
+    </p>
+  </li>
+</ul>
+
+
+<h4>5.20 2008-07-11</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li><p>
+    If an external editor was used in the IDE, it was also used in the debugger.
+    This could make it impossible to set breakpoints in the source code.
+    Now the debugger always uses the built-in editor.<br/>
+    [EW19591]
+  </p></li>
+
+  <li><p>
+   If the simulator executed a tight loop containing illegal instructions, it
+   would flood the debug log window with error messages and the IDE would
+   hang. This has been corrected.<br/>
+   [EW19815]
+  </p></li>
+
+  <li><p>
+   The debugger can now read all RealView 3.1 generated ELF/DWARF files.<br/>
+   [EW19868]
+  </p></li>
+
+  <li><p>
+   Examining a function pointer that is a class member, either with a
+   tooltip or by adding it to the watch window, no longer makes the debugger crasch.<br/>
+   [EW20034]
+  </p></li>
+
+  <li><p>
+   A multiple failure to open a file using the<code> fopen() </code>library function could
+   use up all available file handles. This no longer occurs.<br/>
+   [EW20102]
+  </p></li>
+
+  <li><p>
+   For Cortex-M cores, the 16 bit MOV(register) instruction is now simulated
+   correctly when PC is the destination register.<br/>
+   [EW20200]
+  </p></li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li><b>Debugger startup</b><br/>
+     You can now start the debugger with or without downloading code,
+     using two new buttons on the toolbar, or two new Project menu commands.
+     There are also two new corresponding ways to restart the debugger during the debug session.
+  </li>
+  <p>
+  <li><b>Loading multiple ELF images</b><br/>
+    The debugger can load multiple ELF images using the C-SPY macro <code>__loadModule()</code>.
+  </li>
+  <p>
+  <li><b>Symbols window</b><br/>
+     The Symbols window displays the complete list of symbols used within the project.
+     In contrast to the Source Browser, the list of symbols is not based
+     on project source files but is retrieved from the debug information.
+     This means, that it also lists symbols from libraries that you do not have the source for.
+     It also lists assembler labels, which are not conveniently visible in any other window. 
+  </li>
+  <p>
+  <li><b>New flash loader mechanism</b><br/>
+     A new flash loader mechanism is available that adds increased speed and flexibility.
+  </li>
+</ul>
+
+<h4>5.11 2007-11-28</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li><p>
+    The macro function<code> __openFile() </code>now takes all kind of parameters, not only <code>"r"</code>
+    or <code>"w"</code>. In particular, it is possible to use the <code>"b"</code> parameter, to open the
+    file in binary mode.<br/>
+    [EW17017, EW19034]
+  </p></li>
+  <li><p>
+    <code>CPSID</code> and <code>CPSIE</code> were exchanged in disassembly for Cortex-M.<br/>
+    [EW18739]
+  </p></li>
+  <li><p>
+    When simulating a core with no system coprocessor (CP15) support, a CP15
+    instruction could crash the simulator.<br/>
+    [EW19244]
+  </p></li>
+  <li><p>
+    When several compilation units used the same type, a problem with debug information
+    could earlier cause some of the instances of that type to be incorrectly
+    handled by C-SPY. This could cause syntax errors in C-SPY expressions
+    containing the type and also make it impossible to expand its members.<br/>
+    [EW19338, EW19340]
+  </p></li>
+  <li><p>
+    The simulator did not simulate the <code>SVC</code> instruction correctly for Cortex-M
+    cores.<br/>
+    [EW19484]
+  </p></li>
+  <li><p>
+    Corrupted semihosting data structures could cause the
+    debugger to crash.<br/>
+    [EW19507]
+  </p></li>
+  <li><p>
+     In some cases, references were incorrectly shown in the QuickWatch, Watch
+     and Locals windows. This has been corrected.<br/>
+    [EW19542]
+  </p></li>
+  <li><p>
+    Setting a breakpoint in a large switch statement could earlier fail.<br/>
+    [EW19553,19611]
+  </p></li>
+  <li><p>
+    When debugging nested switch statement in ARM mode, the current source code
+    location displayed could be incorrect. This made it look like the wrong case
+    statement was executed.<br/>
+    [EW19681]
+  </p></li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li><p><b>
+    Support for the Cortex-M1 core.
+  </b></p></li>
+</ul>
+
+
+<h4>5.10 2007-07-02</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li><p>
+    Cortex-M3 devices were earlier started in unprivileged mode in the simulator.<br/>
+   [EW18742]
+  </p></li>
+
+  <li><p>
+    The debugger used to crash for code where the base class is a template class.<br/>
+    [EW18999]
+  </p></li>
+
+  <li><p>
+    C-SPY no longer crashes if a C-SPY macro invoked by a breakpoint
+    deletes the very same breakpoint.<br/>
+    [EW19001]
+  </p></li>
+
+  <li><p>
+    C-SPY is now able to download a large image to the target.<br/>
+    [EW19855]
+  </p></li>
+</ul>
+
+
+<h4>V4.41A 2006-12-08</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li><p>Interrupt simulation was always incorrectly enabled after reload of a project.<br/>
+	 [EW18578]
+  </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li><b>Exporting command line for cspybat</b><br/>
+      C-SPY now generates a file with helpful information that can be used for 
+      running the debugger from the command line using the cspybat utility. Every 
+      time the debugger is initialized (technically, it happens when a project 
+      is loaded and when terminating a debug session) a <code>bat</code> file is generated 
+      that can be used almost without modifications to start cspybat from the command 
+      line with the same settings as in the IDE.<p></p>
+
+      The file is generated as <code>$PROJ_DIR$\settings\projectname.cspy.bat</code>
+  </li>
+</ul>
+
+
+<h4>V4.40A 2006-05-18</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li><p>The CMX plugin could crash the debugger if debug information generation was
+         disabled in project options.<br/>
+	 [EW17832]
+  </p>
+  </li>
+
+  <li><p>Debugger testing for read/write memory when setting breakpoints
+         interfered with the ST STR910 flash controller.<br/>
+         [EW17930]
+  </p>
+  </li>
+
+  <li><p>The C-SPY macro <code>__emulatorStatusCheckOnRead()</code> did not work correctly,
+         causing problems when debugging TI TMS470R1B1M.<br/>
+         [EW17992,EW18012]
+  </p>
+  </li>
+
+  <li><p>Some ThreadX views could crash the debugger when running in big endian
+         mode.<br/>
+         [EW18010]
+  </p>
+  </li>
+
+  <li><p>A row with a single newline in the debugger <b>Extra Options</b> dialog crashed
+         the debugger.<br/>
+         [EW18011]
+  </p>
+  </li>
+
+  <li><p>A syntax error message and a macro definition error message appeared
+         erroneously in the debug window under certain circumstances.<br/>
+	 [EW18069]
+  </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li><b>Support for the Cortex-M series has been added</b><p></p></li>
+
+  <li><p><b>Symbolic Memory window</b><br/>
+    A symbolic memory window has been added. It displays raw memory contents
+    annotated with any global symbols present.
+  </li>
+</ul>
+
+
+<h4>V4.31A 2006-02-03</h4>
+
+<b>Program corrections</b><p>
+
+<ul>
+  <li><p>
+    The Live watch window is currently only supported by the simulator,
+    and should not be active for other debugger drivers, like JTAG.<br/>
+    [EW15698]
+  </p></li>
+
+  <li><p>
+    <code>MSR</code> with an immediate operand was disassembled and simulated incorrectly for
+    some immediate values.<br/>
+    [EW17465]
+  </p></li>
+
+  <li><p>
+    The simulator could errorneously set the processor mode to system mode 
+    when running <code>SWI</code>, <code>LDM</code>, <code>STM</code> or <code>BKPT</code> instructions.<br/>
+    [EW17454]
+  </p></li>
+
+  <li><p>
+    Selecting hardware reset when using a flash loader should give one reset
+    before flashing and a second reset just before starting the application.
+    The second hardware reset was not performed.<br/>
+    [EW17777]
+  </p></li>
+</ul>
+
+<b>New features</b><p>
+<ul>
+  <li><p><b>Stack window</b><br/>
+    To monitor the memory consumption and the integrity of the stack, a new Stack 
+    window has been added. It shows the stack contents as raw data, C/C++ 
+    variables, and function frames. It also shows current and maximum stack 
+    consumption graphically. Warnings can be issued when the stack exceeds a 
+    certain level or if the stack pointer points outside the stack memory.
+    </p>
+  </li>
+
+  <li><b>New breakpoint category - Log breakpoint</b><br/>
+    Log breakpoints make it easy to log messages whenever execution passes 
+    a certain code location without having to add any code to the 
+    target application. When a log breakpoint is triggered, it writes to the 
+    Debug Log window and then the application continues execution.<p></p>
+
+  <li><b>New way to toggle breakpoints</b><br/>
+    You can now&nbsp;set or clear a breakpoint 
+    by&nbsp;double-clicking in the left margin of the editor window; the breakpoint 
+    location is marked by a red X. If there is more than one possible breakpoint
+    location in the source line, the breakpoint is placed on the first location.<p></p>
+</ul>
+
+
+<h4>V4.30A 2005-06-23</h4>
+
+<b>Program corrections</b><p>
+
+<ul>
+  <li><p>
+    The Memory window now displays “--“ for each individual memory unit that cannot
+    be read accessed; as opposed to the whole row.<br/>
+    [EW16446]
+  </p></li>
+
+  <li>
+  Setting data breakpoints in explicitly sized (8/16/32) memory crashed the
+  debugger.
+  [EW16756]
+  <p></li>
+
+  <li>
+  The CMX RTOS plugin could fail to be activated because it did not properly
+  detect the CMX operating system.
+  [EW16890]
+  <p></li>
+
+  <li>
+    The simulation of the <code>SMLAL</code> instruction was incorrect. Upon
+    entry to the instruction the content of the upper word <code>RdHi</code>
+    was lost (<code>RdHi</code> was set equal to <code>RdLo</code>).
+    [EW16902]
+  <p></li>
+
+  <li>
+    When disassembling in Thumb mode, labels were shown on a separate line,
+    with a preceeding blank line. When single-stepping, the blank line was
+    highlighted instead of the line with the current instruction.
+  </li>
+</ul>
+
+<h4>V4.20A 2005-01-10</h4>
+
+<b>Program corrections</b><p>
+  
+<ul>
+  <li><p>
+    The simulation of the VFP coprocessor could not be disabled by
+    clearing the <code>EN</code> bit in the <code>VFPEXC</code>.<br/>
+    [EW14654]
+  <p></li>
+
+  <li><p>
+    At certain conditions when debugging for big endian processors C-SPY
+    could crash or stop responding.<br/>
+    [EW15126]
+  <p></li>
+
+  <li><p>
+    The debugger disassembly wrongly switched to thumb mode 64 bytes after
+    an arm label if the code was followed further down by a thumb
+    label.<br/>
+    [EW15571]
+  <p></li>
+
+  <li><p>
+    The Analog Devices (ADUC702X) flash programming algorithm failed
+    if the binary image contained gaps.<br/>
+    [EW15780]
+  </p></li>
+
+  <li><p>
+    Setting breakpoints in C was not possible if the <code>PC</code> did not line
+    up with a statement boundary.<br/>
+    [EW15590]
+  </p></li>
+
+  <li><p>
+    The simulator incorrectly set the <code>Q</code>-flag when executing
+    <code>SMLAxy</code> or <code>SMLAWy</code> instructions even when no overflow
+    occured in the execution.<br/>
+    [EW15603]
+  </p></li>
+
+  <li><p>
+    The file <code>CMXTinyArmPlugin.ewplugin</code> contained an incorrect
+    path.<br/>
+    [EW15702]
+  </p></li>
+
+  <li><p>
+    Under certain circumstances, IAR Embedded Workbench could crash when
+    starting C-SPY and the CmxArmPlugin or the CMXTinyArmPlugin was
+    used.<br/>
+    [EW15703]
+  </p></li>
+
+  <li><p>
+    Annoying 'data coverage not supported' log message removed.<br/>
+    [EW15704]
+  </p></li>
+
+  <li><p>
+    If the flash loader operation failed and gave an error dialog box the
+    progress bar could be left open.<br/>
+    [EW16050]
+  </p></li>
+
+  <li><p>
+    If, during a simulation, execution reached unallocated memory, a new
+    memory block would be allocated and filled with zeros. Then the
+    execution would continue in this block, since 0x0 is a valid
+    instruction in both ARM and Thumb mode. The execution would continue,
+    potentially until the memory runs out on the host machine. This has
+    been fixed. Now the simulation stops and an error message is displayed
+    whenever the program reaches memory that has not been allocated. The
+    simulator allocates memory in 16 Kbyte blocks. If the error message
+    "Tried to execute instruction in unallocated memory space, address
+    <code>0xXXXXX000</code>" is displayed, the execution did go wrong in the 16
+    Kbyte block before <code>0xXXXXX000</code>. Then it continued until it
+    reached the 16 Kbyte border, at <code>0xXXXXX000</code>, where it
+    stopped.<br/>
+    [EW16085]
+  </p></li>
+
+  <b>New features</b><p>
+  <li>
+    By using different memory zones, you can control the access width used
+    for reading and writing in, for example, the Memory window. For normal
+    memory, the default zone <code>Memory</code> can be used, but certain I/O
+    registers may require to be accessed as 8, 16, or 32 bits to give
+    correct results.
+  </li><p>
+
+  <li>
+    The debugger displays I/O register bit names for most supported
+    devices.
+  </li><p>
+
+
+</ul>
+
+<h4>V4.11A 2004-06-10</h4>
+<ul>
+
+  <li><p>
+    At certain conditions when debugging for big endian processors, C-SPY
+    could crash or stop responding.<br/>
+    [EW15126]
+  </p></li>
+
+  <li><p>
+    Incorrect simulation of the <code>SMULL</code> instruction.<br/>
+    [EW15191]
+  </p></li>
+
+  <li><p>
+    Wrong simulation of the instructions<br/>
+    <code>
+    SMLAW<y> (SMLAWB, SMLAWT)<br/>
+    SMLA<x><y> (SMLABB, SMLABT, SMLATB, SMLATT)<br/>
+    SMLAL<x><y> (SMLALBB, SMLALBT, SMLALTB, SMLALTT)<br/>
+    SMULW<y> (SMULWB, SMULWT)<br/>
+    </code>
+    [EW15463]
+  </p></li>
+
+  <li><p>
+    A debug information construct was wrongly handled by the debugger and
+    caused it to crash.<br/>
+    [EW15712]
+  </p></li>
+
+  <li><p>
+    The simulator always started at address zero regardless of the start address
+    specified by the program start label. The simulator now starts at the
+    program start label if it exists, if not it will start at address zero.
+  </p></li>
+
+</ul>
+
+<h4>V4.10B 2004-03-09</h4>
+<ul>
+  <li>None.</li>
+</ul>
+
+<h4>V4.10A 2004-02-21</h4>
+<ul>
+
+  <li><p>
+    Packed structs (<code>#pragma pack</code>) are not correctly displayed in
+    C-SPY.<br/>
+    [EW14151]
+  </p></li>
+
+  <li><p>
+    Executing a "Memory Fill" command for very large chunks of memory could take
+    a long time and occasionally lead to debugger crashes.<br/>
+    [EW14252]
+  </p></li>
+
+  <li><p>
+    The simulator responded with an illegal instruction error when
+    executing coprocessor instructions. The new behavior is to
+    silently ignore them unless it is recognized by the simulator,
+    for example the VFP.<br/>
+    [EW14489]
+  </p></li>
+
+  <li><p>
+    Long pathnames to projects could trigger a bug that forced
+    the driver to use big endian mode.<br/>
+    [EW14860]
+  </p></li>
+
+  <li><p>
+    Wrong simulation of <code>QDADD</code> and <code>QDSUB</code>.<br/>
+    [EW14884]
+  </p></li>
+
+</ul>
+
+<h4>V3.40B-P1 2003-10-06</h4>
+<ul>
+  <li><p>
+    Error in simulation of the VFP instructions <code>FMSC</code>,
+    <code>FNMAC</code> and <code>FNMSC</code>.<br/>
+    [EW14464]
+  </p></li>
+
+  <li><p>
+    VFP conversion of doubles to float could trash other VFP registers.<br/>
+    [EW14473]
+  </p></li>
+
+</ul>
+
+<h4>V3.40A 2003-07-03</h4>
+<ul>
+  <b>Program corrections</b><p>
+
+  <li>
+    Pressing the End key anywhere on the last line in the Memory window will
+    put the cursor to the end of the previous line. This also happens when
+    selecting memory.<br/>
+    [EW12542, EW12645, EW12649]
+  </li>
+  <p>
+  <li>
+    A problem where .ddf files containing lines longer than 1024 characters could not be
+    loaded has been fixed. The maximum line length is still fixed, but is now 16384 characters.<br/>
+    [EW13875]
+  </li>
+  <p>
+  <b>New features</b><p>
+  <li>
+    Support for the Vector Floating-point Architecture (VFP).
+  </li>
+  <p>
+  <li>
+    The simulator gives a warning in the log window if it detects an unaligned access.
+    This is because ARM processors do not support unaligned accesses to memory.
+  </li>
+
+</ul>
+
+<h4>V3.30A 2003-02-18</h4>
+
+<ul>
+<li>
+Fixed problem: When executing in pipeline simulation mode the fatal error
+"Unknown exception 9 in driver" occurred.<br/>
+[EW13064, EW13065]</li>
+</li>
+</ul>
+
+<h4>
+V3.21A 2002-09-30</h4>
+
+<ul>
+<li>
+The <code>R0-R14</code>, <code>SPSR</code> registers were not properly synchronized with the <code>R0, R14, SPSR_&lt;mode></code>
+registers when&nbsp; modifying one of these registers.</li>
+<br/>[EW12432]
+
+<p>
+<li>
+The <code>MSR</code> instruction was incorrectly simulated.</li>
+<br/>[EW12434]
+
+<p>
+  <li>
+    The <code>LDM</code> instruction restoring the <code>PC</code> and the
+    <code>CPSR</code> masked bit 1 of the <code>PC</code> when switching to Thumb
+    mode.
+  </li>
+
+<p>
+<li>
+When enabling pipeline mode, breakpoints are triggered when OP-fetch is done
+which can cause the debugger to stop at an instruction that will not reach
+the execution stage later on. You must have this in mind when setting
+breakpoints when running in pipeline mode. In this release, the library
+function <code>exit()</code> has been modified, and will not interfere with the application
+anymore.</li>
+<br/>[EW12347]
+
+</ul>
+
+
+
+
+<h4>
+V3.20A 2002-06-19</h4>
+
+<ul>
+<li>
+ARM instruction set version 5TE is now supported.</li>
+
+  <li>
+    Additional disassembly comments to instructions with the
+    <code>[#xx,PC]</code> operand is now supported.
+  </li>
+
+<li>
+The registers <code>SPSR</code>, <code>R8_usr</code> to <code>R14_usr</code> are now
+accessible through the Register window.
+</li>
+
+<li>
+C-SPY could could give an error message about an illegal instruction for valid
+code.</li>
+
+<br/>[EW12247]
+<li>
+Reading <code>SPSR</code> does not take the current processor mode into
+account, causing the wrong value to be read.
+</li>
+
+<br/>[EW12040]
+<li>
+When expanding a structure with bitfields, C-SPY crashed.</li>
+
+<br/>[EW11379]
+<li>
+Terminal I/O input did only accept ASCII characters (0-127), now characters
+0-255 are supported.</li>
+
+<br/>[EW11969]</ul>
+
+<h4>
+V3.11A 2001-12-03</h4>
+
+<ul>
+<li>
+The Call Stack window could sometimes fail to show parameter values.</li>
+
+<br/>[EW10086]
+<li>
+Code coverage in Thumb mode did not work.</li>
+
+<li>
+Interrupt simulation did not work properly.</li>
+</ul>
+
+<h4>
+V3.10A 2001-10-02</h4>
+
+<ul>
+<li>
+Data breakpoints on character variables located on even addresses could
+fail.</li>
+
+<br/>[EW10081]
+<li>
+The C-SPY SFR window flagged some values as lost and no change of SFR value
+was possible.</li>
+
+<br/>[EW10085]
+<li>
+Entering pointers to structure members or array elements in the location
+field of the edit breakpoint dialog caused a fatal C-SPY error.</li>
+
+<br/>[EW10293]
+<li>
+The C-SPY simulator could mix up <code>ASR</code> and <code>LSR</code> in some
+cases. For example:</li>
+
+<br/><code>ldr r4, [r1, r2, LSR #24]</code>
+<br/>[EW10296]
+<li>
+The C-SPY simulator did not handle the <code>UMLAL</code> instruction correctly.
+</li>
+
+<br/>[EW10298]
+<li>
+The simulator did not handle the simulation of <code>LDMIA SP!,{...,PC}^</code>
+correctly when returning from IRQ to SVC mode. Instead of incrementing
+<code>SP_irq</code>, <code>SP_svc</code> was modified.</li>
+
+<br/>[ARMDTW0020]
+<li>
+The first message printed in a program using <code>printf()</code> could be lost in
+the terminal I/O window.</li>
+
+<br/>[ARMDTW0023]
+<li>
+Doing a reset after program termination failed.</li>
+
+<br/>[ARMDTW0024]
+<li>
+Enable pipeline mode. Select Low level - Memory Access Configuration from
+the menu bar. In the dialog box, click Add. If the OK or Cancel button was clicked,
+ C-SPY crashed.</li>
+
+<br/>[ARMDTW0025]
+<li>
+Single-step in assembler mode when debugging C code crashed C-SPY if
+the Trace option on the Control menu was enabled.</li>
+
+<br/>[ARMDTW0026]</ul>
+
+<h4>
+V2.10D 2001-06-29</h4>
+
+<ul>
+<li>
+The simulator does not consider the mode used when doing this instruction:
+<code>MRS R3,SPSR</code>. It always read from <code>SPSR_SVR</code>. This is now
+corrected.</li>
+
+<br/>[ARMDTW0010]</ul>
+
+<h4>
+V2.10A 2001-02-21</h4>
+
+<ul>
+<li>
+Support for big-endian mode is implemented in this release. Big-endian
+mode is selected with the command line option <code>-e</code>. The default mode is little-endian.</li>
+
+<li>
+Support for ARM9TDMI simulation is implemented. This affects the pipeline
+simulation and the cycle counter. The ARM9 simulation mode is selected
+with the command line option <code>-v1</code>. The default mode is ARM7 ( <code>-v0</code> ).</li>
+</ul>
+
+<h4>
+V1.30A 2000-09-08</h4>
+
+<ul>
+<li>
+Device definition file handling has been implemented in this release. Select
+the appropriate ddf file in the C-SPY options dialog box in the Embedded Workbench.
+It will then be possible to open the sfr window and access the sfrs defined
+for the current chip. The currently available ddf files are installed in
+the config directory. Corresponding include files (io*.h) are installed
+in the inc directory.</li>
+</ul>
+
+<h4>
+V1.20A 2000-05-28</h4>
+
+<ul>
+<li>
+The name of this component has been changed from CWARM to CSARM.</li>
+
+<li>
+Selection of disassembly mode is implemented in this release. Select one
+of the entries in the Low Level menu.</li>
+
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Disassemble in Thumb mode
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Disassemble in ARM mode
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Disassemble in Current processor mode
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Disassemble in Auto mode
+<br/>To refresh the display of the disassembled code after the mode is changed, you need
+to scroll the window up and down far enough to get a refresh.
+<li>
+The cycle-accurate simulation mode is implemented. To enter this mode from
+start, select "Enable pipeline simulation" on the Simulator tab on the
+C-SPY options page to start the simulation in cycle accurate mode.</li>
+
+<li>
+Clock Speed Register is implemented. Fill in the clock speed in Hz. C-SPY
+will calculate the execution time in microseconds, and display it in the
+Register window.</li>
+</ul>
+
+<h4>
+V1.10A 1999-12-30</h4>
+
+<ul>
+<li>
+First release.</li>
+</ul>
+    </div>
+</body>
+</html>

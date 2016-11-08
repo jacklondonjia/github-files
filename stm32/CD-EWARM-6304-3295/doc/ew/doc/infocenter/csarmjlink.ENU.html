@@ -1,0 +1,798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: csTARGET.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the IAR C-SPY J-Link driver </title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for the IAR C-SPY J-Link driver version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a>
+            | Release notes for the IAR C-SPY J-Link driver
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+<ul>
+  <li><p>
+    J-Link Ultra can be calibrated to ensure accurate power measurements. To calibrate J-Link Ultra follow these steps:
+    <ol>
+      <li>Make sure the J-Link Ultra JTAG connector is disconnected from the target board</li>
+      <li>Connect J-Link Ultra to the PC</li>
+      <li>Start J-Link Commander (<code>Program Files\IAR Systems\Embedded Workbench 5.4\arm\bin\jlink.exe</code>)</li>
+      <li>Type "calibrate"</li>
+    </ol>
+   </p></li>
+  <li><p>
+    The J-Link/J-Trace probe has a built-in flash programming capability for some devices.
+    This capability might in some cases conflict with the flash loader mechanism provided by the debugger.
+    For example when disabling the debugger flash loader with the intent of debugging directly in RAM,
+    the J-Link/J-Trace built-in flash loader might still be active causing unexpected results.
+    The J-Link/J-Trace built-in flash loader can be enabled/disabled using the J-Link control panel accessible
+    from the Windows task bar when the Embedded Workbench is in debug mode.
+   </p></li>
+  <li><p>
+    To J-Link DCC file names have changed in version 5.20.
+    Use <code>JLINKDCC_Process.c, JLINKDCC.h, JLINKDCC_HandleDataAbort.s</code>
+    instead of <code>DCC_Process.c, DCC_Process.h, and DCC_HandleDataAbort.s</code>.
+  </p></li>
+  <li><p>
+    To debug with J-Link, the USB driver has to be installed. The driver is
+    found in the <code>drivers\JLink</code> directory on the installation
+    CD-ROM. In addition, it is available in the
+    <code>...\arm\drivers\JLink</code> directory in the installation.
+  </p></li>
+  <li><p>
+    Tips on how to use J-Link in C-SPY can be found in the technical note 
+    <a href="http://supp.iar.com/Support/?Note=76557">76557</a>.    
+  </p></li>
+
+    For more information on installing J-Link, refer to the 
+    <a href="../EWARM_DebuggingGuide.ENU.pdf">IAR Embedded Workbench Debugging Guide</a>
+    and the
+    <a href="../jlinkarm.pdf">J-Link / J-Trace User Guide</a>.
+  <p>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+<ul>
+  <li>
+    <p>
+      <b>Limitation:</b> Intel XScale is currently not supported.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <b>Limitation:</b> DCC is currently not supported for ARM11.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Information about known problems in the low-level J-Link C-SPY driver
+      can be found in the <a href="../jlinkarmdll.html#problems">release notes for
+      J-Link ARM DLL</a>.
+    </p>
+  </li>
+
+  <li>
+    <p>
+	  The debugger might close unexpectedly when reading from a non-existent peripheral location.<br>
+	  [EW22344]
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Sometimes when starting a new debug session using J-Trace CM3 with the STM32F207ZG-SK board, you can
+      get the error "No trace frequency measured" depending on whether debugging with trace was recently performed.
+      If this occurs, just click <code>OK</code> to continue.<br>
+      [EW22550]
+    </p>
+  </li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+
+<li>
+  <p>
+    In EWARM 6.30.3:<br>
+    The ETM port is now initialized correctly when an STM32 device is debugged using J-Trace.<br>
+    [EW22796,EW22822]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.4:<br>
+    Trace port is now enabled when enabling ETM trace on STM32F4xx.<br>
+    [EW22903]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.30.4:<br>
+    PINSEL10 is no longer set by debugger when using SWO with LPC17xx.<br>
+    [EW22698]
+  </p>
+</li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+  <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+<ul>
+  <li>
+    J-Link is shipped with a 20-pin JTAG connector. 14-pin JTAG targets can
+    be connected with a cable as shown below:
+  <p>
+    <img src="images/arm_20-2-14connector.gif" width="415" height="183"
+    border="0"></p>
+  </li>
+
+  <li><p>
+    Debugging multiple ARM cores
+  </p></li>
+  <ul>
+    <li><p>
+      J-Link can handle multicore debugging. 
+      In this case multiple ARM devices are connected to the same JTAG
+      connector as shown below:
+    <p>
+    <p>
+      <img src="images/arm_2device_connect.gif" width="599" height="318"
+      border="0"></p>
+    </li>
+  </ul>
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+  <h4>V6.21 2011-07-05</h4>
+  <b>Program corrections</b>
+ 
+<ul>
+<li>
+  <p>
+    In EWARM 6.21.2:<br>
+    Only relevant bits in the <code>RCC_AHB1ENR</code>/<code>RCC_AHBENR</code> and <code>GPIOE</code> registers are enabled when enabling ETM trace on STM32F2xx/STM32L15x.<br>
+    [EW22552]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.2:<br>
+    The J-Link flash loader mechanism now works for STM32L15x devices.<br>
+    [EW22639]
+  </p>
+</li>
+</ul> 
+ 
+  <b>New features</b>
+ 
+<ul>
+  <li>None.</li>
+</ul>
+ 
+ 
+  <h4>V6.20 2011-04-29</h4>
+  <b>Program corrections</b>
+  <ul>
+<li>
+  <p>
+    The J-Link driver instruction set simulation for 32-bit Thumb instructions on Cortex-A/R targets
+    now works correctly.<br>
+    [EW22179]
+  </p>
+</li>
+
+<li>
+  <p>
+    The J-Link flash breakpoints now work properly on LPC ARM7 devices also when
+    the mapping is changed via the <code>MEMMAP</code> register in the target application.<br>
+    [EW22187]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    The C-SPY macro <code>__setCodeBreak</code> now works as expected.<br>
+    [EW22410]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V6.10 2010-11-04</h4>
+  <b>Program corrections</b>
+  <ul>
+
+<li>
+  <p>
+    The debugger no longer tries to obtain data from ETM when ETM isn't available.<br>
+    [EW21816]
+  </p>
+</li>
+
+<li>
+  <p>
+    It is now possible to debug on LPC 2378 using a J-Link Ultra.<br>
+    [EW21921]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    For some JTAG or target errors the debugger could hang forever waiting on execution to stop.
+    It is now possible to choose to abort the debug session or reset and try again to get the
+    control back.<br>
+    [EW22096]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.2:<br>
+    In some cases, when using trace-based features, executing an application in the debugger
+    over a long time no longer results in a Runtime Error! message and an abrupt IAR Embedded
+    Workbench termination.<br>
+    [EW22122]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.10.5:<br>
+    The semihosting for ARM7 and ARM9 no longer fails if the  __vector symbol is located to an address different from 0.<br>
+    [EW22242]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V5.50 2010-04-21 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      <p>
+        There was an inconsistency between the J-Link control panel and the C-SPY debugger
+        when showing information about the actual breakpoint type used on target.<br>
+        [EW21604]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The error message when setting a breakpoint fails was not informative enough.<br>
+        [EW21605]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.50.5:<br>
+        Problems related to the proper execution and mapping of the on-chip bootloader
+        on NXP LPC11xx and LPC13xx devices have been corrected.<br>
+        [EW21769]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.50.5:<br>
+        Access to specific memory areas no longer results in the fatal error message "Failed to prepare indirect memory access, no RAM area configured!".<br>
+        [EW21801]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        In EWARM 5.50.5:<br>
+        In some cases where a fatal error appear, the debugger no longer ends with a crash.<br>
+        [EW21827]
+      </p>
+    </li>
+    <li>
+      <p>
+        In EWARM 5.50.6:<br>
+        Implemented the special reset sequence needed by TI Stellaris Tempest/Firestorm devices.<br>
+        [EWARM-973]
+      </p>
+    </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+   None.
+  </li>
+  </ul>
+
+  <h4>V5.41 2009-12-14 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+    <li>
+      None.
+    </li>
+  </ul>
+
+  <h4>V5.40 2009-07-10 </h4>
+  <b>Program corrections</b>
+  <ul>
+<li>
+  <p>
+    Slow download on ARM11 when using J-Link. This has been fixed but requires a J-Link v8 or later to get the higher speed.<br>
+    [EW20318]
+  </p>
+</li>
+
+<li>
+  <p>
+    Hardware reset during execution could lead C-SPY to believe execution had stopped.<br>
+    [EW21106]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    SWO trace data is now collected during single step.<br>
+    [EW21339]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    Running C-SPY J-Link driver in batch mode now works when connected to an older revision of the STM32F10x device.<br>
+    [EWARM-685]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+<ul>
+  <li>
+    <p>
+      J-Trace for Cortex-M3 with triggering and filtering conditions.
+    </p>
+  </li>
+  <li>
+    <p>
+      Data breakpoints with value match condition for ARM7, ARM9 and Cortex-M
+    </p>
+  </li>
+  <li>
+    <p>
+      64-bits memory accesses.
+    </p>
+  </li>
+</ul>
+
+<h4>V5.30 2009-01-23</h4>
+
+<b>Program corrections</b>
+<ul>
+      <li>
+        <p>
+          Vector catch functionallity did not work properly and in some cases this could
+          lead to the fact that two breakpoints were set at same address.<br>
+          [EW20480]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The diagnostic message "Debugger problem discovered: The debugger has set two
+          breakpoints at the same address 0x00000008." was incorrectly displayed when
+          using vector catch on SWI and having semihosting enabled. This has been corrected.<br>
+          [EW20604]
+        </p>
+      </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    <p>
+     None.
+    </p>
+  </li>
+</ul>
+
+
+<h4>V5.20 2008-06-24</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li>
+    <p>
+   For Cortex-M3 the PRIMASK register was always displayed as "0" in the register window.<br>
+   [EW19974]
+    </p>
+  </li>
+  <li>
+    <p>
+   The disassembly window made accesses to the VICAddress register etc. (0xFFFFFF00 - 0xFFFFFFFF )
+   when displaying the interrupt vectors at 0x00-0x20. This led to that no IRQs were triggered any more.<br>
+   [EW20160]
+    </p>
+  </li>
+  <li>
+    <p>
+   For Cortex-M, the hardware breakpoint was not removed when it was cleared. This happened when there is only one breakpoint set.<br>
+   [EW20251]
+    </p>
+  </li>
+  <li>
+    <p>
+   When using the restore breakpoints feature and ARM11, the debugger could set two breakpoints at the same address.<br>
+   [EW20221]
+    </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    <p>
+     For Cortex-M, support for Trace and Terminal I/O (output) via SWO.
+    </p>
+  </li>
+  <li>
+    <p>
+     For ARM7 and ARM9, support for Terminal I/O (output) via DCC.
+    </p>
+  </li>
+  <li>
+    <p>
+     Support for the flash download and flash breakpoints features offered by J-Link (optional features).
+     For more information see the <a href="../jlinkarm.pdf">J-Link / J-Trace User Guide</a>
+    </p>
+  </li>
+  <li>
+    <p>
+     New reset methods added.
+    </p>
+  </li>
+</ul>
+
+<h4>V5.11 2007-11-28</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li>
+    <p>
+   When using the <b>Attach to program</b> option and having the stack plugin enabled, the debugger crashed when ending a debug session.<br>
+   [EW19229]
+    </p>
+  </li>
+  <li>
+    <p>
+   Single stepping over a breakpoint on Cortex-M3 failed and the target was halted on the breakpoint address.<br>
+   [EW18892]
+    </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    <p>
+     Support for ARM11.
+    </p>
+  </li>
+  <li>
+    <p>
+     New reset methods added.
+    </p>
+  </li>
+</ul>
+
+
+<h4>V5.10 2007-07-02</h4>
+
+<b>Program corrections</b>
+<ul>
+  <li>
+    <p>
+   When using the CPU ARM7TDMI-S, some features that are only working on ARM9 were incorrectly available in the menus.
+    </p>
+  </li>
+
+  <li>
+    <p>
+   Diagnostic messages sent from the J-Link driver during download were incorrectly treated as warnings.
+    </p>
+  </li>
+
+  <li>
+    <p>
+   For Cortex-M3, the debugger sometimes left hardware breakpoints enabled when stepping which made the 
+   target seem to be halted on the current address.<br>
+   [EW18848]
+    </p>
+  </li>
+</ul>
+
+<b>New features</b>
+<ul>
+  <li>
+    Data breakpoints are supported. For more information, refer to
+    <i>Part 6. C-SPY hardware debugger systems</i> in the <a href="../EWARM_DebuggingGuide.ENU.pdf">EWARM Debugging Guide</a>
+    <p>
+  </li>
+
+  <li>The debugger can now display trace data from the ETB (Embedded Trace Buffer)
+     available on some ARM devices. This is supported by both the J-Link and the J-Trace probe.
+     <p>
+  </li>
+
+  <li>
+   Attach/detach to a running system without interrupting execution (nonintrusive debugging) is now supported.
+   <p>
+  </li>
+
+  <li>
+   Breakpoints and memory can now be modified during execution.
+   Global/static variables can be displayed by the Live watch window during execution.
+   To enable these features on ARM7/ARM9, a DCC handler must repeatedly be
+   called by the application.
+   The DCC handler code can be found in <code>src\debugger\DCC</code>.
+   <p>
+  </li>
+
+  <li>
+   Macros for accessing the co-processor CP15 have been added.
+   <p>
+  </li>
+
+  <li>
+   Macro for JTAG TRST<code> __jtagResetTRST() </code> has been added.
+    <p>
+  </li>
+</ul>
+
+<h4>V4.41A 2006-12-08</h4>
+
+<b>New features</b>
+<ul>
+  <li>
+    <p>
+  Live watch window for variables and live access of memory.
+    </p>
+  </li>
+  <li>
+    <p>
+  Setting breakpoints during execution.
+    </p>
+  </li>
+  <li>
+    <p>
+  Possible to show trace timestamps. (J-Trace)
+    </p>
+  </li>
+  <li>
+    <p>
+  Code coverage (J-Trace)
+    </p>
+  </li>
+
+  <li>
+    <p>
+  Command line option that performs <code>__jlinkExecCommand</code> macro calls at startup.
+    </p>
+  </li>
+
+  <li>
+    <p>
+  Macros for direct JTAG access.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Information about new features in the low-level J-Link C-SPY driver
+      can be found in the <a href="../jlinkarmdll.html#features">release notes for
+      J-Link ARM DLL</a>.
+    </p>
+  </li>
+</ul>
+
+<b>Program corrections</b>
+<ul>
+ <li>
+    <p>
+      Some CPUs do not emit any trace information for certain 
+      instructions during single step due to a bug in the silicon.
+      The debugger did not handle this and an error occured when reading a trace buffer.<br>
+      [EW18388]
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Trace buffer size setting were incorrectly not saved.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      Information about program corrections in the low-level J-Link C-SPY
+      driver can be found in the <a href="../jlinkarmdll.html#pcorr">release notes
+      for J-Link ARM DLL</a>.
+    </p>
+  </li>
+</ul>
+
+
+<h4>V4.40A 2006-05-18</h4>
+<ul>
+  <li>
+    <p>
+      Support for the Cortex-M series has been added
+    </p>
+  </li>
+</ul>
+
+
+<h4>V4.31A 2006-02-03</h4>
+<ul>
+  <li><p>
+      Added support for J-Trace with ETM trace.
+    </p>
+  </li>
+  <li>
+      The cspybat.exe command line debug tool crashed when configured to use the J-Link driver.<br>
+      [EW17782]
+  </li>
+</ul>
+
+
+<h4>V4.30A 2005-06-23</h4>
+<ul>
+  <li>
+    <p>
+      In some cases, the debugger could fail to clear temporary
+      breakpoints set to control the execution of the flash loader.<br>
+      [EW16610, EW16699]
+    </p>
+  </li>
+
+  <li><p>
+    The J-Link firmware did not work correctly with ARM946E-S and ARM926EJ-S.
+    The new J-Link driver will automatically update the firmware.<br>
+    [EW16638]
+  </p></li>
+</ul>
+
+<h4>V4.20A 2005-01-10</h4>
+<ul>
+  <li>
+    Changing the Philips LPC212x EXTPOLAR register caused JTAG
+    disconnection.<br>
+    [EW16365]
+  </li>
+</ul>
+
+<h4>V4.11A 2004-06-10</h4>
+<ul>
+  <li></p>
+    Debugging with big endian byte order did not work.<br>
+    [EW15030]
+  </p></li>
+
+  <li><p>
+    Combining the options <b>Suppress download</b> and <b>Verify
+    download</b> did not work.  The combination of the options <b>Suppress
+    download</b> and <b>Verify download</b> should verify the target
+    content without downloading.
+  </p></li>
+</ul>
+
+<h4>V4.10B 2004-03-09</h4>
+<ul>
+  <li><p>
+    Flashing code larger than 8 Kbytes was erratic.
+  </p></li>
+</ul>
+
+<h4>V4.10A 2004-02-21</h4>
+<ul>
+  <li>
+    None.
+  </li>
+<p>
+</ul>
+
+<h4>V1.09 2003-12-15</h4>
+<ul>
+  <li>
+    First release.
+  </li>
+</ul>
+    </div>
+</body>
+</html>

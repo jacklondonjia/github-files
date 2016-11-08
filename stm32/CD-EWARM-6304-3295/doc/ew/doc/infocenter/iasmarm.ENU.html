@@ -1,0 +1,845 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+    "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!--  $Id: aTARGET.html 111 2011-10-03 11:43:56Z peterod $-->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemalocation="http://www.w3.org/MarkUp/SCHEMA/xhtml11.xsd" xml:lang="en">
+<head>
+    <title>Release notes for the IAR Assembler for ARM</title>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" media="all" href="style/ewic.css" />
+</head>
+<body>
+    <div id="topbanner">
+    </div>
+    <div id="titlebanner_small">
+        <h2>
+            Release notes for IAR Assembler for ARM version 6.30.4
+        </h2>
+    </div>
+    <div class="breadcrumb">
+        <a href="index.ENU.html">IAR Information Center for ARM</a> | <a href="release_notes.ENU.html">
+            Release notes</a> | <a href="components.ENU.html">Components</a> | Release notes for the IAR Assembler for ARM
+    </div>
+    <div class="mainblock">
+        <ul>
+            <li><a href="#important">Important information</a> </li>
+            <li><a href="#features">New features</a> </li>
+            <li><a href="#problems">Known problems</a> </li>
+            <li><a href="#pcorr">Program corrections</a> </li>
+            <li><a href="#manuals">User guide corrections</a> </li>
+            <li><a href="#misc">Miscellaneous</a> </li>
+            <li><a href="#history">Release history</a> </li>
+        </ul>
+        <!--======================================================================-->
+        <!-- IMPORTANT INFORMATION                                                -->
+        <!--======================================================================-->
+        <h3>
+            <a name="important" id="important"></a>Important information
+        </h3>
+<ul>
+    <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- NEW FEATURES                                                         -->
+        <!--======================================================================-->
+        <h3>
+            <a name="features" id="features"></a>New features
+        </h3>
+<ul>
+  <li>
+    None.
+  </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Known Problems-->
+        <!--======================================================================-->
+        <h3>
+            <a name="problems" id="problems"></a>Known Problems
+        </h3>
+<ul> 
+    <li><p>Preprocessor symbols are not included in the ELF/DWARF output.</p>
+    </li> 
+    <li><p>Mixing C-style preprocessor macros and assembler-style macros
+        should be avoided. If a C-style macro is used for concatenating
+        identifiers in the label field, that label becomes absolute even
+        if it is located in a relocatable segment.
+        Use the ordinal macro arguments <code>\1-\9</code> and <code>\A-\Z</code> instead of the
+        symbolic argument names when you concatenate identifiers.
+        For example, this works correctly:
+        <pre>
+        mymac   MACRO first,second
+        \1_\2:  NOP
+                ENDM
+
+                mymac a,b</pre>
+        and expanded to:
+        <pre>
+        a_b:    NOP</pre></p>
+    </li>
+    <li><p><code>DS16</code> should force 2-byte alignment, but it does not.<br>
+        <code>DS32</code> should force 4-byte alignment, but it does not.<br>
+        A temporary solution is to insert <code>ALIGNRAM 1</code> before <code>DS16</code> and
+        <code>ALIGNRAM 2</code> before <code>DS32</code>.</p>
+    </li>
+
+      <li>
+        <p>
+          Assembler directives may not appear within an IT-block (the conditional instructions
+          following an IT-instruction). The limitation does not apply to C-style preprocessor
+          directives, which are processed before any assembler instruction has been parsed.
+          If an assembler directive is found within an IT-block, the block is considered to
+          end and the assembler will report error<code> #429: IT-block contains too few instructions</code>.
+          A possible workaround is to use a corresponding C-style preprocessor directive
+          instead, if possible (for example, use<code> #if </code>instead of<code> IF</code>).<br>
+          [EW20356]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          When the C-style preprocessor performs macro expansion, any identifier that matches
+          a base mnemnonic will also match conditional variants, so for example<code> #define B 42 </code>
+          will effectively define also <code>BNE</code>, <code>BGE</code>, etc. as 42.<br>
+          [EW21470]
+        </p>
+      </li>
+</ul>
+        <!--======================================================================-->
+        <!-- Program Corrections                                                  -->
+        <!--======================================================================-->
+        <h3>
+            <a name="pcorr" id="pcorr"></a>Program Corrections
+        </h3>
+<ul>
+<li>
+  <p>
+    Relocation of <code>LDRD</code> (literal) will cause linking to fail if the reference is backwards.
+    To address this issue, an unsolved literal is no longer allowed unless
+    the assembler can determine it to be a forward reference.<br>
+    [EW22726]
+  </p>
+</li>
+
+</ul>
+        <!--======================================================================-->
+        <!-- USER GUIDE CORRECTIONS                                               -->
+        <!--======================================================================-->
+        <h3>
+            <a name="manuals" id="manuals"></a>User guide corrections
+        </h3>
+<ul>
+  <li>
+    ARM&reg; IAR Assembler Reference Guide (AARM-8), corrections:<br><br>
+    <ul>
+      <li>
+        Page 40: Replace <code>SFE(MYCODE)-SFB(MYCODE)</code> with <code>SIZEOF(MYCODE)</code><br>
+      </li>
+      <br>
+      <li>
+        Page 83, 86 and 94: Remove the directive<code> CFI VIRTUALRESOURCE </code>because it is no longer available in the assembler.<br>
+      </li>
+      <br>
+    </ul>
+  </li>
+  <br>
+</ul>
+        <!--======================================================================-->
+        <!-- MISCELLANEOUS                                                        -->
+        <!--======================================================================-->
+        <h3>
+            <a name="misc" id="misc"></a>Miscellaneous
+        </h3>
+<ul>
+    <li>None.</li>
+</ul>
+        <!--======================================================================-->
+        <!-- RELEASE HISTORY                                                      -->
+        <!--======================================================================-->
+        <h3>
+            <a name="history" id="history"></a>Release history
+        </h3>
+  <h4>V6.21 2011-07-05</h4>
+  <b>Program corrections</b>
+ 
+<ul>
+<li>
+  <p>
+    The assembler now accepts pre-UAL syntax (for example <code>MOV&lt;c&gt;S</code>)
+    also for <code>BICS</code>, <code>ORRS</code> and <code>ANDS</code>.<br>
+    [EW22459]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 6.21.4:<br>
+    The instructions <code>SMLAWB</code>, <code>SMLAWT</code>, <code>SMULBB</code>,
+    <code>SMULBT</code>, <code>SMULTB</code>, and <code>SMULTT</code> are no longer
+    available when assembling for Cortex-M3 since they require the media extensions of Cortex-M4.<br>
+    [EW22553]
+  </p>
+</li>
+</ul> 
+ 
+  <b>New features</b>
+ 
+<ul>
+	<li>None.</li>
+</ul>
+ 
+ 
+  <h4>V6.20 2011-04-29</h4>
+  <b>Program corrections</b>
+  <ul>
+
+<li>  
+  <p>  
+    The asembler can now parse the keywords <code>ELSE</code>, <code>ELSIF</code>, and <code>ENDIF</code>
+    even if a C/C++ comment follows without separation.<br>
+    [EW22296]
+  </p>  
+</li>  
+
+<li>
+  <p>
+    In EWARM 6.20.2:<br>
+    The assembler will no longer issue an internal error after reporting 
+    "expression out of range" for instructions of the form <code>LSR{S} <Rdn>,<Rdn>,#0"</code>.<br>
+    [EW22406]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+
+  <h4>V6.10 2010-11-04</h4>
+  <b>Program corrections</b>
+  <ul>
+<li>
+  <p>
+    The use of an EQUated symbol no longer generates an internal error.<br>
+    [EW21616]
+  </p>
+</li>
+<li>
+  <p>
+    The assembler now generates an error whenever it can't continue generating ELF after
+    previous errors.<br>
+    [EW21760]
+  </p>
+</li>
+<li>
+  <p>
+    Assembler for ARMv6-M no longer accepts Thumb-2 variants of immediate bitwise logical
+    instructions (<code>ORR</code>, <code>AND</code>, <code>BIC</code>, <code>EOR</code>)
+    or comparisons (<code>CMP</code>, <code>CMN</code>, <code>TST</code>, <code>TEQ</code>).<br>
+    [EW21980]
+  </p>
+</li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V5.50 2010-04-21 </h4>
+  <b>Program corrections</b>
+  <ul>
+    <li>
+      <p>
+        The <code>SRS</code> instruction syntax with explicit <code>SP</code> as first operand is now recognized.<br>
+        [EW21571]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        The immediate variants of Thumb-2 instructions <code>CMN</code>, <code>CMP</code>, <code>TEQ</code>, and <code>TST</code> are no longer accepted for non-Thumb-2 architectures.<br>
+        [EW21644]
+      </p>
+    </li>
+
+    <li>
+      <p>
+        ARM1136 is considered ARMv6K. This is correct for core revisions r1p0 and later.<br>
+        [EW21653]
+      </p>
+    </li>
+  </ul>
+
+  <b>New features</b>
+  <ul>
+  <li>
+    None.
+  </li>
+  </ul>
+
+  <h4>V5.41 2009-12-14 </h4>
+  <ul>
+    <li>
+      <p>
+        In EWARM 5.41.2:<br>
+        <code>LDR</code> with <code>SP</code> as the destination register is no longer reported as an unpredictable instruction.<br>
+        [EW21576]
+      </p>
+    </li>
+  </ul>
+
+  <h4>V5.40 2009-07-10 </h4>
+  <ul>
+<li>
+  <p>
+    The <code>MOVT</code> instruction has been corrected to move the bottom halfword
+    of the immediate value into the top halfword of the destination of the destination
+    register. Previously the top halfword of the immediate value was used.<br>
+    [EW20852]
+  </p>
+</li>
+
+<li>
+  <p>
+    The assembler now reports an <code>illegal register</code> error instead of the warning
+    <code>unpredictable register combination</code> when <code>SP</code> or <code>PC</code> is in the
+    register list of an <code>STM</code> instruction in Thumb mode. Similarly
+    for <code>SP</code> and the <code>LDM</code> instruction.<br>
+    [EW20854]
+  </p>
+</li>
+
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    The implicit Thumb mode for Cortex-M when no explicit THUMB directive is used, now marks labels as odd.<br>
+    [EW20359,EW21173]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    Assembly of conditional <code>BLX</code> in Thumb mode no longer results in internal error.<br>
+    [EW21182]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    The <code>SVC</code> instruction is now available when assembling for Cortex-M0.<br>
+    [EW21213]
+  </p>
+</li>
+<li>
+  <p>
+    In EWARM 5.40.4:<br>
+    In the CODE16 mode an unconditional branch could become a <code>BEQ</code> with an 8-bit offset,
+    which has no encoding for <code>AL</code> (the always condition). The correct 11-bit offset
+    encoding is now used for unconditional branches.<br>
+    [EW21257]
+  </p>
+</li>
+  </ul>
+
+<h4>V5.30 2009-01-23</A></h4>
+<ul>
+      <li>
+        <p>
+          The handling of branch length corner cases for Thumb2 ISA has been improved.
+          The reduced instruction size is now taken into account when attempting to select
+          a smaller branch. If an instruction between a branch and its target label is
+          shrunk, a wide branch might still be generated in corner cases where a narrow
+          branch could have been used.<br>
+          [EW20357]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Incorrect warning is no longer emitted.<br>
+          [EW20358]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The <code>SMC</code> instruction is now available with arm1176(f)jz cores.<br>
+          [EW20388]
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The assembler can now parse a multibyte comment inside a macro definition.<br>
+          [EW20510]
+        </p>
+      </li>
+</ul>
+
+<h4>V5.20 2008-06-24</A></h4>
+<ul>
+      <li>
+        <p>
+          Invalid instructions could generate internal errors.<br>
+          [EW19411, EW19733]
+        </p>
+      </li>
+      <li>
+        <p>
+          The assembler can now handle a local label definition followed by
+          a segment definition that uses the same name.<br>
+          [EW19474]
+        </p>
+      </li>
+      <li>
+        <p>
+          Some needed system registers have been added in v6M mode.<br>
+          [EW19813]
+        </p>
+      </li>
+</ul>
+
+<h4>V5.11 2007-12-11</A></h4>
+<ul>
+  <li>
+    <p>
+      The assembler now uses absolute paths to all source files referred to in the 
+      debug information in the object file.<br>
+      [EW18901]
+    </p>
+  </li>
+  <li>
+    <p>
+      The assembler now interprets the parameter to the options <code>-L</code>, <code>-O</code>,
+      and <code>-I</code> as a directory path only. 
+      The previous prefix behavior has been removed.<br>
+      [EW18903]
+    </p>
+  </li>
+  <li>
+    <p>
+      When a CPU core with a VFP coprocessor is selected, an error is no longer generated if you
+      try to disable it with <code>--vfp=none</code>.<br>
+      [EW19073]
+    </p>
+  </li>
+  <li>
+    <p>
+      The assembler can now handle a local label definition followed by a segment
+      definition that uses the same name.<br>
+      [EW19474]
+    </p>
+  </li>
+  <li>
+    <p>
+      Relocatable expressions no longer give internal errors.<br>
+      [EW19580]
+    </p>
+  </li>
+  <li>
+    <p>
+      The assembler no longer generates an internal error for certain PC-relative expressions.<br>
+      [EW19676]
+    </p>
+  </li>
+</ul>
+
+<h4>V5.10   2007-05-25</h4>
+<ul>
+  <li>
+    <p>
+      If you specify the assembler option <b><code>-j</code></b>, the assembler will recognize the instruction 
+      syntax used by the TASM assembler from Advanced RISC Machines Ltd. In version 4.40A, the instruction 
+      mnemonics <code>CMPS</code>, <code>CMNS</code>, <code>TEQS</code>, and <code>TSTS</code> were accidentally removed, 
+      but have been reintroduced in this version.<br>
+      [EW18338]
+    </p>
+   </li>
+</ul>
+
+
+<h4>V4.41A   2006-12-08</h4>
+<ul>
+  <li>
+    <p>
+      When using the assembler option <b><code>-j</code></b>, the assembler will recognize the instruction 
+      syntax used by the TASM assembler from Advanced RISC Machines Ltd. In version 4.40A, the instruction 
+      mnemonics <code>CMPS</code>, <code>CMNS</code>, <code>TEQS</code>, and <code>TSTS</code> were accidentally removed but 
+      have been reintroduced in this version.<br>
+      [EW18338]
+    </p>
+   </li>
+</ul>
+
+<h4>V4.40A   2006-06-03</h4>
+<ul>
+  <li>
+    <p>The instruction "<code>SRSIB #<mode></code>" was incorrectly assembled and generated an incorrect opcode.<br>
+      [EW17795]
+    </p>
+  <li>
+    <p>Some 16-bit Thumb instructions incorrectly accepted the writeback modifier,
+       but ignored it during code generation.
+       The writeback modified is no longer accepted in these cases.<br> 
+      [EW17829]
+    </p>
+  <li>
+    <p>Using the command line option <code>--cpu</code> to specify any of the cores ARM1136JF, ARM1136JF-S,
+       ARM1176JF, or ARM1176JF-S caused an internal error in the assembler.<br> 
+      [EW17838]
+    </p>
+  <li>
+    <p>If the Thumb mode <code>BLX</code> instruction was used to call an ARM function located in
+       the same code segment, the branch offset could be incorrectly calculated causing an
+       illegal instruction to be generated.<br> 
+      [EW17959]
+    </p>
+  <li>
+    <p>When assembler instructions were used incorrectly (wrong syntax, branch offset too large, etc.),
+       an error message was issued. However, in some cases, after issuing the correct error message,
+       the assembler stopped with an internal error message.
+       Examples are:<br>
+       - Thumb mode <code>BLX</code>, where branch offset is too large<br>
+       - ARM mode coprocessor instructions with a bad syntax<br> 
+      [EW17967]
+    </p>
+  <li>
+    <p>The <code>--fpu</code> command line option is used to specify the FPU for the device.
+       If an illegal value was given, the assembler did not give an error message.
+       Instead, it was handled as if no FPU was available.
+       An error message is now given if an illegal value is given to the <code>--fpu</code> option.<br> 
+      [EW18009]
+    </p>
+  <li>
+    <p>Selecting a cpu or architecture with the command line option <code>--cpu</code> will result in
+       preprocessor symbols being defined by the assembler.
+       However, the preprocessor symbols were not correctly set for all values of <code>--cpu</code> in
+       the previous version. Symbol <code>__ARM6__</code> was incorrectly set for CPUs from the ARM9, ARM10,
+       and XScale cpu families, and if architecture "5TE" was specified.<br>
+       In addition, besides recognizing new ARM6T2 and ARM7M cpu:s, the correct fpu will
+       automatically be selected if specifying a cpu with an fpu.<br> 
+      [EW18016]
+    </p>
+  <li>
+    <p>The normal format for adding/subtracting an immediate value using the ADD/SUB instructions
+       is "<code>ADD Rd, Rn, #value</code>", where the value for most constants represents a positive value.
+       The assembler also accepts the instruction with a negative immediate value.
+       In this case, the instruction is silently converted, so that ADD of a negative value is
+       replaced with a SUB of the corresponding positive value.
+       This replacement was incorrect for ADD/SUB, when the constant is larger than 0xFF,
+       i.e. when the instruction encoding requires an shift value to be encoded.<br>
+      [EW18043]
+    </p>
+</ul>
+
+<h4>V4.31A   2006-02-03</h4>
+<ul>
+  <li>
+    <p>The <code>CODE32</code> directive now aligns correctly.<br> 
+      [EW17286]
+    </p>
+  <li>
+    <p>Instruction parsing could be incorrect for some instructions in special situations.
+       If a conditional instruction was placed inside a macro, and the instruction
+       was preceeded by a label, the condition code was not correctly handled.<br> 
+      [EW17528]
+    </p>
+  <li>
+    <p>For data processing instructions where the source is an immediate value
+       with a specified rotation count, and the destination register is a high
+       register (R8 - R15), the generated opcode was incorrect.
+       Example of an incorrectly handled instruction:<br>
+       <code>ADD R9, R9, #63, 4</code><br>
+      [EW17659]
+    </p>
+  <li>
+    <p>The 3-operand data processing instructions (<code>ADD</code> etc) now fully accept the syntax<br>
+       <code>&lt;op&gt; &lt;Rd&gt;, &lt;Rn&gt;, #&lt;immediate&gt;, &lt;rotation&gt;</code><br>
+       for all combinations of immediate and rotation values calculated either at assembly
+       time or at link time.<br>
+      [EW17579]
+    </p>
+  <li>
+    <p>The <code>CMP/CMN/TST/TEQ</code> instructions did not support the syntax<br>
+       <code>&lt;op&gt; &lt;Rn&gt;, #&lt;imm&gt;, &lt;rot&gt;</code><br> 
+      [EW17660]
+    </p>
+  <li>
+    <p>The VFP instructions <code>FSTM</code> and <code>FLDM</code> are normally written
+       with the addressing modes IA or DB. If used in situations where data is loaded
+       or stored from/to a stack, the addressing mode names EA and FD must be supported
+       as synonyms.<br> 
+      [EW17661]
+    </p>
+  <li>
+    <p>The ARM mode <code>MOV Rd, #imm</code> instruction now accepts negative constants
+       by automatically changing the <code>MOV</code> instuction to an <code>MVN</code> instruction.
+       <code>MVN</code> can be changed into a <code>MOV</code> instruction correspondingly.<br> 
+      [EW17666]
+    </p>
+  <li>
+    <p>The VFP instruction FSTMIAX generated the wrong opcode.
+       The same opcode as FSTMIAD was generated.<br> 
+      [EW17670]
+    </p>
+  <li>
+    <p>If the offset is negative in an instruction on the form<br>
+      <code>LDC/STC{2} &lt;coproc&gt;, &lt;CRd&gt;, [&lt;Rn&gt;,#-<offset>]{!}</code><br>
+      the assembler earlier incorrectly generated the opcode for the
+      corresponding instruction with a positive offset.<br> 
+      [EW17679]
+    </p>
+  <li>
+    <p>If the PC-relative syntax for the <code>FLDS</code> instruction was used (<code>FDLS Rd, label</code>),
+       and the label was located so that the offset was negative
+       (label placed earlier than eight bytes after the instruction),
+       the generated opcode for the instruction was incorrect.<br> 
+      [EW17680]
+    </p>
+</ul>
+
+<h4>V4.30A   2005-06-23</h4>
+<ul>
+  <li>
+    <p>Some illegal assembler instructions could cause an internal error
+       instead of a syntax error. <br>Example:
+      <pre>MOV R0, @R1</pre>
+      [EW16414]
+    </p>
+  <li>
+    <p>
+     "Warning[401]: Base register in Register list" was sometimes given
+     for ldm instructions that didn't have writeback.<br>
+     [EW16455]
+   </p>
+</ul>
+
+<h4>V4.20A   2005-01-10</h4>
+<ul>
+
+  <li><p>    
+    FLDS, FLDD, FSTS and FSTD can now have a relocatable offset. This is
+    needed when accessing constants from VFP code.<br>
+    [EW15641,EW15998]
+  </p>
+
+  <li><p>
+    An error that terminated the assembler unexpectedly if it encountered
+    identifiers with more than 255 characters has been corrected. Now using
+    such identifiers are reported as an error.<br>
+    [EW16099]
+  </p>
+
+  <li><p>
+    BLX in ARM mode to a local thumb label could be incorrectly
+    assembled.<br>
+    [EW16207]
+  </p>
+</ul>
+
+
+<h4>V4.11A   2004-06-14</h4>
+<ul>
+  <li>
+    The preprocessor couldn't quite handle a macro parameter that invoced
+    another parameterized macro.<br>
+    [EW15241]
+
+  <li>
+    Two or more tabs preceeding SMULxy, SMULWx SMLAxy, SMLAWx or SMLALxy
+    could cause the assembler to fail.<br>
+    [EW15398]
+
+  <li>
+    BLX in ARM mode to an extern Thumb label could be incorrectly
+    assembled.<br>
+    [EW15484]
+  <li>
+    The assembler gave internal error for the VFP instructions:
+<pre>
+    FLDD d0,[r0]
+    FLDS s0,[r0]
+</pre>
+    [EW15998]
+ </ul>
+
+<h4>V4.10B   2004-03-09</h4>
+<ul>
+  <li>
+    ARM VFP vector floating point coprocessor instructions are
+    supported by the assembler. A new option, <code>--fpu</code> is available
+    to select between different floating point alternatives.
+  </li>
+</ul>
+
+<h4>V4.10A   2004-02-21</h4>
+<ul>
+  <li>
+    Data definition directives immediately followed by a
+    comment character gave a syntax error.<br>
+<pre>
+    DCD 5; this fails
+    DCD 5 ; this works
+</pre>[EW13456] 
+  <li>
+    A forward reference of a label with the same name as a segment defined
+    later gave an internal error. For example:<br>
+<pre>
+    rseg yyy
+    dc32 xxx
+
+    rseg xxx
+    xxx:
+    end
+</pre>
+    [EW14442]
+
+  <li>
+    The assembler calculated offsets between labels in different
+    <code>noroot</code> segments incorrectly.<br>
+    [EW14476]
+
+  <li>
+    The assembler handled SWI-instructions with a 24-bit operand as
+    'out of range'.<br>
+    [EW14785]
+
+  <li>
+    Instructions of the form
+<pre>
+    label mnemonic
+</pre>
+    generated wrong code if the label contained any of the character
+    sequences EQ, NE, CS, ... (conditional instruction keywords).<br>
+    [EW14855] 
+  </li>
+
+</ul>
+
+<h4>V3.40B-P1   2003-10-06</h4>
+<ul>
+    <li>
+        The assembler previously aborted with an internal error when an
+        excessive number of EQUs were present in the source code.<br>
+        [EW14351]
+    </li>
+</ul>
+
+<h4>V3.40A   2003-07-03</h4>
+<ul>
+    <li>Compiler assembly output in interwork mode could fail to assemble.<br>
+        [EW13604]
+
+    <li>An assembler syntax error was generated when R15/PC was used as the
+        &lt;Rd&gt; operand of the MRC instruction.<br>
+        [EW14087]
+    </li>
+</ul>
+
+<h4>V3.30A   2003-02-17</h4>
+<ul>
+    <li>Assembler syntax coloring did not work.<br>
+        [EW12809]
+    <li>The code <code>cmp r0,#-1</code> in ARM mode gave a range error.<br>
+        [EW12329]
+    <li>Missing error message for conflicting operands in mul r0,r0.<br>
+        [EW13361]
+    </li>
+</ul>
+
+<h4>V3.21A   2002-09-27</h4>
+<ul>
+  <li>
+    The Thumb mnemonics <code>LDRSH</code> and <code>LDRSB</code> are now
+    recognized.<br>
+    [EW12311]
+  </li>
+</ul>
+
+<h4>V3.20A   2002-06-18</h4>
+<ul>
+    <li>The ARM instruction set version 5TE is now supported.<br>
+        To use it add command-line option <code>--cpu {target core or
+        architecture name}</code>.<p></p>
+
+    <li>Byte order can now be specified with the command line option<br> 
+        <code>--endian {little | l | big | b}</code>
+    </li>
+
+</ul>
+
+<h4>V3.11A   2001-12-04</h4>
+<ul>
+    <li>None.
+    </li>
+</ul>
+
+<h4>V3.10A   2001-10-04</h4>
+<ul>
+    <li>None.
+    </li>
+</ul>
+
+<h4>V2.10D   2001-06-29</h4>
+<ul>
+  <li>
+    The assembler crashed on the use of SYMBOL directives as generated by
+    the compiler.  The SYMBOL directive is used to handle C++ scoped
+    names. It caused a problem when assembling an assembler file generated
+    by the compiler.<br>
+    [EW10297]
+  </li>
+</ul>
+
+<h4>V2.10A   2001-02-21</h4>
+<ul>
+    <li>Support for big-endian byte order implemented, option <code>-e</code>.
+    </li>
+</ul>
+
+<h4>V1.30A   2000-09-08</h4>
+<ul>
+  <li>
+    The XLINK option <code>-O</code> can be used to produce multiple output
+    files. Syntax:<br>
+<pre>
+    -Oformat[,variant][=filename]
+</pre>
+    The option is described in the XLINK documentation.
+  </li>
+</ul>
+
+<h4>V1.20B   2000-06-14</h4>
+<ul>
+  <li>
+    Initialization problem in <code>aarm.dll</code> corrected.
+  </li>
+</ul>
+
+<h4>V1.20A   2000-05-30</h4>
+<ul>
+    <li>None
+    </li>
+</ul>
+<h4>V1.10B   2000-01-14</h4>
+<ul>
+    <li>ADR in Thumb mode was incorrect, and has now been 
+  corrected. 
+
+    <li>LDR alignment checking has been modified.
+    </li>
+</ul>
+<h4>V1.10A   1999-12-30</h4>
+<ul>
+    <li>First release.
+    </li>
+</ul>
+    </div>
+</body>
+</html>
